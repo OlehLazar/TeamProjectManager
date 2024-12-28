@@ -4,7 +4,7 @@ import Navbar from "./Navbar"
 
 const DefaultLayout = () => {
     return(
-        <main>
+        <main className="bg-[#a0aecd] min-h-screen">
             <Navbar />
             <div className="flex-grow">
                 <Outlet />
