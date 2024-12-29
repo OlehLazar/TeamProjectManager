@@ -3,7 +3,7 @@ import { ParagraphProps } from "../../interfaces/ParagraphProps"
 const Paragraph: React.FC<ParagraphProps> = ({ heading, text}) => {
   return (
     <div className="flex flex-col">
-        <h1 className="text-center text-2xl font-semibold pb-5">{heading}</h1>
+        <h1 className="text-center text-2xl font-semibold pb-3">{heading}</h1>
         <p>{text}</p>
     </div>
   )
