@@ -1,6 +1,12 @@
+import AboutUs from "../components/homePage/AboutUs"
+import StartNow from "../components/homePage/StartNow"
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <AboutUs />
+      <StartNow />
+    </div>
   )
 }
 
