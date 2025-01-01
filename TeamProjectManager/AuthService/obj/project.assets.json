@@ -1587,9 +1587,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj",
-      "projectName": "AuthService",
-      "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj",
+      "projectUniqueName": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\TeamProjectManager.DAL.csproj",
+      "projectName": "TeamProjectManager.DAL",
+      "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\TeamProjectManager.DAL.csproj",
       "packagesPath": "C:\\Users\\Oleh\\.nuget\\packages\\",
       "outputPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\obj\\",
       "projectStyle": "PackageReference",
