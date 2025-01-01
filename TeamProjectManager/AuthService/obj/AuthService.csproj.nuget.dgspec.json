@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.API\\TeamProjectManager.API.csproj": {}
+    "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.API\\TeamProjectManager.API.csproj": {
+    "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.API\\TeamProjectManager.API.csproj",
-        "projectName": "TeamProjectManager.API",
-        "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.API\\TeamProjectManager.API.csproj",
+        "projectUniqueName": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj",
+        "projectName": "AuthService",
+        "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\AuthService.csproj",
         "packagesPath": "C:\\Users\\Oleh\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.API\\obj\\",
+        "outputPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\AuthService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Oleh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,9 +46,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Swashbuckle.AspNetCore": {
+            "Microsoft.AspNetCore.Identity": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[2.2.0, )"
             }
           },
           "imports": [
@@ -63,9 +63,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
