@@ -8,9 +8,9 @@ public class User : IdentityUser
 
 	public string LastName { get; set; }
 
-	public IEnumerable<Task> CreatedTasks { get; set; }
+	public ICollection<Task> CreatedTasks { get; set; }
 
-	public IEnumerable<Task> AssignedTasks { get; set; }
+	public ICollection<Task> AssignedTasks { get; set; }
 
-	public IEnumerable<Team> Teams { get; set; }
+	public ICollection<Team> Teams { get; set; }
 }
