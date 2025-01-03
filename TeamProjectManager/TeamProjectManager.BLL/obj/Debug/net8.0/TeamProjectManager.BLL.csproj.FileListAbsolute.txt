@@ -1,0 +1,5 @@
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.BLL\obj\Debug\net8.0\TeamProjectManager.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.BLL\obj\Debug\net8.0\TeamProjectManager.BLL.AssemblyInfoInputs.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.BLL\obj\Debug\net8.0\TeamProjectManager.BLL.AssemblyInfo.cs
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.BLL\obj\Debug\net8.0\TeamProjectManager.BLL.csproj.CoreCompileInputs.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.BLL\obj\Debug\net8.0\TeamProjectManager.BLL.sourcelink.json

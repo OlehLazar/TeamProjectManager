@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\data\\managerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\data\\managerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,53 +51,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Project.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Project.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\Project.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Project.cs",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\Project.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAA1wAsAAAAAAAAAAAAAAA==",
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Notification.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\Notification.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Notification.cs",
+              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\Notification.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T18:58:01.381Z",
+              "WhenOpened": "2025-01-03T19:56:53.622Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Task.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Task.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\Task.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Task.cs",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\Task.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAYwA4AAAAlAAAAAAAAAA==",
+              "Title": "ManagerDbContext.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Data\\ManagerDbContext.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Data\\ManagerDbContext.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Data\\ManagerDbContext.cs*",
+              "RelativeToolTip": "TeamProjectManager.DAL\\Data\\ManagerDbContext.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAiwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T18:50:23.593Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Team.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Team.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\Team.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Team.cs",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\Team.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T18:42:51.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\User.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\User.cs",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T18:42:28.752Z",
+              "WhenOpened": "2025-01-03T19:12:52.727Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,15 @@
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.csproj.AssemblyReference.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.AssemblyInfoInputs.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.AssemblyInfo.cs
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.csproj.CoreCompileInputs.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.sourcelink.json
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\bin\Debug\net8.0\TeamProjectManager.DAL.deps.json
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\bin\Debug\net8.0\TeamProjectManager.DAL.runtimeconfig.json
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\bin\Debug\net8.0\TeamProjectManager.DAL.dll
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\bin\Debug\net8.0\TeamProjectManager.DAL.pdb
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.dll
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\refint\TeamProjectManager.DAL.dll
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.pdb
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\TeamProjectManager.DAL.genruntimeconfig.cache
+C:\Projects\TeamProjectManager\TeamProjectManager\TeamProjectManager.DAL\obj\Debug\net8.0\ref\TeamProjectManager.DAL.dll

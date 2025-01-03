@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamProjectManager.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71aa3ea081b104cd2056c40cddb9cf450c341896")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6af50713499964d09e43c08c1e4024bdc728de53")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamProjectManager.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamProjectManager.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

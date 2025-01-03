@@ -10,6 +10,8 @@ public class User : IdentityUser
 
 	public string? Avatar { get; set; }
 
+	public ICollection<Notification>? Notifications { get; set; }
+
 	public ICollection<Task>? CreatedTasks { get; init; }
 
 	public ICollection<Task>? AssignedTasks { get; init; }
