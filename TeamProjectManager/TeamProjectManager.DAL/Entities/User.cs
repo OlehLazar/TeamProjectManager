@@ -8,9 +8,11 @@ public class User : IdentityUser
 
 	public string LastName { get; set; }
 
-	public ICollection<Task> CreatedTasks { get; set; }
+	public string? Avatar { get; set; }
 
-	public ICollection<Task> AssignedTasks { get; set; }
+	public ICollection<Task>? CreatedTasks { get; init; }
 
-	public ICollection<Team> Teams { get; set; }
+	public ICollection<Task>? AssignedTasks { get; init; }
+
+	public ICollection<Team>? Teams { get; init; }
 }
