@@ -12,9 +12,9 @@ public class Project
 	[Length(10, 500)]
 	public string Description { get; set; } = string.Empty;
 
-	public string TeamId { get; set; }
+	public int TeamId { get; set; }
 
 	public Team Team { get; set; }
 
-	public ICollection<Task>? Tasks { get; init; }
+	public ICollection<Board>? Boards { get; init; }
 }

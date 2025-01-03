@@ -16,7 +16,7 @@ public class Task
 
 	public DateTime EndDate { get; set; }
 
-	public int ProjectId { get; set; }
+	public int BoardId { get; set; }
 
 	public int CreatorId { get; set; }
 
@@ -24,7 +24,7 @@ public class Task
 
 	public bool Status { get; set; }
 
-	public Project Project { get; set; }
+	public Board Board { get; set; }
 
 	public User Creator { get; set; }
 

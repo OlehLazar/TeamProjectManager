@@ -2,21 +2,21 @@
 
 namespace TeamProjectManager.DAL.Entities;
 
-public class Team
+public class Board
 {
 	public int Id { get; set; }
 
 	[Length(5, 50)]
 	public string Name { get; set; } = string.Empty;
 
-	[Length(5, 200)]
+	[Length(10, 200)]
 	public string Description { get; set; } = string.Empty;
 
-	public int LeaderId { get; set; }
+	public DateTime CreatedDate { get; set; }
 
-	public User Leader { get; set; }
+	public int ProjectId { get; set; }
 
-	public ICollection<User>? Members { get; init; }
+	public Project Project { get; set; }
 
-	public ICollection<Project>? Projects { get; init; }
+	public ICollection<Task>? Tasks { get; init; }
 }
