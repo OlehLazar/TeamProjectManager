@@ -2,6 +2,7 @@
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
@@ -13,33 +14,39 @@ public class TeamRepository(ManagerDbContext context)
 		return await _context.Teams.ToListAsync();
 	}
 
-	public Task<Team> AddAsync(Team entity)
+	public async Task<IEnumerable<Team>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Teams
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<Team> DeleteAsync(Team entity)
+	public async Task<Team> GetByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		return await _context.Teams.FindAsync(id);
 	}
 
-	public Task<Team> DeleteByIdAsync(string id)
+	public async Task AddAsync(Team entity)
 	{
-		throw new NotImplementedException();
+		_context.Teams.Add(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<IEnumerable<Team>> GetAsync(int skip, int take)
+	public async Task UpdateAsync(Team entity)
 	{
-		throw new NotImplementedException();
+		_context.Teams.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Team> GetByIdAsync(string id)
+	public async Task DeleteAsync(Team entity)
 	{
-		throw new NotImplementedException();
+		_context.Teams.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Team> UpdateAsync(Team entity)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		await DeleteAsync(await GetByIdAsync(id));
 	}
 }

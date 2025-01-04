@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
@@ -12,33 +13,39 @@ public class TaskRepository(ManagerDbContext context)
 		return await _context.Tasks.ToListAsync();
 	}
 
-	public Task<Entities.Task> AddAsync(Entities.Task entity)
+	public async Task<IEnumerable<Entities.Task>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Tasks
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<Entities.Task> DeleteAsync(Entities.Task entity)
+	public async Task<Entities.Task> GetByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		return await _context.Tasks.FindAsync(id);
 	}
 
-	public Task<Entities.Task> DeleteByIdAsync(string id)
+	public async Task AddAsync(Entities.Task entity)
 	{
-		throw new NotImplementedException();
+		_context.Tasks.Add(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<IEnumerable<Entities.Task>> GetAsync(int skip, int take)
+	public async Task UpdateAsync(Entities.Task entity)
 	{
-		throw new NotImplementedException();
+		_context.Tasks.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Entities.Task> GetByIdAsync(string id)
+	public async Task DeleteAsync(Entities.Task entity)
 	{
-		throw new NotImplementedException();
+		_context.Tasks.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Entities.Task> UpdateAsync(Entities.Task entity)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		await DeleteAsync(await GetByIdAsync(id));
 	}
 }

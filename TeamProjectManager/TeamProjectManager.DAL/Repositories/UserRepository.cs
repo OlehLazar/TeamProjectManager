@@ -48,6 +48,5 @@ public class UserRepository(ManagerDbContext context)
 	public async Task DeleteByIdAsync(int id)
 	{
 		await DeleteAsync(await GetByIdAsync(id));
-		await _context.SaveChangesAsync();
 	}
 }
