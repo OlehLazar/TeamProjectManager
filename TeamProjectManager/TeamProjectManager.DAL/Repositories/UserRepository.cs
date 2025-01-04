@@ -22,7 +22,7 @@ public class UserRepository(ManagerDbContext context)
 			.ToListAsync();
 	}
 
-	public async Task<User> GetByIdAsync(int id)
+	public async Task<User?> GetByIdAsync(int id)
 	{
 		return await _context.Users.FindAsync(id.ToString());
 	}
@@ -47,6 +47,11 @@ public class UserRepository(ManagerDbContext context)
 
 	public async Task DeleteByIdAsync(int id)
 	{
-		await DeleteAsync(await GetByIdAsync(id));
+		var user = await GetByIdAsync(id);
+
+		if (user != null)
+		{
+			await GetByIdAsync(id);
+		}
 	}
 }

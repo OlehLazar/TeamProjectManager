@@ -2,6 +2,7 @@
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
@@ -13,43 +14,59 @@ public class NotificationRepository(ManagerDbContext context)
 		return await _context.Notifications.ToListAsync();
 	}
 
-	public Task<Notification> AddAsync(Notification entity)
+	public async Task<IEnumerable<Notification>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Notifications
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<Notification> DeleteAsync(Notification entity)
+	public async Task<Notification?> GetByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		return await _context.Notifications.FindAsync(id);
 	}
 
-	public Task<Notification> DeleteByIdAsync(string id)
+	public async Task<IEnumerable<Notification>> GetByUserIdAsync(string userId, int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Notifications
+			.Where(n => n.UserId == userId)
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<IEnumerable<Notification>> GetAsync(int skip, int take)
+	public async Task<int> GetCountAsync(string userId)
 	{
-		throw new NotImplementedException();
+		return await _context.Notifications
+			.CountAsync(n => n.UserId == userId);
 	}
 
-	public Task<Notification> GetByIdAsync(string id)
+	public async Task AddAsync(Notification entity)
 	{
-		throw new NotImplementedException();
+		_context.Notifications.Add(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<IEnumerable<Notification>> GetByUserIdAsync(string userId, int skip, int take)
+	public async Task UpdateAsync(Notification entity)
 	{
-		throw new NotImplementedException();
+		_context.Notifications.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<int> GetCountAsync(string userId)
+	public async Task DeleteAsync(Notification entity)
 	{
-		throw new NotImplementedException();
+		_context.Notifications.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Notification> UpdateAsync(Notification entity)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		var notification = await GetByIdAsync(id);
+
+		if (notification != null)
+		{
+			await DeleteAsync(notification);
+		}
 	}
 }

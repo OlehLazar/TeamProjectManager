@@ -2,6 +2,7 @@
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
@@ -13,33 +14,44 @@ public class BoardRepository(ManagerDbContext context)
 		return await _context.Boards.ToListAsync();
 	}
 
-	public Task<Board> AddAsync(Board entity)
+	public async Task<IEnumerable<Board>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Boards
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<Board> DeleteAsync(Board entity)
+	public async Task<Board?> GetByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		return await _context.Boards.FindAsync(id);
 	}
 
-	public Task<Board> DeleteByIdAsync(string id)
+	public async Task AddAsync(Board entity)
 	{
-		throw new NotImplementedException();
+		_context.Boards.Add(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<IEnumerable<Board>> GetAsync(int skip, int take)
+	public async Task UpdateAsync(Board entity)
 	{
-		throw new NotImplementedException();
+		_context.Boards.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Board> GetByIdAsync(string id)
+	public async Task DeleteAsync(Board entity)
 	{
-		throw new NotImplementedException();
+		_context.Boards.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<Board> UpdateAsync(Board entity)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		var board = await GetByIdAsync(id);
+
+		if (board != null)
+		{
+			await DeleteAsync(board);
+		}
 	}
 }

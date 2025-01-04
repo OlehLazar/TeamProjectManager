@@ -22,7 +22,7 @@ public class TeamRepository(ManagerDbContext context)
 			.ToListAsync();
 	}
 
-	public async Task<Team> GetByIdAsync(int id)
+	public async Task<Team?> GetByIdAsync(int id)
 	{
 		return await _context.Teams.FindAsync(id);
 	}
@@ -47,6 +47,11 @@ public class TeamRepository(ManagerDbContext context)
 
 	public async Task DeleteByIdAsync(int id)
 	{
-		await DeleteAsync(await GetByIdAsync(id));
+		var team = await GetByIdAsync(id);
+		
+		if (team != null)
+		{
+			await DeleteAsync(team);
+		}
 	}
 }

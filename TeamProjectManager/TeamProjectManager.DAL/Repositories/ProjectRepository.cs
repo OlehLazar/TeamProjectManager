@@ -14,34 +14,44 @@ public class ProjectRepository(ManagerDbContext context)
 		return await _context.Projects.ToListAsync();
 	}
 
-	public Task<IEnumerable<Project>> GetAsync(int skip, int take)
+	public async Task<IEnumerable<Project>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Projects
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
 	}
 
-	public Task<Project> GetByIdAsync(int id)
+	public async Task<Project?> GetByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		return await _context.Projects.FindAsync(id);
 	}
 
-	public Task UpdateAsync(Project entity)
+	public async Task UpdateAsync(Project entity)
 	{
-		throw new NotImplementedException();
+		_context.Projects.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task AddAsync(Project entity)
+	public async Task AddAsync(Project entity)
 	{
-		throw new NotImplementedException();
+		_context.Projects.Add(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task DeleteAsync(Project entity)
+	public async Task DeleteAsync(Project entity)
 	{
-		throw new NotImplementedException();
+		_context.Projects.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task DeleteByIdAsync(int id)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
-	}
+		var project = await GetByIdAsync(id);
 
+		if (project != null)
+		{
+			await DeleteAsync(project);
+		}
+	}
 }

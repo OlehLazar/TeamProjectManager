@@ -21,7 +21,7 @@ public class TaskRepository(ManagerDbContext context)
 			.ToListAsync();
 	}
 
-	public async Task<Entities.Task> GetByIdAsync(int id)
+	public async Task<Entities.Task?> GetByIdAsync(int id)
 	{
 		return await _context.Tasks.FindAsync(id);
 	}
@@ -46,6 +46,11 @@ public class TaskRepository(ManagerDbContext context)
 
 	public async Task DeleteByIdAsync(int id)
 	{
-		await DeleteAsync(await GetByIdAsync(id));
+		var task = await GetByIdAsync(id);
+
+		if (task != null)
+		{
+			await DeleteAsync(task);
+		}
 	}
 }
