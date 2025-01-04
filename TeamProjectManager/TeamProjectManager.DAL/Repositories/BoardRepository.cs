@@ -1,4 +1,5 @@
-﻿using TeamProjectManager.DAL.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
 
@@ -7,6 +8,11 @@ namespace TeamProjectManager.DAL.Repositories;
 public class BoardRepository(ManagerDbContext context)
 	: AbstractRepository(context), IBoardRepository
 {
+	public async Task<IEnumerable<Board>> GetAllAsync()
+	{
+		return await _context.Boards.ToListAsync();
+	}
+
 	public Task<Board> AddAsync(Board entity)
 	{
 		throw new NotImplementedException();
@@ -18,11 +24,6 @@ public class BoardRepository(ManagerDbContext context)
 	}
 
 	public Task<Board> DeleteByIdAsync(string id)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<IEnumerable<Board>> GetAllAsync()
 	{
 		throw new NotImplementedException();
 	}

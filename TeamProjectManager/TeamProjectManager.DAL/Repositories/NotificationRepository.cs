@@ -1,4 +1,5 @@
-﻿using TeamProjectManager.DAL.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
 
@@ -7,6 +8,11 @@ namespace TeamProjectManager.DAL.Repositories;
 public class NotificationRepository(ManagerDbContext context) 
 	: AbstractRepository(context), INotificationRepository
 {
+	public async Task<IEnumerable<Notification>> GetAllAsync()
+	{
+		return await _context.Notifications.ToListAsync();
+	}
+
 	public Task<Notification> AddAsync(Notification entity)
 	{
 		throw new NotImplementedException();
@@ -18,11 +24,6 @@ public class NotificationRepository(ManagerDbContext context)
 	}
 
 	public Task<Notification> DeleteByIdAsync(string id)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<IEnumerable<Notification>> GetAllAsync()
 	{
 		throw new NotImplementedException();
 	}

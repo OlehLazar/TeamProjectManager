@@ -1,28 +1,31 @@
-﻿using TeamProjectManager.DAL.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
 public class UserRepository(ManagerDbContext context)
 	: AbstractRepository(context), IUserRepository
 {
-	public Task<User> AddAsync(User entity)
+	public async Task<IEnumerable<User>> GetAllAsync()
+	{
+		return await _context.Users.ToListAsync();
+	}
+
+	public Task AddAsync(User entity)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<User> DeleteAsync(User entity)
+	public async Task DeleteAsync(User entity)
 	{
-		throw new NotImplementedException();
+		_context.Users.Remove(entity);
+		await _context.SaveChangesAsync();
 	}
 
-	public Task<User> DeleteByIdAsync(string id)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<IEnumerable<User>> GetAllAsync()
+	public Task DeleteByIdAsync(string id)
 	{
 		throw new NotImplementedException();
 	}
@@ -37,7 +40,7 @@ public class UserRepository(ManagerDbContext context)
 		throw new NotImplementedException();
 	}
 
-	public Task<User> UpdateAsync(User entity)
+	public Task UpdateAsync(User entity)
 	{
 		throw new NotImplementedException();
 	}

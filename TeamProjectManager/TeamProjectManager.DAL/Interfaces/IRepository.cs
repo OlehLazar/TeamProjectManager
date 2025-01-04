@@ -8,11 +8,11 @@ public interface IRepository<TEntity>
 
 	Task<TEntity> GetByIdAsync(string id);
 
-	Task<TEntity> AddAsync(TEntity entity);
+	Task AddAsync(TEntity entity);
 
-	Task<TEntity> UpdateAsync(TEntity entity);
+	Task UpdateAsync(TEntity entity);
 
-	Task<TEntity> DeleteAsync(TEntity entity);
+	Task DeleteAsync(TEntity entity);
 
-	Task<TEntity> DeleteByIdAsync(string id);
+	Task DeleteByIdAsync(string id);
 }
