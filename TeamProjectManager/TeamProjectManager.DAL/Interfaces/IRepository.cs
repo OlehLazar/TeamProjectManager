@@ -12,5 +12,7 @@ public interface IRepository<TEntity>
 
 	Task<TEntity> UpdateAsync(TEntity entity);
 
-	Task<TEntity> DeleteAsync(string id);
+	Task<TEntity> DeleteAsync(TEntity entity);
+
+	Task<TEntity> DeleteByIdAsync(string id);
 }

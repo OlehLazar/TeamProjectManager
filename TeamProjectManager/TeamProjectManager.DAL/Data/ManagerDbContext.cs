@@ -4,15 +4,10 @@ using TeamProjectManager.DAL.Entities;
 
 namespace TeamProjectManager.DAL.Data;
 
-public class ManagerDbContext : IdentityDbContext<User>
+public class ManagerDbContext(DbContextOptions<ManagerDbContext> options) 
+	: IdentityDbContext<User>(options)
 {
-    public ManagerDbContext(DbContextOptions<ManagerDbContext> options) 
-        : base(options)
-    {
-        
-    }
-
-    public DbSet<Board> Boards { get; set; }
+	public DbSet<Board> Boards { get; set; }
 
     public DbSet<Notification> Notifications { get; set; }
 
