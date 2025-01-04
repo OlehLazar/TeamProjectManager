@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TeamProjectManager.DAL.Data;
+using TeamProjectManager.DAL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
