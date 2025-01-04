@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'ptSerif': ['"PT Serif"', 'cursive'],
+        'ptSerif': ['"PT Serif"', 'serif'],
+        'firaSans': ['"Fira Sans"', 'sans-serif'],
+        'openSans': ['"Open Sans"', 'sans-serif'],
       },
     },
   },
