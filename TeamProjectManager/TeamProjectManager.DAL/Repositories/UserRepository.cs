@@ -14,9 +14,29 @@ public class UserRepository(ManagerDbContext context)
 		return await _context.Users.ToListAsync();
 	}
 
-	public Task AddAsync(User entity)
+	public async Task<IEnumerable<User>> GetAsync(int skip, int take)
 	{
-		throw new NotImplementedException();
+		return await _context.Users
+			.Skip(skip)
+			.Take(take)
+			.ToListAsync();
+	}
+
+	public async Task<User> GetByIdAsync(int id)
+	{
+		return await _context.Users.FindAsync(id.ToString());
+	}
+
+	public async Task AddAsync(User entity)
+	{
+		_context.Users.Add(entity);
+		await _context.SaveChangesAsync();
+	}
+
+	public async Task UpdateAsync(User entity)
+	{
+		_context.Users.Update(entity);
+		await _context.SaveChangesAsync();
 	}
 
 	public async Task DeleteAsync(User entity)
@@ -25,23 +45,9 @@ public class UserRepository(ManagerDbContext context)
 		await _context.SaveChangesAsync();
 	}
 
-	public Task DeleteByIdAsync(string id)
+	public async Task DeleteByIdAsync(int id)
 	{
-		throw new NotImplementedException();
-	}
-
-	public Task<IEnumerable<User>> GetAsync(int skip, int take)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<User> GetByIdAsync(string id)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task UpdateAsync(User entity)
-	{
-		throw new NotImplementedException();
+		await DeleteAsync(await GetByIdAsync(id));
+		await _context.SaveChangesAsync();
 	}
 }

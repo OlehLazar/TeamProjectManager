@@ -2,6 +2,7 @@
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamProjectManager.DAL.Repositories;
 
@@ -13,33 +14,34 @@ public class ProjectRepository(ManagerDbContext context)
 		return await _context.Projects.ToListAsync();
 	}
 
-	public Task<Project> AddAsync(Project entity)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<Project> DeleteAsync(Project entity)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<Project> DeleteByIdAsync(string id)
-	{
-		throw new NotImplementedException();
-	}
-
 	public Task<IEnumerable<Project>> GetAsync(int skip, int take)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<Project> GetByIdAsync(string id)
+	public Task<Project> GetByIdAsync(int id)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<Project> UpdateAsync(Project entity)
+	public Task UpdateAsync(Project entity)
 	{
 		throw new NotImplementedException();
 	}
+
+	public Task AddAsync(Project entity)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task DeleteAsync(Project entity)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task DeleteByIdAsync(int id)
+	{
+		throw new NotImplementedException();
+	}
+
 }

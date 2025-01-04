@@ -6,7 +6,7 @@ public interface IRepository<TEntity>
 
 	Task<IEnumerable<TEntity>> GetAsync(int skip, int take);
 
-	Task<TEntity> GetByIdAsync(string id);
+	Task<TEntity> GetByIdAsync(int id);
 
 	Task AddAsync(TEntity entity);
 
@@ -14,5 +14,5 @@ public interface IRepository<TEntity>
 
 	Task DeleteAsync(TEntity entity);
 
-	Task DeleteByIdAsync(string id);
+	Task DeleteByIdAsync(int id);
 }
