@@ -18,9 +18,9 @@ public class Task
 
 	public int BoardId { get; set; }
 
-	public int CreatorId { get; set; }
+	public string CreatorId { get; set; }
 
-	public int AssigneeId { get; set; }
+	public string AssigneeId { get; set; }
 
 	public bool Status { get; set; }
 

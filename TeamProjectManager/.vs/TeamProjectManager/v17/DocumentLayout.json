@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\data\\managerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\data\\managerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -18,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 73,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -47,32 +38,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Notification.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Notification.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Entities\\Notification.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Entities\\Notification.cs",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Entities\\Notification.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T19:56:53.622Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ManagerDbContext.cs",
-              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Data\\ManagerDbContext.cs",
-              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Data\\ManagerDbContext.cs",
-              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Data\\ManagerDbContext.cs*",
-              "RelativeToolTip": "TeamProjectManager.DAL\\Data\\ManagerDbContext.cs*",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAiwB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T19:12:52.727Z",
-              "EditorCaption": ""
             }
           ]
         },

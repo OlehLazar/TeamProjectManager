@@ -12,7 +12,7 @@ public class Team
 	[Length(5, 200)]
 	public string Description { get; set; } = string.Empty;
 
-	public int LeaderId { get; set; }
+	public string LeaderId { get; set; }
 
 	public User Leader { get; set; }
 
