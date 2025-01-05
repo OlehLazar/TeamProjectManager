@@ -1,6 +1,6 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class AbstractModel(int id)
+public class AbstractModel
 {
-	public int Id { get; set; } = id;
+	public int Id { get; set; }
 }
