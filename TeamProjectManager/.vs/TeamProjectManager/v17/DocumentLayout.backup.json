@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.dal\\repositories\\teamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C38A7AB2-4E35-46E5-94B2-8EFA11D14ED1}|TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj|solutionrelative:teamprojectmanager.dal\\repositories\\teamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 73,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,6 +47,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "TeamProjectManager.DAL\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T11:39:08.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TeamRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Repositories\\TeamRepository.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.DAL\\Repositories\\TeamRepository.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\Repositories\\TeamRepository.cs",
+              "RelativeToolTip": "TeamProjectManager.DAL\\Repositories\\TeamRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T11:34:35.196Z",
+              "EditorCaption": ""
             }
           ]
         },
