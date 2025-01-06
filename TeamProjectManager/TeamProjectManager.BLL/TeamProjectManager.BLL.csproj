@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <ProjectReference Include="..\TeamProjectManager.DAL\TeamProjectManager.DAL.csproj" />
   </ItemGroup>
 
 </Project>
