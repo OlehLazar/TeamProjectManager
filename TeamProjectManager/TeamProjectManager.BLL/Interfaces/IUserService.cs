@@ -17,5 +17,5 @@ public interface IUserService
 
 	Task<IdentityResult> ChangePasswordAsync(string userName, string password);
 
-	Task DeleteAsync(int id);
+	Task DeleteAsync(string userName);
 }

@@ -14,9 +14,24 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 
 	private readonly SignInManager<User> _signInManager = signInManager;
 
-	public Task<UserModel> GetAsync(string userName)
+	public async Task<UserModel> GetAsync(string userName)
 	{
-		throw new NotImplementedException();
+		AppException.ThrowIfNullOrWhiteSpace(userName, "User name is required.");
+
+		var user = await _userManager.FindByNameAsync(userName);
+
+		if (user == null)
+		{
+			throw new AppException("User not found.");
+		}
+
+		return new UserModel
+		{
+			FirstName = user.FirstName,
+			LastName = user.LastName,
+			UserName = user.UserName,
+			Avatar = user.Avatar,
+		};
 	}
 
 	public Task<IdentityResult> RegisterAsync(UserModel user)
@@ -61,8 +76,12 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		return IdentityResult.Success;
 	}
 
-	public Task DeleteAsync(int id)
+	public async Task DeleteAsync(string userName)
 	{
-		throw new NotImplementedException();
+		var user = await _userManager.FindByNameAsync(userName);
+
+		AppException.ThrowIfNull(user, "User not found.");
+
+		await _userManager.DeleteAsync(user!);
 	}
 }

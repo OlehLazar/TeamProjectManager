@@ -2,6 +2,11 @@
 
 public class UserModel : AbstractModel
 {
+    public UserModel()
+    {
+        
+    }
+
     public UserModel(string firstName, string lastName, string userName, string password)
     {
         FirstName = firstName;
@@ -10,13 +15,13 @@ public class UserModel : AbstractModel
 		Password = password;
 	}
 
-    public required string FirstName { get; set; }
+	public string FirstName { get; set; } = default!;
 
-	public required string LastName { get; set; }
+	public string LastName { get; set; } = default!;
 
-	public required string UserName { get; set; }
+	public string UserName { get; set; } = default!;
 
-	public required string Password { get; set; }
+	public string Password { get; set; } = default!;
 
 	public string? Avatar { get; set; }
 }
