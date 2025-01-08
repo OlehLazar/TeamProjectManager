@@ -8,9 +8,9 @@ public interface ITeamService
 
 	Task<TeamModel> GetByIdAsync(int id);
 
-	Task AddAsync(TeamModel team);
+	Task AddAsync(TeamModel teamModel);
 
-	Task<TeamModel> UpdateAsync(TeamModel team);
+	Task<TeamModel> UpdateAsync(TeamModel teamModel);
 
 	Task DeleteAsync(int id);
 }

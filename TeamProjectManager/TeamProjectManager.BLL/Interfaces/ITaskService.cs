@@ -8,9 +8,9 @@ public interface ITaskService
 
 	Task<TaskModel> GetTaskByIdAsync(int id);
 
-	Task AddAsync(TaskModel task);
+	Task AddAsync(TaskModel taskModel);
 
-	Task<TaskModel> UpdateAsync(TaskModel task);
+	Task<TaskModel> UpdateAsync(TaskModel taskModel);
 
 	Task DeleteAsync(int id);
 }

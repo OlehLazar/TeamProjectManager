@@ -8,9 +8,9 @@ public interface IBoardService
 
 	Task<BoardModel> GetByIdAsync(int id);
 
-	Task AddAsync(BoardModel board);
+	Task AddAsync(BoardModel boardModel);
 
-	Task<BoardModel> UpdateAsync(BoardModel board);
+	Task<BoardModel> UpdateAsync(BoardModel boardModel);
 
 	Task DeleteAsync(int id);
 }

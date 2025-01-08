@@ -8,9 +8,9 @@ public interface INotificationService
 
 	Task<NotificationModel> GetByIdAsync(int id);
 
-	Task AddAsync(NotificationModel notification);
+	Task AddAsync(NotificationModel notificationModel);
 
-	Task<NotificationModel> UpdateAsync(NotificationModel notification);
+	Task<NotificationModel> UpdateAsync(NotificationModel notificationModel);
 
 	Task DeleteAsync(int id);
 }

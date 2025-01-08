@@ -8,9 +8,9 @@ public interface IProjectService
 
 	Task<ProjectModel> GetByIdAsync(int id);
 
-	Task AddAsync(ProjectModel project);
+	Task AddAsync(ProjectModel projectModel);
 
-	Task<ProjectModel> UpdateAsync(ProjectModel project);
+	Task<ProjectModel> UpdateAsync(ProjectModel projectModel);
 
 	Task DeleteAsync(int id);
 }
