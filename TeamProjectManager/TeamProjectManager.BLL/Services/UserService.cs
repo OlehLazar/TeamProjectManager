@@ -11,7 +11,6 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 	: IUserService
 {
 	private readonly UserManager<User> _userManager = userManager;
-
 	private readonly SignInManager<User> _signInManager = signInManager;
 
 	public async Task<UserModel> GetAsync(string userName)
@@ -29,24 +28,59 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		{
 			FirstName = user.FirstName,
 			LastName = user.LastName,
-			UserName = user.UserName,
+			UserName = user.UserName!,
 			Avatar = user.Avatar,
 		};
 	}
 
-	public Task<IdentityResult> RegisterAsync(UserModel user)
+	public async Task<IdentityResult> RegisterAsync(UserModel userModel)
 	{
-		throw new NotImplementedException();
+		AppException.ThrowIfNull(userModel, "User data is required.");
+
+		var user = new User
+		{
+			FirstName = userModel.FirstName,
+			LastName = userModel.LastName,
+			UserName = userModel.UserName,
+			Avatar = userModel.Avatar,
+		};
+
+		return await _userManager.CreateAsync(user, userModel.Password);
 	}
 
-	public Task<IdentityResult> LoginAsync(string userName, string password)
+	public async Task<IdentityResult> LoginAsync(string userName, string password)
 	{
-		throw new NotImplementedException();
+		AppException.ThrowIfNullOrWhiteSpace(userName, "User name is required.");
+		AppException.ThrowIfNullOrWhiteSpace(password, "Password is required.");
+
+		var user = await _userManager.FindByNameAsync(userName);
+		if (user == null)
+		{
+			return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+		}
+
+		var result = await _signInManager.PasswordSignInAsync(userName, password, false, false);
+		if (!result.Succeeded)
+		{
+			return IdentityResult.Failed(new IdentityError { Description = "Invalid password." });
+		}
+
+		return IdentityResult.Success;
 	}
 
-	public Task<UserModel> UpdateAsync(UserModel user)
+	public async Task<UserModel> UpdateAsync(UserModel userModel)
 	{
-		throw new NotImplementedException();
+		AppException.ThrowIfNull(userModel, "User data is required.");
+		var user = await _userManager.FindByNameAsync(userModel.UserName);
+		AppException.ThrowIfNull(user, "User not found.");
+
+		user!.FirstName = userModel.FirstName;
+		user.LastName = userModel.LastName;
+		user.Avatar = userModel.Avatar;
+
+		await _userManager.UpdateAsync(user);
+
+		return userModel;
 	}
 
 	public async Task LogoutAsync()
@@ -82,6 +116,11 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 
 		AppException.ThrowIfNull(user, "User not found.");
 
-		await _userManager.DeleteAsync(user!);
+		var result = await _userManager.DeleteAsync(user!);
+
+		if (!result.Succeeded)
+		{
+			throw new AppException("Failed to delete the user.");
+		}
 	}
 }

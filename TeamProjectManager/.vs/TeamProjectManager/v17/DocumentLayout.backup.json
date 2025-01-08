@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\validation\\appexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\validation\\appexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedHeight": 73,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "RelativeToolTip": "TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T18:47:44.489Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
@@ -46,15 +71,41 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppException.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Validation\\AppException.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Validation\\AppException.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Validation\\AppException.cs",
+              "RelativeToolTip": "TeamProjectManager.BLL\\Validation\\AppException.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwAoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T10:38:18.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Services\\UserService.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Services\\UserService.cs",
+              "RelativeToolTip": "TeamProjectManager.BLL\\Services\\UserService.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAswFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T10:14:25.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Interfaces\\IUserService.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Interfaces\\IUserService.cs",
               "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Interfaces\\IUserService.cs",
               "RelativeToolTip": "TeamProjectManager.BLL\\Interfaces\\IUserService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAcAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAzwBMAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T19:01:23.852Z",
+              "WhenOpened": "2025-01-06T10:08:20.94Z",
               "EditorCaption": ""
             }
           ]

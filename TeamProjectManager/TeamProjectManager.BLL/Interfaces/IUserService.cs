@@ -7,11 +7,11 @@ public interface IUserService
 {
 	Task<UserModel> GetAsync(string userName);
 
-	Task<IdentityResult> RegisterAsync(UserModel user);
+	Task<IdentityResult> RegisterAsync(UserModel userModel);
 
 	Task<IdentityResult> LoginAsync(string userName, string password);
 
-	Task<UserModel> UpdateAsync(UserModel user);
+	Task<UserModel> UpdateAsync(UserModel userModel);
 
 	Task LogoutAsync();
 
