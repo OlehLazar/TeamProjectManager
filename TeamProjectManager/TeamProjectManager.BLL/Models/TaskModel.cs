@@ -2,6 +2,11 @@
 
 public class TaskModel : AbstractModel
 {
+    public TaskModel()
+    {
+        
+    }
+
     public TaskModel(string name, string description, DateTime startDate, DateTime endDate, 
 		int boardId, int creatorId, int assigneeId)
     {
@@ -29,4 +34,10 @@ public class TaskModel : AbstractModel
 	public int AssigneeId { get; set; }
 
 	public bool Status { get; set; } = default;
+
+	public BoardModel Board { get; set; }
+
+	public UserModel Creator { get; set; }
+
+	public UserModel Assignee { get; set; }
 }

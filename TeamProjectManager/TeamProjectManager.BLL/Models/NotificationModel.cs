@@ -2,6 +2,11 @@
 
 public class NotificationModel : AbstractModel
 {
+    public NotificationModel()
+    {
+        
+    }
+
     public NotificationModel(string title, string content, DateTime createdAt, int userId)
     {
         Title = title;

@@ -2,6 +2,11 @@
 
 public class BoardModel : AbstractModel
 {
+    public BoardModel()
+    {
+        
+    }
+
     public BoardModel(string name, string description, DateTime createdDate, int projectId)
     {
         Name = name;
