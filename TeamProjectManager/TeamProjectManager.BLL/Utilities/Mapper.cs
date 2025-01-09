@@ -126,25 +126,77 @@ public static class Mapper
 	public static Project MapProject(ProjectModel projectModel)
 	{
 		ArgumentNullException.ThrowIfNull(projectModel);
+
+		return new Project
+		{
+			Id = projectModel.Id,
+			Name = projectModel.Name,
+			Description = projectModel.Description,
+			TeamId = projectModel.TeamId,
+			Team = MapTeam(projectModel.Team),
+			Boards = projectModel.Boards.Select(MapBoard).ToList(),
+		};
 	}
 
 	public static NotificationModel MapNotificationModel(Notification notification)
 	{
 		ArgumentNullException.ThrowIfNull(notification);
+
+		return new NotificationModel
+		{
+			Id = notification.Id,
+			Title = notification.Title,
+			Content = notification.Content,
+			CreatedAt = notification.CreatedAt,
+			IsRead = notification.IsRead,
+			UserId = int.Parse(notification.UserId),
+			User = MapUserModel(notification.User),
+		};
 	}
 
 	public static Notification MapNotification(NotificationModel notificationModel)
 	{
 		ArgumentNullException.ThrowIfNull(notificationModel);
+
+		return new Notification
+		{
+			Id = notificationModel.Id,
+			Title = notificationModel.Title,
+			Content = notificationModel.Content,
+			CreatedAt = notificationModel.CreatedAt,
+			IsRead = notificationModel.IsRead,
+			UserId = notificationModel.UserId.ToString(),
+			User = MapUser(notificationModel.User),
+		};
 	}
 
 	public static BoardModel MapBoardModel(Board board)
 	{
 		ArgumentNullException.ThrowIfNull(board);
+
+		return new BoardModel
+		{
+			Id = board.Id,
+			Name = board.Name,
+			Description = board.Description,
+			ProjectId = board.ProjectId,
+			Project = MapProjectModel(board.Project),
+			Tasks = board.Tasks.Select(MapTaskModel).ToList(),
+		};
 	}
 
 	public static Board MapBoard(BoardModel boardModel)
 	{
 		ArgumentNullException.ThrowIfNull(boardModel);
+
+		return new Board
+		{
+			Id = boardModel.Id,
+			Name = boardModel.Name,
+			Description = boardModel.Description,
+			ProjectId = boardModel.ProjectId,
+			Project = MapProject(boardModel.Project),
+			Tasks = boardModel.Tasks.Select(MapTask).ToList(),
+		};
 	}
 }

@@ -15,11 +15,15 @@ public class BoardModel : AbstractModel
 		ProjectId = projectId;
 	}
 
-    public required string Name { get; set; }
+    public required string Name { get; set; } = default!;
 
-	public required string Description { get; set; }
+	public required string Description { get; set; } = default!;
 
 	public DateTime CreatedDate { get; set; }
 
 	public int ProjectId { get; set; }
+
+    public ProjectModel Project { get; set; } = default!;
+
+	public ICollection<TaskModel>? Tasks { get; init; }
 }

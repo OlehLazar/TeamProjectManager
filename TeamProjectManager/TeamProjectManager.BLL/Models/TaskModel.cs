@@ -19,9 +19,9 @@ public class TaskModel : AbstractModel
 		AssigneeId = assigneeId;
 	}
 
-    public required string Name { get; set; }
+    public required string Name { get; set; } = default!;
 
-	public required string Description { get; set; }
+	public required string Description { get; set; } = default!;
 
 	public DateTime StartDate { get; set; }
 

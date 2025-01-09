@@ -15,13 +15,15 @@ public class NotificationModel : AbstractModel
 		UserId = userId;
 	}
 
-    public required string Title { get; set; }
+    public required string Title { get; set; } = default!;
 
-	public required string Content { get; set; }
+	public required string Content { get; set; } = default!;
 
 	public required DateTime CreatedAt { get; set; }
 
 	public required bool IsRead { get; set; } = default;
 
 	public required int UserId { get; set; }
+
+	public required UserModel User { get; set; }
 }

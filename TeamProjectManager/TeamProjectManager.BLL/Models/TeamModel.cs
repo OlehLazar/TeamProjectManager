@@ -14,9 +14,9 @@ public class TeamModel : AbstractModel
 		LeaderId = leaderId;
 	}
 
-    public required string Name { get; set; }
+    public required string Name { get; set; } = default!;
 
-	public required string Description { get; set; }
+	public required string Description { get; set; } = default!;
 
 	public int LeaderId { get; set; }
 
