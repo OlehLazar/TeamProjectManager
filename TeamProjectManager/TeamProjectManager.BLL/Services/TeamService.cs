@@ -1,5 +1,7 @@
 ﻿using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
+using TeamProjectManager.BLL.Utilities;
+using TeamProjectManager.BLL.Validation;
 using TeamProjectManager.DAL.Interfaces;
 
 namespace TeamProjectManager.BLL.Services;
@@ -15,28 +17,44 @@ public class TeamService : ITeamService
 		_teamRepository = unitOfWork.TeamRepository;
 	}
 
-    public Task<IEnumerable<TeamModel>> GetAsync(FilterModel filter)
+    public async Task<IEnumerable<TeamModel>> GetAsync(FilterModel filter)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<TeamModel> GetByIdAsync(int id)
+	public async Task<TeamModel> GetByIdAsync(int id)
 	{
+		var team = await _teamRepository.GetByIdAsync(id);
+		AppException.ThrowIfNull(team, "Team not found");
+		return Mapper.MapTeamModel(team!);
+	}
+
+	public async Task AddAsync(TeamModel team)
+	{
+		AppException.ThrowIfNull(team, "Team can't be null");
+		var entity = Mapper.MapTeam(team);
+		await _teamRepository.AddAsync(entity);
+	}
+
+	public async Task UpdateAsync(TeamModel team)
+	{
+		AppException.ThrowIfNull(team, "Team can't be null");
+
+		var teamEntity = await _teamRepository.GetByIdAsync(team.Id);
+		AppException.ThrowIfNull(teamEntity, "Team not found");
+
+		var updatedEntity = Mapper.MapTeam(team);
+		await _teamRepository.UpdateAsync(updatedEntity);
+
 		throw new NotImplementedException();
 	}
 
-	public Task AddAsync(TeamModel team)
+	public async Task DeleteAsync(int id)
 	{
-		throw new NotImplementedException();
-	}
+		var team = await _teamRepository.GetByIdAsync(id);
 
-	public Task<TeamModel> UpdateAsync(TeamModel team)
-	{
-		throw new NotImplementedException();
-	}
+		AppException.ThrowIfNull(team, "Team not found");
 
-	public Task DeleteAsync(int id)
-	{
-		throw new NotImplementedException();
+		await _teamRepository.DeleteByIdAsync(id);
 	}
 }

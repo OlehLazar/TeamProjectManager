@@ -10,7 +10,7 @@ public interface ITeamService
 
 	Task AddAsync(TeamModel teamModel);
 
-	Task<TeamModel> UpdateAsync(TeamModel teamModel);
+	Task UpdateAsync(TeamModel teamModel);
 
 	Task DeleteAsync(int id);
 }
