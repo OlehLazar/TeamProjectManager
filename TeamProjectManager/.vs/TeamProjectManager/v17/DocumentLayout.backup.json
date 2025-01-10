@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\utilities\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\utilities\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\boardmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\boardmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\teammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\teammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\utilities\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\utilities\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\filtermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\notificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\notificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|c:\\projects\\teamprojectmanager\\teamprojectmanager\\teamprojectmanager.bll\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{332BE03D-8FAC-40F7-A38D-B11ED22C0454}|TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj|solutionrelative:teamprojectmanager.bll\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 73,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,19 +70,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "TeamModel.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\TeamModel.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\TeamModel.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\TeamModel.cs",
+              "RelativeToolTip": "TeamProjectManager.BLL\\Models\\TeamModel.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T20:33:33.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "RelativeToolTip": "TeamProjectManager.BLL\\Models\\UserModel.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T20:31:46.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "BoardModel.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\BoardModel.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\BoardModel.cs",
               "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\BoardModel.cs",
               "RelativeToolTip": "TeamProjectManager.BLL\\Models\\BoardModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA1wAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T17:20:44.988Z"
+              "WhenOpened": "2025-01-08T17:20:44.988Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "FilterModel.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\FilterModel.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\FilterModel.cs",
@@ -86,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "NotificationModel.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\NotificationModel.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\NotificationModel.cs",
@@ -98,19 +133,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ProjectModel.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\ProjectModel.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Models\\ProjectModel.cs",
               "ToolTip": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Models\\ProjectModel.cs",
               "RelativeToolTip": "TeamProjectManager.BLL\\Models\\ProjectModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T17:17:04.795Z"
+              "WhenOpened": "2025-01-08T17:17:04.795Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Mapper.cs",
               "DocumentMoniker": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\Utilities\\Mapper.cs",
               "RelativeDocumentMoniker": "TeamProjectManager.BLL\\Utilities\\Mapper.cs",
