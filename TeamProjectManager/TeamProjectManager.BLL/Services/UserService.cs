@@ -13,16 +13,13 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 	private readonly UserManager<User> _userManager = userManager;
 	private readonly SignInManager<User> _signInManager = signInManager;
 
-	public async Task<UserModel> GetAsync(string userName)
+	public async Task<UserModel> GetUserAsync(string userName)
 	{
 		AppException.ThrowIfNullOrWhiteSpace(userName, "User name is required.");
 
 		var user = await _userManager.FindByNameAsync(userName);
 
-		if (user == null)
-		{
-			throw new AppException("User not found.");
-		}
+		AppException.ThrowIfNull(user, "User not found.");
 
 		return new UserModel
 		{
@@ -33,7 +30,7 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		};
 	}
 
-	public async Task<IdentityResult> RegisterAsync(UserModel userModel)
+	public async Task<IdentityResult> RegisterUserAsync(UserModel userModel)
 	{
 		AppException.ThrowIfNull(userModel, "User data is required.");
 
@@ -48,7 +45,7 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		return await _userManager.CreateAsync(user, userModel.Password);
 	}
 
-	public async Task<IdentityResult> LoginAsync(string userName, string password)
+	public async Task<IdentityResult> LoginUserAsync(string userName, string password)
 	{
 		AppException.ThrowIfNullOrWhiteSpace(userName, "User name is required.");
 		AppException.ThrowIfNullOrWhiteSpace(password, "Password is required.");
@@ -68,7 +65,7 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		return IdentityResult.Success;
 	}
 
-	public async Task<UserModel> UpdateAsync(UserModel userModel)
+	public async Task<UserModel> UpdateUserAsync(UserModel userModel)
 	{
 		AppException.ThrowIfNull(userModel, "User data is required.");
 		var user = await _userManager.FindByNameAsync(userModel.UserName);
@@ -83,7 +80,7 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		return userModel;
 	}
 
-	public async Task LogoutAsync()
+	public async Task LogoutUserAsync()
 	{
 		await _signInManager.SignOutAsync();
 	}
@@ -110,7 +107,7 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 		return IdentityResult.Success;
 	}
 
-	public async Task DeleteAsync(string userName)
+	public async Task DeleteUserAsync(string userName)
 	{
 		var user = await _userManager.FindByNameAsync(userName);
 

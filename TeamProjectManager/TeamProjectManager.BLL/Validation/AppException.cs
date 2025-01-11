@@ -14,7 +14,7 @@ public class AppException : Exception
 	{
 		if (obj == null)
 		{
-			throw new AppException(message);
+			throw new AppException(message, new ArgumentNullException());
 		}
 	}
 
@@ -22,7 +22,7 @@ public class AppException : Exception
 	{
 		if (string.IsNullOrWhiteSpace(str))
 		{
-			throw new AppException(message);
+			throw new AppException(message, new ArgumentException());
 		}
 	}
 
@@ -30,7 +30,7 @@ public class AppException : Exception
 	{
 		if (number < 0)
 		{
-			throw new AppException(message);
+			throw new AppException(message, new ArgumentOutOfRangeException());
 		}
 	}
 
@@ -38,15 +38,7 @@ public class AppException : Exception
 	{
 		if (number <= 0)
 		{
-			throw new AppException(message);
-		}
-	}
-
-	public static void ThrowIfCondition(bool condition, string message)
-	{
-		if (condition)
-		{
-			throw new AppException(message);
+			throw new AppException(message, new ArgumentOutOfRangeException());
 		}
 	}
 }

@@ -8,8 +8,8 @@ namespace TeamProjectManager.BLL.Services;
 
 public class TeamService : ITeamService
 {
-	private IUnitOfWork _unitOfWork;
-	private ITeamRepository _teamRepository;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly ITeamRepository _teamRepository;
 
 	public TeamService( IUnitOfWork unitOfWork)
     {
@@ -17,44 +17,31 @@ public class TeamService : ITeamService
 		_teamRepository = unitOfWork.TeamRepository;
 	}
 
-    public async Task<IEnumerable<TeamModel>> GetAsync(FilterModel filter)
+    public async Task<IEnumerable<TeamModel>> GetTeamsAsync()
 	{
-		throw new NotImplementedException();
+		var teams = await _teamRepository.GetAllAsync();
+		AppException.ThrowIfNull(teams, "Teams not found");
+		return teams.Select(Mapper.MapTeamModel);
 	}
 
-	public async Task<TeamModel> GetByIdAsync(int id)
+	public async Task<TeamModel> GetTeamByIdAsync(int id)
 	{
 		var team = await _teamRepository.GetByIdAsync(id);
 		AppException.ThrowIfNull(team, "Team not found");
 		return Mapper.MapTeamModel(team!);
 	}
 
-	public async Task AddAsync(TeamModel team)
+	public async Task AddTeamAsync(TeamModel team)
 	{
 		AppException.ThrowIfNull(team, "Team can't be null");
 		var entity = Mapper.MapTeam(team);
 		await _teamRepository.AddAsync(entity);
 	}
 
-	public async Task UpdateAsync(TeamModel team)
-	{
-		AppException.ThrowIfNull(team, "Team can't be null");
-
-		var teamEntity = await _teamRepository.GetByIdAsync(team.Id);
-		AppException.ThrowIfNull(teamEntity, "Team not found");
-
-		var updatedEntity = Mapper.MapTeam(team);
-		await _teamRepository.UpdateAsync(updatedEntity);
-
-		throw new NotImplementedException();
-	}
-
-	public async Task DeleteAsync(int id)
+	public async Task DeleteTeamAsync(int id)
 	{
 		var team = await _teamRepository.GetByIdAsync(id);
-
 		AppException.ThrowIfNull(team, "Team not found");
-
 		await _teamRepository.DeleteByIdAsync(id);
 	}
 }

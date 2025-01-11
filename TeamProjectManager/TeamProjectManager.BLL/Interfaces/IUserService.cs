@@ -5,17 +5,17 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface IUserService
 {
-	Task<UserModel> GetAsync(string userName);
+	Task<UserModel> GetUserAsync(string userName);
 
-	Task<IdentityResult> RegisterAsync(UserModel userModel);
+	Task<IdentityResult> RegisterUserAsync(UserModel userModel);
 
-	Task<IdentityResult> LoginAsync(string userName, string password);
+	Task<IdentityResult> LoginUserAsync(string userName, string password);
 
-	Task<UserModel> UpdateAsync(UserModel userModel);
+	Task LogoutUserAsync();
 
-	Task LogoutAsync();
+	Task<UserModel> UpdateUserAsync(UserModel userModel);
 
 	Task<IdentityResult> ChangePasswordAsync(string userName, string password);
 
-	Task DeleteAsync(string userName);
+	Task DeleteUserAsync(string userName);
 }
