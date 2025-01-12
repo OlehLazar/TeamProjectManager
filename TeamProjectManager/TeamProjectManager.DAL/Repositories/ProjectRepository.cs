@@ -14,6 +14,13 @@ public class ProjectRepository(ManagerDbContext context)
 		return await _context.Projects.ToListAsync();
 	}
 
+	public async Task<IEnumerable<Project>> GetAllByTeamIdAsync(int teamId)
+	{
+		return await _context.Projects
+			.Where(p => p.TeamId == teamId)
+			.ToListAsync();
+	}
+
 	public async Task<IEnumerable<Project>> GetAsync(int skip, int take)
 	{
 		return await _context.Projects

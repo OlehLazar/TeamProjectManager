@@ -4,7 +4,7 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface IBoardService
 {
-	Task<IEnumerable<BoardModel>> GetAsync(FilterModel filter);
+	Task<IEnumerable<BoardModel>> GetAsync();
 
 	Task<BoardModel> GetByIdAsync(int id);
 

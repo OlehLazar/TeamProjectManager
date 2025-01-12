@@ -4,7 +4,7 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface INotificationService
 {
-	Task<IEnumerable<NotificationModel>> GetAsync(FilterModel filter);
+	Task<IEnumerable<NotificationModel>> GetAsync();
 
 	Task<NotificationModel> GetByIdAsync(int id);
 

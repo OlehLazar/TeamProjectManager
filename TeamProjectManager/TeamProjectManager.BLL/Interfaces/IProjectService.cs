@@ -4,13 +4,13 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface IProjectService
 {
-	Task<IEnumerable<ProjectModel>> GetAsync(FilterModel filter);
+	Task<IEnumerable<ProjectModel>> GetProjectsByTeamIdAsync(int teamId);
 
-	Task<ProjectModel> GetByIdAsync(int id);
+	Task<ProjectModel> GetProjectByIdAsync(int id);
 
-	Task AddAsync(ProjectModel projectModel);
+	Task AddProjectAsync(ProjectModel projectModel);
 
-	Task<ProjectModel> UpdateAsync(ProjectModel projectModel);
+	Task UpdateProjectAsync(ProjectModel projectModel);
 
-	Task DeleteAsync(int id);
+	Task DeleteProjectAsync(int id);
 }

@@ -41,8 +41,7 @@ public class TeamService : ITeamService
 	public async Task AddTeamAsync(TeamModel team)
 	{
 		AppException.ThrowIfNull(team, "Team can't be null");
-		var entity = Mapper.MapTeam(team);
-		await _teamRepository.AddAsync(entity);
+		await _teamRepository.AddAsync(Mapper.MapTeam(team));
 	}
 
 	public async Task DeleteTeamAsync(int id)
