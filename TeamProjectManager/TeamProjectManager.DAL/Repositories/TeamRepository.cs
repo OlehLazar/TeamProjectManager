@@ -14,7 +14,7 @@ public class TeamRepository(ManagerDbContext context)
 		return await _context.Teams.ToListAsync();
 	}
 
-	public async Task<IEnumerable<Team>> GetAllByUserId(string userId)
+	public async Task<IEnumerable<Team>> GetAllByUserIdAsync(string userId)
 	{
 		return await _context.Teams
 			.Where(t => t.LeaderId == userId || t.Members!.Any(m => m.Id == userId))
