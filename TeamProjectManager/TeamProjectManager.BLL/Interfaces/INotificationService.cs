@@ -4,13 +4,11 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface INotificationService
 {
-	Task<IEnumerable<NotificationModel>> GetAsync();
+	Task<IEnumerable<NotificationModel>> GetNotificationsAsync(int userId, int page, int pageSize);
 
-	Task<NotificationModel> GetByIdAsync(int id);
+	Task NotifyUserAsync(int userId, string title, string content);
 
-	Task AddAsync(NotificationModel notificationModel);
+	Task ReadNotificationAsync(int id);
 
-	Task<NotificationModel> UpdateAsync(NotificationModel notificationModel);
-
-	Task DeleteAsync(int id);
+	Task DeleteNotificationAsync(int id);
 }

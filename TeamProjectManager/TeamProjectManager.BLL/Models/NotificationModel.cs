@@ -19,11 +19,11 @@ public class NotificationModel : AbstractModel
 
 	public required string Content { get; set; } = default!;
 
-	public required DateTime CreatedAt { get; set; }
+	public DateTime CreatedAt { get; set; }
 
-	public required bool IsRead { get; set; } = default;
+	public bool IsRead { get; set; } = default;
 
 	public required int UserId { get; set; }
 
-	public required UserModel User { get; set; }
+	public UserModel User { get; set; }
 }
