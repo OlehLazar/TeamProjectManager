@@ -14,6 +14,13 @@ public class BoardRepository(ManagerDbContext context)
 		return await _context.Boards.ToListAsync();
 	}
 
+	public async Task<IEnumerable<Board>> GetAllByProjectIdAsync(int projectId)
+	{
+		return await _context.Boards
+			.Where(b => b.ProjectId == projectId)
+			.ToListAsync();
+	}
+
 	public async Task<IEnumerable<Board>> GetAsync(int skip, int take)
 	{
 		return await _context.Boards

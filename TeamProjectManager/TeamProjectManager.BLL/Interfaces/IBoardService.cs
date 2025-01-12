@@ -4,13 +4,13 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface IBoardService
 {
-	Task<IEnumerable<BoardModel>> GetAsync();
+	Task<IEnumerable<BoardModel>> GetBoardsByProjectIdAsync(int projectId);
 
-	Task<BoardModel> GetByIdAsync(int id);
+	Task<BoardModel> GeBoardByIdAsync(int id);
 
-	Task AddAsync(BoardModel boardModel);
+	Task AddBoardAsync(BoardModel boardModel);
 
-	Task<BoardModel> UpdateAsync(BoardModel boardModel);
+	Task UpdateBoardAsync(BoardModel boardModel);
 
-	Task DeleteAsync(int id);
+	Task DeleteBoardAsync(int id);
 }
