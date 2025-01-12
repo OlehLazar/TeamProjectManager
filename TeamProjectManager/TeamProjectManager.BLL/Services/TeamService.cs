@@ -24,6 +24,13 @@ public class TeamService : ITeamService
 		return teams.Select(Mapper.MapTeamModel);
 	}
 
+	public async Task<IEnumerable<TeamModel>> GetTeamsByUserId(int userId)
+	{
+		var teams = await _teamRepository.GetAllByUserId(userId.ToString());
+		AppException.ThrowIfNull(teams, "Teams not found");
+		return teams.Select(Mapper.MapTeamModel);
+	}
+
 	public async Task<TeamModel> GetTeamByIdAsync(int id)
 	{
 		var team = await _teamRepository.GetByIdAsync(id);
