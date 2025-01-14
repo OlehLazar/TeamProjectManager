@@ -8,9 +8,15 @@ const TeamPage = () => {
         </p>
 
         <h1 className="text-center font-bold font-ptSerif text-xl">Projects</h1>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-5 pb-5">
+        <ul className="flex flex-col gap-5 pt-5 pb-5">
             <li>
-                <div className="p-3 border border-gray-300 rounded-lg shadow-black shadow-sm flex flex-col">
+                <div className="p-3 border border-gray-300 rounded-lg shadow-black shadow-sm flex flex-col w-1/4">
+                    <h1 className="font-semibold text-xl font-ptSerif">Project name</h1>
+                    <p>Project description</p>
+                </div>
+            </li>
+            <li>
+                <div className="p-3 border border-gray-300 rounded-lg shadow-black shadow-sm flex flex-col w-1/4">
                     <h1 className="font-semibold text-xl font-ptSerif">Project name</h1>
                     <p>Project description</p>
                 </div>
@@ -20,7 +26,13 @@ const TeamPage = () => {
         <h1 className="text-center font-bold font-ptSerif text-xl">Memebrs</h1>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-5 pb-5">
             <li>
-                <div className="p-3 border border-gray-300 rounded-lg shadow-black shadow-sm flex flex-col">
+                <div className="p-3 border border-gray-400 rounded-lg flex flex-col">
+                    <h1 className="font-semibold text-xl font-ptSerif">Member name</h1>
+                    <p>Username</p>
+                </div>
+            </li>
+            <li>
+                <div className="p-3 border border-gray-400 rounded-lg flex flex-col">
                     <h1 className="font-semibold text-xl font-ptSerif">Member name</h1>
                     <p>Username</p>
                 </div>

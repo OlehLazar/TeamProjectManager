@@ -1,4 +1,4 @@
-import { ParagraphProps } from "../../interfaces/ParagraphProps"
+import { ParagraphProps } from "../../interfaces/props/ParagraphProps"
 
 const Paragraph: React.FC<ParagraphProps> = ({ heading, text}) => {
   return (
