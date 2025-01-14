@@ -1,3 +1,11 @@
+import { ProjectModel } from "./ProjectModel";
+import { UserModel } from "./UserModel";
+
 export interface TeamModel {
-    Id: number;
+    id: number;
+    name: string;
+    description: string;
+    leader: UserModel;
+    members: UserModel[];
+    projects: ProjectModel[];
 }
