@@ -13,6 +13,13 @@ export const exampleProjects = [
       id: 3,
       name: "Project Gamma",
       description: "This is the Gamma project description.",
+      boards: [
+        {
+          id: 1,
+          name: "Board 1",
+          description: "This is the first board of the Gamma project.",
+        }
+      ],
     },
 ];
   

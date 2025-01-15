@@ -6,6 +6,6 @@ export interface TeamModel {
     name: string;
     description: string;
     leader: UserModel;
-    members: UserModel[];
-    projects: ProjectModel[];
+    members?: UserModel[] | null;
+    projects?: ProjectModel[] | null;
 }
