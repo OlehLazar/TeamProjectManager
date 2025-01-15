@@ -22,5 +22,5 @@ public class ProjectModel : AbstractModel
 
     public TeamModel Team { get; set; }
 
-    public ICollection<BoardModel> Boards { get; set; }
+    public ICollection<BoardModel>? Boards { get; set; }
 }

@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import MyTeamsPage from "./pages/MyTeamsPage";
 import MyProjectsPage from "./pages/MyProjectsPage";
 import TeamPage from "./pages/TeamPage";
+import ProjectPage from "./pages/ProjectPage";
 import { exampleTeam } from "./constants/exampleTeam";
 import { exampleProjects } from "./constants/exampleProjects";
 
@@ -19,6 +20,7 @@ const App = () => (
         <Route path="/teams" element={<MyTeamsPage />} />
         <Route path="/teams/:teamId" element={<TeamPage team={exampleTeam} />} />
         <Route path="/projects" element={<MyProjectsPage projects={exampleProjects} />} />
+        <Route path="/projects/:projectId" element={<ProjectPage projects={exampleProjects} />} />
       </Route>
     </Routes>
   </Router>
