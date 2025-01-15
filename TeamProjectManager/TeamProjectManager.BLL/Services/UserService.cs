@@ -4,6 +4,7 @@ using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Validation;
 using TeamProjectManager.DAL.Entities;
 using Task = System.Threading.Tasks.Task;
+using TeamProjectManager.BLL.Utilities;
 
 namespace TeamProjectManager.BLL.Services;
 
@@ -21,26 +22,14 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 
 		AppException.ThrowIfNull(user, "User not found.");
 
-		return new UserModel
-		{
-			FirstName = user.FirstName,
-			LastName = user.LastName,
-			UserName = user.UserName!,
-			Avatar = user.Avatar,
-		};
+		return Mapper.MapUserModel(user!);
 	}
 
 	public async Task<IdentityResult> RegisterUserAsync(UserModel userModel)
 	{
 		AppException.ThrowIfNull(userModel, "User data is required.");
 
-		var user = new User
-		{
-			FirstName = userModel.FirstName,
-			LastName = userModel.LastName,
-			UserName = userModel.UserName,
-			Avatar = userModel.Avatar,
-		};
+		var user = Mapper.MapUser(userModel);
 
 		return await _userManager.CreateAsync(user, userModel.Password);
 	}
