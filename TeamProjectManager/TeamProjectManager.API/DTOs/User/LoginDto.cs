@@ -1,5 +1,3 @@
 ﻿namespace TeamProjectManager.API.DTOs.User;
 
-public class LoginDto
-{
-}
+public record LoginDto(string UserName, string Password);

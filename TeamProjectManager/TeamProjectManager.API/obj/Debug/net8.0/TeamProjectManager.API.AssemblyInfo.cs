@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamProjectManager.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d497c267730502776ad1a5901a4c47f2d4a430d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5355969f2165c3a16c0aa803f5d32a6dc72a216")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamProjectManager.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamProjectManager.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
