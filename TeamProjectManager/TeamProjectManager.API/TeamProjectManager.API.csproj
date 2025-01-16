@@ -16,6 +16,12 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\TeamProjectManager.DAL\TeamProjectManager.DAL.csproj" />
+		<ProjectReference Include="..\TeamProjectManager.BLL\TeamProjectManager.BLL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	  <Folder Include="Validation\" />
 	</ItemGroup>
 
 </Project>

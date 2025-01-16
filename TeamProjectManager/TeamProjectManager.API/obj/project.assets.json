@@ -1797,6 +1797,20 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "TeamProjectManager.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "TeamProjectManager.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TeamProjectManager.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TeamProjectManager.BLL.dll": {}
+        }
+      },
       "TeamProjectManager.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -4848,6 +4862,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "TeamProjectManager.BLL/1.0.0": {
+      "type": "project",
+      "path": "../TeamProjectManager.BLL/TeamProjectManager.BLL.csproj",
+      "msbuildProject": "../TeamProjectManager.BLL/TeamProjectManager.BLL.csproj"
+    },
     "TeamProjectManager.DAL/1.0.0": {
       "type": "project",
       "path": "../TeamProjectManager.DAL/TeamProjectManager.DAL.csproj",
@@ -4858,6 +4877,7 @@
     "net8.0": [
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
       "Swashbuckle.AspNetCore >= 7.2.0",
+      "TeamProjectManager.BLL >= 1.0.0",
       "TeamProjectManager.DAL >= 1.0.0"
     ]
   },
@@ -4889,6 +4909,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj": {
+              "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.BLL\\TeamProjectManager.BLL.csproj"
+            },
             "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj": {
               "projectPath": "C:\\Projects\\TeamProjectManager\\TeamProjectManager\\TeamProjectManager.DAL\\TeamProjectManager.DAL.csproj"
             }
