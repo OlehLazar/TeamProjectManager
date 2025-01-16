@@ -8,7 +8,7 @@ const LoginPage = () => {
       <Input name="nickname" placeholder="nickname" width="w-1/3" />
       <Input name="password" placeholder="password" width="w-1/3" />
       <Button width="w-1/6">Log in</Button>
-      <p>Don't have an account yet? <a href="/signup" className="font-semibold">Sign up now</a></p>
+      <p>Don't have an account yet? <a href="/signup" className="font-semibold hover:font-bold">Sign up now</a></p>
     </div>
   )
 }
