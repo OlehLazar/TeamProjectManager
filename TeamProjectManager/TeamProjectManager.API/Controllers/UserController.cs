@@ -4,6 +4,7 @@ using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Utilities;
 using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
+using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
@@ -60,7 +61,22 @@ public class UserController : ControllerBase
 	{
 		try
 		{
+			var validationResult = UserValidator.ValidateUser(registerDto);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Message);
+			}
 
+			var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
+			var result = await _userService.RegisterUserAsync(userModel);
+			if (result.Succeeded)
+			{
+				return Ok();
+			}
+			else
+			{
+				return BadRequest(result.Errors);
+			}
 		}
 		catch (AppException ex)
 		{
@@ -117,7 +133,23 @@ public class UserController : ControllerBase
 	{
 		try
 		{
+			var validationResult = UserValidator.ValidateUser(updateUserDto);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Message);
+			}
 
+			var userName = User.Identity!.Name!;
+			var user = new UserModel
+			{
+				FirstName = updateUserDto.FirstName!,
+				LastName = updateUserDto.LastName!,
+				UserName = userName,
+				Avatar = updateUserDto.Avatar,
+			};
+
+			await _userService.UpdateUserAsync(user);
+			return Ok();
 		}
 		catch (AppException ex)
 		{
@@ -135,7 +167,20 @@ public class UserController : ControllerBase
 	{
 		try
 		{
+			var validationResult = UserValidator.ValidatePassword(password);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Message);
+			}
 
+			var user = await _userService.GetUserAsync(User.Identity!.Name!);
+			var result = await _userService.ChangePasswordAsync(user.UserName, password);
+			if (result.Succeeded)
+			{
+				return NoContent();
+			}
+
+			return BadRequest(result.Errors);
 		}
 		catch (AppException ex)
 		{
