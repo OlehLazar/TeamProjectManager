@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Utilities;
+using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Validation;
 
@@ -26,11 +27,31 @@ public class UserController : ControllerBase
 	{
 		try
 		{
+			var validationResult = UserValidator.ValidateUser(loginDto);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Message);
+			}
 
+			var result = await _userService.LoginUserAsync(loginDto.UserName, loginDto.Password);
+			if (result.Succeeded)
+			{
+				var user = await _userService.GetUserAsync(loginDto.UserName);
+				var token = _jwtHelper.GenerateToken(user.Id.ToString(), user.UserName);
+				return Ok(new { token });
+			}
+			else
+			{
+				return BadRequest(result.Errors);
+			}
 		}
 		catch (AppException ex)
 		{
 			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
 	}
 
@@ -44,6 +65,10 @@ public class UserController : ControllerBase
 		catch (AppException ex)
 		{
 			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
 	}
 
@@ -60,6 +85,10 @@ public class UserController : ControllerBase
 		{
 			return BadRequest(ex.Message);
 		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+		}
 	}
 
 	[Authorize]
@@ -68,17 +97,23 @@ public class UserController : ControllerBase
 	{
 		try
 		{
-
+			var user = await _userService.GetUserAsync(User.Identity!.Name!);
+			var userDto = new UserDto(user.FirstName, user.LastName, user.UserName, user.Avatar);
+			return Ok(userDto);
 		}
 		catch (AppException ex)
 		{
 			return BadRequest(ex.Message);
 		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+		}
 	}
 
 	[Authorize]
 	[HttpPut]
-	public async Task<IActionResult> UpdateProfile(UpdateProfileDto updateProfileDto)
+	public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
 	{
 		try
 		{
@@ -87,6 +122,10 @@ public class UserController : ControllerBase
 		catch (AppException ex)
 		{
 			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
 	}
 
@@ -102,6 +141,10 @@ public class UserController : ControllerBase
 		{
 			return BadRequest(ex.Message);
 		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+		}
 	}
 
 	[Authorize]
@@ -110,11 +153,17 @@ public class UserController : ControllerBase
 	{
 		try
 		{
-
+			var user = await _userService.GetUserAsync(User.Identity!.Name!);
+			await _userService.DeleteUserAsync(user.UserName);
+			return NoContent();
 		}
 		catch (AppException ex)
 		{
 			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
 	}
 }

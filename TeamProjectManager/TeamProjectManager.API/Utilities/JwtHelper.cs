@@ -20,7 +20,7 @@ public class JwtHelper
 		_tokenExpirationMinutes = int.TryParse(configuration["Jwt:ExpirationMinutes"], out var minutes) ? minutes : 60;
 	}
 
-	public string GenerateToken(string userId, string userName, string role)
+	public string GenerateToken(string userId, string userName)
 	{
 		var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
 		var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -29,7 +29,6 @@ public class JwtHelper
 		{
 				new Claim(JwtRegisteredClaimNames.Sub, userId),
 				new Claim(JwtRegisteredClaimNames.UniqueName, userName),
-				new Claim(ClaimTypes.Role, role),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
             };
