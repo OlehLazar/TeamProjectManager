@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamProjectManager.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85eea0b85913a4ddd8d7982e951572a2c8f7abee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5481d499613974089971686381d815ed0ab59c6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamProjectManager.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamProjectManager.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
