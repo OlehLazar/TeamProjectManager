@@ -15,96 +15,9 @@ public class UserController : ControllerBase
 {
 	private readonly IUserService _userService;
 
-	private readonly JwtHelper _jwtHelper;
-
-	public UserController(IUserService userService, JwtHelper jwtHelper)
+	public UserController(IUserService userService)
     {
 		_userService = userService;
-		_jwtHelper = jwtHelper;
-	}
-
-	[HttpPost("login")]
-	public async Task<IActionResult> Login(LoginDto loginDto)
-	{
-		try
-		{
-			var validationResult = UserValidator.ValidateUser(loginDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Message);
-			}
-
-			var result = await _userService.LoginUserAsync(loginDto.UserName, loginDto.Password);
-			if (result.Succeeded)
-			{
-				var user = await _userService.GetUserAsync(loginDto.UserName);
-				var token = _jwtHelper.GenerateToken(user.Id.ToString(), user.UserName);
-				return Ok(new { token });
-			}
-			else
-			{
-				return BadRequest(result.Errors);
-			}
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
-	}
-
-	[HttpPost("register")]
-	public async Task<IActionResult> Register(RegisterDto registerDto)
-	{
-		try
-		{
-			var validationResult = UserValidator.ValidateUser(registerDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Message);
-			}
-
-			var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
-			var result = await _userService.RegisterUserAsync(userModel);
-			if (result.Succeeded)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest(result.Errors);
-			}
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
-	}
-
-	[Authorize]
-	[HttpPost("logout")]
-	public async Task<IActionResult> Logout()
-	{
-		try
-		{
-			await _userService.LogoutUserAsync();
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
 	}
 
 	[Authorize]
