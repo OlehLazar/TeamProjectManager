@@ -24,8 +24,6 @@
 	  <Folder Include="DTOs\Board\" />
 	  <Folder Include="DTOs\Notification\" />
 	  <Folder Include="DTOs\Task\" />
-	  <Folder Include="DTOs\Project\" />
-	  <Folder Include="DTOs\Team\" />
 	</ItemGroup>
 
 </Project>
