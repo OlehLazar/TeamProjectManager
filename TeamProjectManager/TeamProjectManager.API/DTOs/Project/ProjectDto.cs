@@ -1,6 +1,3 @@
 ﻿namespace TeamProjectManager.API.DTOs.Project;
 
-public class ProjectDto
-{
-	NotImplementedException();
-}
+public record ProjectDto(int Id, string Name, string Description, int TeamId);
