@@ -42,16 +42,15 @@ public class UserController : ControllerBase
 
 	[Authorize]
 	[HttpPut]
-	public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
+	public async Task<IActionResult> UpdateProfile([FromBody] UpdateUserDto updateUserDto)
 	{
+		if (!ModelState.IsValid)
+		{
+			return BadRequest(ModelState);
+		}
+
 		try
 		{
-			var validationResult = UserValidator.ValidateUser(updateUserDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Message);
-			}
-
 			var userName = User.Identity!.Name!;
 			var user = new UserModel
 			{

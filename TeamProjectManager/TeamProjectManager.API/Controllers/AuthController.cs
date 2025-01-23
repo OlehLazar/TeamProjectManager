@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Utilities;
 using TeamProjectManager.API.Validation;
+using TeamProjectManager.API.Validation.User;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Validation;
@@ -23,14 +24,14 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("login")]
-	public async Task<IActionResult> Login(LoginDto loginDto)
+	public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
 	{
 		try
 		{
-			var validationResult = UserValidator.ValidateUser(loginDto);
+			var validationResult = await new LoginValidator().ValidateAsync(loginDto);
 			if (!validationResult.IsValid)
 			{
-				return BadRequest(validationResult.Message);
+				return BadRequest(validationResult.Errors);
 			}
 
 			var result = await _userService.LoginUserAsync(loginDto.UserName, loginDto.Password);
@@ -56,16 +57,15 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("register")]
-	public async Task<IActionResult> Register(RegisterDto registerDto)
+	public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
 	{
+		if (!ModelState.IsValid)
+		{
+			return BadRequest(ModelState);
+		}
+
 		try
 		{
-			var validationResult = UserValidator.ValidateUser(registerDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Message);
-			}
-
 			var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
 			var result = await _userService.RegisterUserAsync(userModel);
 			if (result.Succeeded)

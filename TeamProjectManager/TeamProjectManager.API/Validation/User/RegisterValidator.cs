@@ -7,13 +7,9 @@ public class RegisterValidator : AbstractValidator<RegisterDto>
 {
     public RegisterValidator()
     {
-		RuleFor(user => user.FirstName)
-				.NotEmpty().WithMessage("Name cannot be empty.")
-				.MinimumLength(2).WithMessage("Name must be at least 2 characters long.");
+		RuleFor(user => user.FirstName).NameRules("First name");
 
-		RuleFor(user => user.LastName)
-			.NotEmpty().WithMessage("Name cannot be empty.")
-			.MinimumLength(2).WithMessage("Name must be at least 2 characters long.");
+		RuleFor(user => user.LastName).NameRules("Last name");
 
 		RuleFor(user => user.Password).PasswordRules();
 	}
