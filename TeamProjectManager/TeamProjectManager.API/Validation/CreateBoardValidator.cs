@@ -3,9 +3,9 @@ using TeamProjectManager.API.DTOs.Board;
 
 namespace TeamProjectManager.API.Validation;
 
-public class BoardValidator : AbstractValidator<CreateBoardDto>
+public class CreateBoardValidator : AbstractValidator<CreateBoardDto>
 {
-    public BoardValidator()
+    public CreateBoardValidator()
     {
         RuleFor(b => b.Name)
             .NotEmpty().WithMessage("Name is required!")

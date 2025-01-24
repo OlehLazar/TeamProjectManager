@@ -3,9 +3,9 @@ using TeamProjectManager.API.DTOs.Task;
 
 namespace TeamProjectManager.API.Validation;
 
-public class TaskValidator : AbstractValidator<CreateTaskDto>
+public class CreateTaskValidator : AbstractValidator<CreateTaskDto>
 {
-    public TaskValidator()
+    public CreateTaskValidator()
     {
         RuleFor(t => t.Name)
 			.NotEmpty().WithMessage("Name is required!")

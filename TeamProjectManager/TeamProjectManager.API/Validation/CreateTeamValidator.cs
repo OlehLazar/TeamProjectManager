@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace TeamProjectManager.API.Validation;
 
-public class TeamValidator : AbstractValidator<CreateTeamDto>
+public class CreateTeamValidator : AbstractValidator<CreateTeamDto>
 {
-    public TeamValidator()
+    public CreateTeamValidator()
     {
         RuleFor(t => t.Name)
             .NotEmpty().WithMessage("Name is required!")

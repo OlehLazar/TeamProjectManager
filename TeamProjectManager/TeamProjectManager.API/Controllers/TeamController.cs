@@ -10,10 +10,12 @@ namespace TeamProjectManager.API.Controllers;
 [Authorize]
 public class TeamController : ControllerBase
 {
+	private readonly IUserService _userService;
 	private readonly ITeamService _teamService;
 
-	public TeamController(ITeamService teamService)
+	public TeamController(IUserService userService, ITeamService teamService)
 	{
+		_userService = userService;
 		_teamService = teamService;
 	}
 

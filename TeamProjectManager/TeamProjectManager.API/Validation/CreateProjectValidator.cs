@@ -3,9 +3,9 @@ using TeamProjectManager.API.DTOs.Project;
 
 namespace TeamProjectManager.API.Validation;
 
-public class ProjectValidator : AbstractValidator<CreateProjectDto>
+public class CreateProjectValidator : AbstractValidator<CreateProjectDto>
 {
-    public ProjectValidator()
+    public CreateProjectValidator()
     {
         RuleFor(p => p.Name)
             .NotEmpty().WithMessage("Name is required!")
