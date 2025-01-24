@@ -43,7 +43,7 @@ public class UserController : ControllerBase
 
 	[Authorize]
 	[HttpPut]
-	public async Task<IActionResult> UpdateProfile([FromBody] UpdateUserDto updateUserDto)
+	public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
 	{
 		if (!ModelState.IsValid)
 		{
@@ -76,7 +76,7 @@ public class UserController : ControllerBase
 
 	[Authorize]
 	[HttpPut("change-password")]
-	public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changeDto)
+	public async Task<IActionResult> ChangePassword(ChangePasswordDto changeDto)
 	{
 		try
 		{
