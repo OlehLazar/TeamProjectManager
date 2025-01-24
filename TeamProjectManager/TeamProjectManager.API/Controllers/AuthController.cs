@@ -59,13 +59,14 @@ public class AuthController : ControllerBase
 	[HttpPost("register")]
 	public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
 	{
-		if (!ModelState.IsValid)
-		{
-			return BadRequest(ModelState);
-		}
-
 		try
 		{
+			var validationResult = await new RegisterValidator().ValidateAsync(registerDto);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Errors);
+			}
+
 			var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
 			var result = await _userService.RegisterUserAsync(userModel);
 			if (result.Succeeded)

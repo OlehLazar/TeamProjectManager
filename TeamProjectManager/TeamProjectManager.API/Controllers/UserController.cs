@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Utilities;
 using TeamProjectManager.API.Validation;
+using TeamProjectManager.API.Validation.User;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Validation;
@@ -75,18 +76,18 @@ public class UserController : ControllerBase
 
 	[Authorize]
 	[HttpPut("change-password")]
-	public async Task<IActionResult> ChangePassword(string password)
+	public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changeDto)
 	{
 		try
 		{
-			var validationResult = UserValidator.ValidatePassword(password);
+			var validationResult = await new ChangePasswordValidator().ValidateAsync(changeDto);
 			if (!validationResult.IsValid)
 			{
-				return BadRequest(validationResult.Message);
+				return BadRequest(validationResult.Errors);
 			}
 
 			var user = await _userService.GetUserAsync(User.Identity!.Name!);
-			var result = await _userService.ChangePasswordAsync(user.UserName, password);
+			var result = await _userService.ChangePasswordAsync(user.UserName, changeDto.NewPassword);
 			if (result.Succeeded)
 			{
 				return NoContent();

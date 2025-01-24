@@ -7,6 +7,8 @@ public class ChangePasswordValidator : AbstractValidator<ChangePasswordDto>
 {
     public ChangePasswordValidator()
     {
-        
-    }
+        RuleFor(user => user.OldPassword).PasswordRules();
+
+        RuleFor(user => user.NewPassword).PasswordRules();
+	}
 }
