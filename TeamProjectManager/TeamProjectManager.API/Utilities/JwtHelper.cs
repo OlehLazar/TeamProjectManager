@@ -27,11 +27,11 @@ public class JwtHelper
 
 		var claims = new[]
 		{
-				new Claim(JwtRegisteredClaimNames.Sub, userId),
-				new Claim(JwtRegisteredClaimNames.UniqueName, userName),
-				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
-            };
+			new Claim(JwtRegisteredClaimNames.Sub, userId),
+			new Claim(JwtRegisteredClaimNames.UniqueName, userName),
+			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
+        };
 
 		var token = new JwtSecurityToken(
 			issuer: _issuer,

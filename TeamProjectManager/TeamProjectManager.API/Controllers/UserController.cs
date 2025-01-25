@@ -10,6 +10,7 @@ using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
@@ -41,7 +42,6 @@ public class UserController : ControllerBase
 		}
 	}
 
-	[Authorize]
 	[HttpPut]
 	public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
 	{
@@ -74,7 +74,6 @@ public class UserController : ControllerBase
 		}
 	}
 
-	[Authorize]
 	[HttpPut("change-password")]
 	public async Task<IActionResult> ChangePassword(ChangePasswordDto changeDto)
 	{
@@ -105,7 +104,6 @@ public class UserController : ControllerBase
 		}
 	}
 
-	[Authorize]
 	[HttpDelete]
 	public async Task<IActionResult> DeleteProfile()
 	{
