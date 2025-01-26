@@ -24,7 +24,7 @@ public class TeamService : ITeamService
 		return teams.Select(Mapper.MapTeamModel);
 	}
 
-	public async Task<IEnumerable<TeamModel>> GetTeamsByUserId(int userId)
+	public async Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(int userId)
 	{
 		var teams = await _teamRepository.GetAllByUserIdAsync(userId.ToString());
 		AppException.ThrowIfNull(teams, "Teams not found");
