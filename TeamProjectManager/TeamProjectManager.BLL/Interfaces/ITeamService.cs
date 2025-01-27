@@ -13,4 +13,6 @@ public interface ITeamService
 	Task AddTeamAsync(TeamModel teamModel);
 
 	Task DeleteTeamAsync(int id);
+
+	Task RemoveMemberAsync(int teamId, int userId);
 }

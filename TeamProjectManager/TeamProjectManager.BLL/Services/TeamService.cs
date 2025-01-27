@@ -50,4 +50,14 @@ public class TeamService : ITeamService
 		AppException.ThrowIfNull(team, "Team not found");
 		await _teamRepository.DeleteByIdAsync(id);
 	}
+
+	public async Task RemoveMemberAsync(int teamId, int userId)
+	{
+		var team = await _teamRepository.GetByIdAsync(teamId);
+		AppException.ThrowIfNull(team, "Team not found");
+		var user = team!.Members!.FirstOrDefault(u => u.Id == userId.ToString());
+		AppException.ThrowIfNull(user, "User not found");
+		team.Members!.Remove(user!);
+		await _teamRepository.UpdateAsync(team);
+	}
 }

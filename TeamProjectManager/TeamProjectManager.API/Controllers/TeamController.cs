@@ -95,28 +95,12 @@ public class TeamController : ControllerBase
 				Name = createTeamDto.Name,
 				Description = createTeamDto.Description,
 				LeaderId = createTeamDto.LeaderId,
-				Members = new List<UserModel>(),
-				Projects = new List<ProjectModel>()
+				Members = [],
+				Projects = []
 			};
 
 			await _teamService.AddTeamAsync(teamModel);
 			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
-	}
-
-	[HttpPut("{id}")]
-	public async Task<IActionResult> UpdateTeam(FullTeamDto updateTeamDto)
-	{
-		try
-		{
 		}
 		catch (AppException ex)
 		{
@@ -133,6 +117,50 @@ public class TeamController : ControllerBase
 	{
 		try
 		{
+			var team = await _teamService.GetTeamByIdAsync(id);
+			if (team == null)
+			{
+				return NotFound("Team not found");
+			}
+
+			var user = await _userService.GetUserAsync(User.Identity!.Name!);
+			if (team.LeaderId == user.Id)
+			{
+				await _teamService.DeleteTeamAsync(id);
+				return Ok(new { message = "Team successfully deleted" } );
+			}
+
+			return Unauthorized("You are not the leader of this team");
+		}
+		catch (AppException ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+		}
+	}
+
+	[HttpPost("{id}/leave")]
+	public async Task<IActionResult> LeaveTeam(int teamId)
+	{
+		try
+		{
+			var team = await _teamService.GetTeamByIdAsync(teamId);
+			if (team == null)
+			{
+				return NotFound("Team not found");
+			}
+
+			var user = await _userService.GetUserAsync(User.Identity!.Name!);
+			if (team.LeaderId == user.Id)
+			{
+				return BadRequest("The leader can't leave the team");
+			}
+
+			await _teamService.RemoveMemberAsync(teamId, user.Id);
+			return Ok(new { message = "You have left the team" });
 		}
 		catch (AppException ex)
 		{
