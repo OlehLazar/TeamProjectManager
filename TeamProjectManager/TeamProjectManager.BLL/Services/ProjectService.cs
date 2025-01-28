@@ -17,7 +17,15 @@ public class ProjectService : IProjectService
 		_projectRepository = unitOfWork.ProjectRepository;
 	}
 
-    public async Task<IEnumerable<ProjectModel>> GetProjectsByTeamIdAsync(int teamId)
+	public async Task<IEnumerable<ProjectModel>> GetProjectsByUserIdAsync(int userId)
+	{
+		var projects = await _projectRepository.GetAllByUserIdAsync(userId);
+		AppException.ThrowIfNull(projects, "Ptojects not found");
+		return projects.Select(Mapper.MapProjectModel);
+	}
+
+
+	public async Task<IEnumerable<ProjectModel>> GetProjectsByTeamIdAsync(int teamId)
 	{
 		var projects = await _projectRepository.GetAllByTeamIdAsync(teamId);
 		AppException.ThrowIfNull(projects, "Projects not found");

@@ -9,6 +9,14 @@ namespace TeamProjectManager.DAL.Repositories;
 public class ProjectRepository(ManagerDbContext context)
 	: AbstractRepository(context), IProjectRepository
 {
+	public async Task<IEnumerable<Project>> GetAllByUserIdAsync(int userId)
+	{
+		return await _context.Projects.Where(p =>
+			p.Team.LeaderId == userId.ToString() ||
+			p.Team.Members!.Any(m => m.Id == userId.ToString())
+		).ToListAsync();
+	}
+
 	public async Task<IEnumerable<Project>> GetAllAsync()
 	{
 		return await _context.Projects.ToListAsync();
