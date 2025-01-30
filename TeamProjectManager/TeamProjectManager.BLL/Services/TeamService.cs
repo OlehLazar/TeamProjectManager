@@ -51,6 +51,16 @@ public class TeamService : ITeamService
 		await _teamRepository.DeleteByIdAsync(id);
 	}
 
+	public async Task AddMemeberAsync(int teamId, int userId)
+	{
+		var team = await _teamRepository.GetByIdAsync(teamId);
+		AppException.ThrowIfNull(team, "Team not found");
+		var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+		AppException.ThrowIfNull(user, "User not found");
+		team.Members.Add(user!);
+		await _teamRepository.UpdateAsync(team);
+	}
+
 	public async Task RemoveMemberAsync(int teamId, int userId)
 	{
 		var team = await _teamRepository.GetByIdAsync(teamId);

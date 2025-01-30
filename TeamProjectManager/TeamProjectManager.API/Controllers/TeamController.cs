@@ -171,4 +171,40 @@ public class TeamController : ControllerBase
 			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
 	}
+
+	[HttpPost("{id}/add-member")]
+	public async Task<IActionResult> AddMember(int id, [FromBody] string userName)
+	{
+		try
+		{
+			var team = await _teamService.GetTeamByIdAsync(id);
+			if (team == null)
+			{
+				return NotFound("Team not found");
+			}
+
+			var user = await _userService.GetUserAsync(userName);
+			if (user == null)
+			{
+				return NotFound("User not found");
+			}
+
+			var currentUser = await _userService.GetUserAsync(User.Identity!.Name!);
+			if (team.LeaderId != currentUser.Id)
+			{
+				return Unauthorized("Only the team leader can add members");
+			}
+
+			await _teamService.AddMemeberAsync(id, user.Id);
+			return Ok(new { message = "Member successfully added" });
+		}
+		catch (AppException ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+		}
+	}
 }
