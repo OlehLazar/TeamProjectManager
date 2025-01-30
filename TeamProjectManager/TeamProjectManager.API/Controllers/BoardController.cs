@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TeamProjectManager.API.DTOs.Board;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Services;
 using TeamProjectManager.BLL.Validation;
@@ -36,5 +37,17 @@ public class BoardController : ControllerBase
         {
 			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
 		}
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetBoardById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateBoard(CreateBoardDto createBoardDto)
+    {
+        throw new NotImplementedException();
     }
 }
