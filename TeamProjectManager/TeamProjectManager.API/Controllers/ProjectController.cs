@@ -32,7 +32,7 @@ public class ProjectController : ControllerBase
 			var projects = await _projectService.GetProjectsByUserIdAsync(userId);
 
 			var projectDtos = projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId));
-			return Ok(projects);
+			return Ok(projectDtos);
 		}
 		catch (AppException ex)
 		{

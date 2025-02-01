@@ -17,6 +17,13 @@ public class TaskService : ITaskService
 		_taskRepository = unitOfWork.TaskRepository;
 	}
 
+	public async Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(int userId)
+	{
+		var tasks = await _taskRepository.GetAllByUserIdAsync(userId.ToString());
+		AppException.ThrowIfNull(tasks, "Tasks not found");
+		return tasks.Select(Mapper.MapTaskModel);
+	}
+
     public async Task<IEnumerable<TaskModel>> GetTasksByBoardIdAsync(int boardId)
 	{
 		var tasks = await _taskRepository.GetAllByBoardIdAsync(boardId);

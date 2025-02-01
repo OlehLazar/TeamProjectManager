@@ -13,6 +13,13 @@ public class TaskRepository(ManagerDbContext context)
 		return await _context.Tasks.ToListAsync();
 	}
 
+	public async Task<IEnumerable<Entities.Task>> GetAllByUserIdAsync(string userId)
+	{
+		return await _context.Tasks
+			.Where(t => t.AssigneeId == userId)
+			.ToListAsync();
+	}
+
 	public async Task<IEnumerable<Entities.Task>> GetAllByBoardIdAsync(int boardId)
 	{
 		return await _context.Tasks
