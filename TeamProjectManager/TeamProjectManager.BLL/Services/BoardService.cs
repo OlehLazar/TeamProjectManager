@@ -17,6 +17,13 @@ public class BoardService : IBoardService
 		_boardRepository = _unitOfWork.BoardRepository;
 	}
 
+	public async Task<IEnumerable<BoardModel>> GetBoardsByUserIdAsync(int userId)
+	{
+		var boards = await _boardRepository.GetAllByUserIdAsync(userId);
+		AppException.ThrowIfNull(boards, "Boards not found");
+		return boards.Select(Mapper.MapBoardModel);
+	}
+
     public async Task<IEnumerable<BoardModel>> GetBoardsByProjectIdAsync(int projectId)
 	{
 		var boards = await _boardRepository.GetAllByProjectIdAsync(projectId);
@@ -24,7 +31,7 @@ public class BoardService : IBoardService
 		return boards.Select(Mapper.MapBoardModel);
 	}
 
-	public async Task<BoardModel> GeBoardByIdAsync(int id)
+	public async Task<BoardModel> GetBoardByIdAsync(int id)
 	{
 		var board = await _boardRepository.GetByIdAsync(id);
 		AppException.ThrowIfNull(board, "Board not found");

@@ -14,6 +14,18 @@ public class BoardRepository(ManagerDbContext context)
 		return await _context.Boards.ToListAsync();
 	}
 
+	public async Task<IEnumerable<Board>> GetAllByUserIdAsync(int userId)
+	{
+		return await _context.Boards
+			.Include(b => b.Project)
+				.ThenInclude(p => p.Team)
+			.Where(b =>
+				b.Project.Team.LeaderId == userId.ToString() ||
+				b.Project.Team.Members!.Any(m => m.Id == userId.ToString())
+			)
+			.ToListAsync();
+	}
+
 	public async Task<IEnumerable<Board>> GetAllByProjectIdAsync(int projectId)
 	{
 		return await _context.Boards
