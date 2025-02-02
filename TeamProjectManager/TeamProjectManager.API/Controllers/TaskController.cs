@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.Board;
 using TeamProjectManager.API.DTOs.Project;
 using TeamProjectManager.API.DTOs.Task;
+using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
+using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Services;
 using TeamProjectManager.BLL.Validation;
 
@@ -79,12 +81,59 @@ public class TaskController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateTask(CreateTaskDto createTaskDto)
     {
-        throw new NotImplementedException();
-    }
+		try
+		{
+			var validationResult = await new CreateTaskValidator().ValidateAsync(createTaskDto);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Errors);
+			}
+
+			var taskModel = new TaskModel
+			{
+				Name = createTaskDto.Name,
+				Description = createTaskDto.Description,
+				StartDate = createTaskDto.StartDate,
+				EndDate = createTaskDto.EndDate,
+				BoardId = createTaskDto.BoardId,
+				CreatorId = createTaskDto.CreatorId,
+				AssigneeId = createTaskDto.AssigneeId,
+			};
+
+			await _taskService.AddTaskAsync(taskModel);
+			return Ok();
+		}
+		catch (AppException ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
+		}
+	}
 
     [HttpPut]
-    public async Task<IActionResult> CompleteTask()
+    public async Task<IActionResult> CompleteTask(int taskId)
     {
-        throw new NotImplementedException();
-    }
+		try
+		{
+			var task = await _taskService.GetTaskByIdAsync(taskId);
+			if (task == null)
+			{
+				return NotFound("Task not found");
+			}
+
+			await _taskService.CompleteTaskAsync(taskId);
+			return Ok();
+		}
+		catch (AppException ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
+		}
+	}
 }
