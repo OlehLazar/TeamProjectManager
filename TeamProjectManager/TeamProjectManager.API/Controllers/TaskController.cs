@@ -30,110 +30,66 @@ public class TaskController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTasks()
     {
-		try
-		{
-			int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-			var tasks = await _taskService.GetTasksByUserIdAsync(userId);
+		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var tasks = await _taskService.GetTasksByUserIdAsync(userId);
 
-			var taskDtos = tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description,
-				t.StartDate, t.EndDate, t.BoardId,
-				t.CreatorId, t.AssigneeId, t.Status));
+		var taskDtos = tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description,
+			t.StartDate, t.EndDate, t.BoardId,
+			t.CreatorId, t.AssigneeId, t.Status));
 
-			return Ok(taskDtos);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		return Ok(taskDtos);
 	}
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTaskById(int id)
     {
-		try
+		var task = await _taskService.GetTaskByIdAsync(id);
+		if (task == null)
 		{
-			var task = await _taskService.GetTaskByIdAsync(id);
-			if (task == null)
-			{
-				return NotFound("Task not found");
-			}
+			return NotFound("Task not found");
+		}
 
-			var taskDto = new TaskDto(task.Id, task.Name, task.Description, 
-				task.StartDate, task.EndDate, task.BoardId, 
-				task.CreatorId, task.AssigneeId, task.Status);
+		var taskDto = new TaskDto(task.Id, task.Name, task.Description,
+			task.StartDate, task.EndDate, task.BoardId,
+			task.CreatorId, task.AssigneeId, task.Status);
 
-			return Ok(taskDto);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		return Ok(taskDto);
 	}
 
     [HttpPost]
     public async Task<IActionResult> CreateTask(CreateTaskDto createTaskDto)
     {
-		try
+		var validationResult = await new CreateTaskValidator().ValidateAsync(createTaskDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new CreateTaskValidator().ValidateAsync(createTaskDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var taskModel = new TaskModel
-			{
-				Name = createTaskDto.Name,
-				Description = createTaskDto.Description,
-				StartDate = createTaskDto.StartDate,
-				EndDate = createTaskDto.EndDate,
-				BoardId = createTaskDto.BoardId,
-				CreatorId = createTaskDto.CreatorId,
-				AssigneeId = createTaskDto.AssigneeId,
-			};
+		var taskModel = new TaskModel
+		{
+			Name = createTaskDto.Name,
+			Description = createTaskDto.Description,
+			StartDate = createTaskDto.StartDate,
+			EndDate = createTaskDto.EndDate,
+			BoardId = createTaskDto.BoardId,
+			CreatorId = createTaskDto.CreatorId,
+			AssigneeId = createTaskDto.AssigneeId,
+		};
 
-			await _taskService.AddTaskAsync(taskModel);
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		await _taskService.AddTaskAsync(taskModel);
+		return Ok();
 	}
 
     [HttpPut]
     public async Task<IActionResult> CompleteTask(int taskId)
     {
-		try
+		var task = await _taskService.GetTaskByIdAsync(taskId);
+		if (task == null)
 		{
-			var task = await _taskService.GetTaskByIdAsync(taskId);
-			if (task == null)
-			{
-				return NotFound("Task not found");
-			}
+			return NotFound("Task not found");
+		}
 
-			await _taskService.CompleteTaskAsync(taskId);
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		await _taskService.CompleteTaskAsync(taskId);
+		return Ok();
 	}
 }

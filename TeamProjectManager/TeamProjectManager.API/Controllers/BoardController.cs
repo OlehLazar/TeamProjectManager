@@ -27,83 +27,50 @@ public class BoardController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetBoards()
 	{
-		try
-        {
-			int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-            var boards = await _boardService.GetBoardsByUserIdAsync(userId);
+		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var boards = await _boardService.GetBoardsByUserIdAsync(userId);
 
-			var boardDtos = boards.Select(b => new BoardDto(b.Id, b.Name, b.Description, b.CreatedDate, b.ProjectId));
-			return Ok(boardDtos);
-		}
-        catch (AppException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
-    }
+		var boardDtos = boards.Select(b => new BoardDto(b.Id, b.Name, b.Description, b.CreatedDate, b.ProjectId));
+		return Ok(boardDtos);
+	}
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetBoardById(int id)
     {
-		try
+		var board = await _boardService.GetBoardByIdAsync(id);
+		if (board == null)
 		{
-			var board = await _boardService.GetBoardByIdAsync(id);
-			if (board == null)
-			{
-				return NotFound("Board not found");
-			}
+			return NotFound("Board not found");
+		}
 
-			var boardDto = new FullBoardDto(
-				board.Id,
-				board.Name,
-				board.Description,
-				board.ProjectId,
-				board.Tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description, t.StartDate, t.EndDate, board.Id, t.CreatorId, t.AssigneeId, t.Status)).ToList()
-			);
+		var boardDto = new FullBoardDto(
+			board.Id,
+			board.Name,
+			board.Description,
+			board.ProjectId,
+			board.Tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description, t.StartDate, t.EndDate, board.Id, t.CreatorId, t.AssigneeId, t.Status)).ToList()
+		);
 
-			return Ok(boardDto);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		return Ok(boardDto);
 	}
 
     [HttpPost]
     public async Task<IActionResult> CreateBoard(CreateBoardDto createBoardDto)
     {
-		try
+		var validationResult = await new CreateBoardValidator().ValidateAsync(createBoardDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new CreateBoardValidator().ValidateAsync(createBoardDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var boardModel = new BoardModel
-			{
-				Name = createBoardDto.Name,
-				Description = createBoardDto.Description,
-				ProjectId = createBoardDto.ProjectId,
-			};
+		var boardModel = new BoardModel
+		{
+			Name = createBoardDto.Name,
+			Description = createBoardDto.Description,
+			ProjectId = createBoardDto.ProjectId,
+		};
 
-			await _boardService.AddBoardAsync(boardModel);
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		await _boardService.AddBoardAsync(boardModel);
+		return Ok();
 	}
 }

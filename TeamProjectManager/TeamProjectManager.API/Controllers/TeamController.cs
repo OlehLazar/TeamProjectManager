@@ -27,184 +27,118 @@ public class TeamController : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetTeams()
 	{
-		try
-		{
-			int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-			var teams = await _teamService.GetTeamsByUserIdAsync(userId);
+		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var teams = await _teamService.GetTeamsByUserIdAsync(userId);
 
-			var teamDtos = teams.Select(t => new TeamDto(t.Id, t.Name, t.Description, t.LeaderId.ToString()));
+		var teamDtos = teams.Select(t => new TeamDto(t.Id, t.Name, t.Description, t.LeaderId.ToString()));
 
-			return Ok(teamDtos);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		return Ok(teamDtos);
 	}
 
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetTeamById(int id)
 	{
-		try
+		var team = await _teamService.GetTeamByIdAsync(id);
+		if (team == null)
 		{
-			var team = await _teamService.GetTeamByIdAsync(id);
-			if (team == null)
-			{
-				return NotFound("Team not found");
-			}
+			return NotFound("Team not found");
+		}
 
-			var teamDto = new FullTeamDto
-			(
-				team.Id,
-				team.Name,
-				team.Description,
-				team.LeaderId,
-				team.Members.Select(m => new UserDto(m.FirstName, m.LastName, m.UserName, m.Avatar)).ToList(),
-				team.Projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId)).ToList()
-			);
+		var teamDto = new FullTeamDto
+		(
+			team.Id,
+			team.Name,
+			team.Description,
+			team.LeaderId,
+			team.Members.Select(m => new UserDto(m.FirstName, m.LastName, m.UserName, m.Avatar)).ToList(),
+			team.Projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId)).ToList()
+		);
 
-			return Ok(teamDto);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		return Ok(teamDto);
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> CreateTeam(CreateTeamDto createTeamDto)
 	{
-		try
+		var validationResult = await new CreateTeamValidator().ValidateAsync(createTeamDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new CreateTeamValidator().ValidateAsync(createTeamDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var teamModel = new TeamModel
-			{
-				Name = createTeamDto.Name,
-				Description = createTeamDto.Description,
-				LeaderId = createTeamDto.LeaderId,
-				Members = [],
-				Projects = []
-			};
+		var teamModel = new TeamModel
+		{
+			Name = createTeamDto.Name,
+			Description = createTeamDto.Description,
+			LeaderId = createTeamDto.LeaderId,
+			Members = [],
+			Projects = []
+		};
 
-			await _teamService.AddTeamAsync(teamModel);
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		await _teamService.AddTeamAsync(teamModel);
+		return Ok();
 	}
 
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> DeleteTeam(int id)
 	{
-		try
+		var team = await _teamService.GetTeamByIdAsync(id);
+		if (team == null)
 		{
-			var team = await _teamService.GetTeamByIdAsync(id);
-			if (team == null)
-			{
-				return NotFound("Team not found");
-			}
+			return NotFound("Team not found");
+		}
 
-			var user = await _userService.GetUserAsync(User.Identity!.Name!);
-			if (team.LeaderId == user.Id)
-			{
-				await _teamService.DeleteTeamAsync(id);
-				return Ok(new { message = "Team successfully deleted" } );
-			}
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		if (team.LeaderId == user.Id)
+		{
+			await _teamService.DeleteTeamAsync(id);
+			return Ok(new { message = "Team successfully deleted" });
+		}
 
-			return Unauthorized("You are not the leader of this team");
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		return Unauthorized("You are not the leader of this team");
 	}
 
 	[HttpPost("{id}/leave")]
 	public async Task<IActionResult> LeaveTeam(int teamId)
 	{
-		try
+		var team = await _teamService.GetTeamByIdAsync(teamId);
+		if (team == null)
 		{
-			var team = await _teamService.GetTeamByIdAsync(teamId);
-			if (team == null)
-			{
-				return NotFound("Team not found");
-			}
+			return NotFound("Team not found");
+		}
 
-			var user = await _userService.GetUserAsync(User.Identity!.Name!);
-			if (team.LeaderId == user.Id)
-			{
-				return BadRequest("The leader can't leave the team");
-			}
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		if (team.LeaderId == user.Id)
+		{
+			return BadRequest("The leader can't leave the team");
+		}
 
-			await _teamService.RemoveMemberAsync(teamId, user.Id);
-			return Ok(new { message = "You have left the team" });
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		await _teamService.RemoveMemberAsync(teamId, user.Id);
+		return Ok(new { message = "You have left the team" });
 	}
 
 	[HttpPost("{id}/add-member")]
 	public async Task<IActionResult> AddMember(int id, [FromBody] string userName)
 	{
-		try
+		var team = await _teamService.GetTeamByIdAsync(id);
+		if (team == null)
 		{
-			var team = await _teamService.GetTeamByIdAsync(id);
-			if (team == null)
-			{
-				return NotFound("Team not found");
-			}
-
-			var user = await _userService.GetUserAsync(userName);
-			if (user == null)
-			{
-				return NotFound("User not found");
-			}
-
-			var currentUser = await _userService.GetUserAsync(User.Identity!.Name!);
-			if (team.LeaderId != currentUser.Id)
-			{
-				return Unauthorized("Only the team leader can add members");
-			}
-
-			await _teamService.AddMemeberAsync(id, user.Id);
-			return Ok(new { message = "Member successfully added" });
+			return NotFound("Team not found");
 		}
-		catch (AppException ex)
+
+		var user = await _userService.GetUserAsync(userName);
+		if (user == null)
 		{
-			return BadRequest(ex.Message);
+			return NotFound("User not found");
 		}
-		catch (Exception ex)
+
+		var currentUser = await _userService.GetUserAsync(User.Identity!.Name!);
+		if (team.LeaderId != currentUser.Id)
 		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+			return Unauthorized("Only the team leader can add members");
 		}
+
+		await _teamService.AddMemeberAsync(id, user.Id);
+		return Ok(new { message = "Member successfully added" });
 	}
 }

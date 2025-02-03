@@ -26,65 +26,43 @@ public class AuthController : ControllerBase
 	[HttpPost("login")]
 	public async Task<IActionResult> Login(LoginDto loginDto)
 	{
-		try
+		var validationResult = await new LoginValidator().ValidateAsync(loginDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new LoginValidator().ValidateAsync(loginDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var result = await _userService.LoginUserAsync(loginDto.UserName, loginDto.Password);
-			if (result.Succeeded)
-			{
-				var user = await _userService.GetUserAsync(loginDto.UserName);
-				var token = _jwtHelper.GenerateToken(user.Id.ToString(), user.UserName);
-				return Ok(new { token });
-			}
-			else
-			{
-				return BadRequest(result.Errors);
-			}
-		}
-		catch (AppException ex)
+		var result = await _userService.LoginUserAsync(loginDto.UserName, loginDto.Password);
+		if (result.Succeeded)
 		{
-			return BadRequest(ex.Message);
+			var user = await _userService.GetUserAsync(loginDto.UserName);
+			var token = _jwtHelper.GenerateToken(user.Id.ToString(), user.UserName);
+			return Ok(new { token });
 		}
-		catch (Exception ex)
+		else
 		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+			return BadRequest(result.Errors);
 		}
 	}
 
 	[HttpPost("register")]
 	public async Task<IActionResult> Register(RegisterDto registerDto)
 	{
-		try
+		var validationResult = await new RegisterValidator().ValidateAsync(registerDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new RegisterValidator().ValidateAsync(registerDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
-			var result = await _userService.RegisterUserAsync(userModel);
-			if (result.Succeeded)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest(result.Errors);
-			}
-		}
-		catch (AppException ex)
+		var userModel = new UserModel(registerDto.FirstName, registerDto.LastName, registerDto.UserName, registerDto.Password);
+		var result = await _userService.RegisterUserAsync(userModel);
+		if (result.Succeeded)
 		{
-			return BadRequest(ex.Message);
+			return Ok();
 		}
-		catch (Exception ex)
+		else
 		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+			return BadRequest(result.Errors);
 		}
 	}
 
@@ -92,18 +70,7 @@ public class AuthController : ControllerBase
 	[HttpPost("logout")]
 	public async Task<IActionResult> Logout()
 	{
-		try
-		{
-			await _userService.LogoutUserAsync();
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		await _userService.LogoutUserAsync();
+		return Ok();
 	}
 }

@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using TeamProjectManager.API.Middleware;
 using TeamProjectManager.API.Validation.User;
 using TeamProjectManager.DAL.Data;
 using TeamProjectManager.DAL.Interfaces;
@@ -32,10 +33,10 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ErrorHandler>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -25,26 +25,15 @@ public class NotificationController : ControllerBase
     [HttpPost("notify")]
     public async Task<IActionResult> NotifyUser(CreateNotificationDto createNotificationDto)
     {
-        try
-        {
-            var validationResult = new CreateNotificationValidator().Validate(createNotificationDto);
-            if (!validationResult.IsValid)
-            {
-				return BadRequest(validationResult.Errors);
-			}
-
-			int userId = (await _userService.GetUserAsync(createNotificationDto.UserName)).Id;
-			await _notificationService.NotifyUserAsync(userId, createNotificationDto.Title, createNotificationDto.Content);
-
-            return NoContent();
-        }
-        catch (AppException ex)
-        {
-			return BadRequest(ex.Message);
+		var validationResult = new CreateNotificationValidator().Validate(createNotificationDto);
+		if (!validationResult.IsValid)
+		{
+			return BadRequest(validationResult.Errors);
 		}
-        catch (Exception ex)
-        {
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
-    }
+
+		int userId = (await _userService.GetUserAsync(createNotificationDto.UserName)).Id;
+		await _notificationService.NotifyUserAsync(userId, createNotificationDto.Title, createNotificationDto.Content);
+
+		return NoContent();
+	}
 }

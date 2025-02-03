@@ -26,85 +26,52 @@ public class ProjectController : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetProjects()
 	{
-		try
-		{
-			int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-			var projects = await _projectService.GetProjectsByUserIdAsync(userId);
+		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var projects = await _projectService.GetProjectsByUserIdAsync(userId);
 
-			var projectDtos = projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId));
-			return Ok(projectDtos);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
-		}
+		var projectDtos = projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId));
+		return Ok(projectDtos);
 	}
 
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetProjectById(int id)
 	{
-		try
+		var project = await _projectService.GetProjectByIdAsync(id);
+		if (project == null)
 		{
-			var project = await _projectService.GetProjectByIdAsync(id);
-			if (project == null)
-			{
-				return NotFound("Project not found");
-			}
+			return NotFound("Project not found");
+		}
 
-			var projectDto = new FullProjectDto
-			(
-				project.Id,
-				project.Name,
-				project.Description,
-				project.TeamId,
-				project.Boards.Select(b => new BoardDto(b.Id, b.Name, b.Description, b.CreatedDate, b.ProjectId)).ToList()
-			);
+		var projectDto = new FullProjectDto
+		(
+			project.Id,
+			project.Name,
+			project.Description,
+			project.TeamId,
+			project.Boards.Select(b => new BoardDto(b.Id, b.Name, b.Description, b.CreatedDate, b.ProjectId)).ToList()
+		);
 
-			return Ok(projectDto);
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		return Ok(projectDto);
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> CreateProject(CreateProjectDto createProjectDto)
 	{
-		try
+		var validationResult = await new CreateProjectValidator().ValidateAsync(createProjectDto);
+		if (!validationResult.IsValid)
 		{
-			var validationResult = await new CreateProjectValidator().ValidateAsync(createProjectDto);
-			if (!validationResult.IsValid)
-			{
-				return BadRequest(validationResult.Errors);
-			}
+			return BadRequest(validationResult.Errors);
+		}
 
-			var projectModel = new ProjectModel
-			{
-				Name = createProjectDto.Name,
-				Description = createProjectDto.Description,
-				TeamId = createProjectDto.TeamId,
-				Boards = []
-			};
+		var projectModel = new ProjectModel
+		{
+			Name = createProjectDto.Name,
+			Description = createProjectDto.Description,
+			TeamId = createProjectDto.TeamId,
+			Boards = []
+		};
 
-			await _projectService.AddProjectAsync(projectModel);
-			return Ok();
-		}
-		catch (AppException ex)
-		{
-			return BadRequest(ex.Message);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, new { message = "An unexpected error occured.", error = ex.Message });
-		}
+		await _projectService.AddProjectAsync(projectModel);
+		return Ok();
 	}
 }
