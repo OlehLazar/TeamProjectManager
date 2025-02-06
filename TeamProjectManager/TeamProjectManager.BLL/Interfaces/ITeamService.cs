@@ -6,7 +6,7 @@ public interface ITeamService
 {
 	Task<IEnumerable<TeamModel>> GetTeamsAsync();
 
-	Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(int userId);
+	Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(string userId);
 
 	Task<TeamModel> GetTeamByIdAsync(int id);
 
@@ -14,7 +14,7 @@ public interface ITeamService
 
 	Task DeleteTeamAsync(int id);
 
-	Task AddMemeberAsync(int teamId, int userId);
+	Task AddMemeberAsync(int teamId, string userId);
 
-	Task RemoveMemberAsync(int teamId, int userId);
+	Task RemoveMemberAsync(int teamId, string userId);
 }

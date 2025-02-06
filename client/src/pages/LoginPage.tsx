@@ -5,7 +5,7 @@ const LoginPage = () => {
   const handleLogin = async (username: string, password: string) => {
     try {
       await login({ userName: username, password });
-      window.location.href = "/"; // Redirect on success
+      window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
       alert("Invalid credentials. Please try again.");

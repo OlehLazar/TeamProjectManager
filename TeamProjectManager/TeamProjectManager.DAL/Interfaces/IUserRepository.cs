@@ -2,6 +2,6 @@
 
 namespace TeamProjectManager.DAL.Interfaces;
 
-public interface IUserRepository : IRepository<User>
+public interface IUserRepository : IRepository<User, string>
 {
 }

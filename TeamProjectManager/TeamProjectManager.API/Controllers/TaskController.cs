@@ -30,7 +30,7 @@ public class TaskController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTasks()
     {
-		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var tasks = await _taskService.GetTasksByUserIdAsync(userId);
 
 		var taskDtos = tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description,

@@ -26,9 +26,9 @@ public class CreateTaskValidator : AbstractValidator<CreateTaskDto>
 			.GreaterThan(0).WithMessage("BoardId is required!");
 
 		RuleFor(t => t.CreatorId)
-			.GreaterThan(0).WithMessage("CreatorId is required!");
+			.NotEmpty().WithMessage("CreatorId is required!");
 
 		RuleFor(t => t.AssigneeId)
-			.GreaterThan(0).WithMessage("AssigneeId is required!");
+			.NotEmpty().WithMessage("AssigneeId is required!");
 	}
 }

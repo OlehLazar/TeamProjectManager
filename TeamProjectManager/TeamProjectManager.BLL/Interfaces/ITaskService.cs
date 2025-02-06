@@ -4,7 +4,7 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface ITaskService
 {
-	Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(int userId);
+	Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(string userId);
 
 	Task<IEnumerable<TaskModel>> GetTasksByBoardIdAsync(int boardId);
 

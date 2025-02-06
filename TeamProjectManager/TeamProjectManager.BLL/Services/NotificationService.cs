@@ -17,14 +17,14 @@ public class NotificationService : INotificationService
 		_notificationRepository = _unitOfWork.NotificationRepository;
 	}
 
-    public async Task<IEnumerable<NotificationModel>> GetNotificationsAsync(int userId, int page, int pageSize)
+    public async Task<IEnumerable<NotificationModel>> GetNotificationsAsync(string userId, int page, int pageSize)
 	{
 		int skip = (page - 1) * pageSize;
-		var notifications = await _notificationRepository.GetByUserIdAsync(userId.ToString(), skip, pageSize);
+		var notifications = await _notificationRepository.GetByUserIdAsync(userId, skip, pageSize);
 		return notifications.Select(Mapper.MapNotificationModel);
 	}
 
-	public async Task NotifyUserAsync(int userId, string title, string content)
+	public async Task NotifyUserAsync(string userId, string title, string content)
 	{
 		AppException.ThrowIfNullOrWhiteSpace(title, "Title is required");
 		AppException.ThrowIfNullOrWhiteSpace(content, "Content is required");

@@ -12,7 +12,7 @@ public static class Mapper
 
 		return new UserModel
 		{
-			Id = int.Parse(user.Id),
+			Id = user.Id,
 			FirstName = user.FirstName,
 			LastName = user.LastName,
 			UserName = user.UserName!,
@@ -43,7 +43,7 @@ public static class Mapper
 			Id = team.Id,
 			Name = team.Name,
 			Description = team.Description,
-			LeaderId = int.Parse(team.LeaderId),
+			LeaderId = team.LeaderId,
 			Leader = MapUserModel(team.Leader),
 			Members = team.Members.Select(MapUserModel).ToList(),
 			Projects = team.Projects.Select(MapProjectModel).ToList(),
@@ -78,8 +78,8 @@ public static class Mapper
 			StartDate = task.StartDate,
 			EndDate = task.EndDate,
 			BoardId = task.BoardId,
-			CreatorId = int.Parse(task.CreatorId),
-			AssigneeId = int.Parse(task.AssigneeId),
+			CreatorId = task.CreatorId,
+			AssigneeId = task.AssigneeId,
 			Status = task.Status,
 			Board = MapBoardModel(task.Board),
 			Creator = MapUserModel(task.Creator),
@@ -149,7 +149,7 @@ public static class Mapper
 			Content = notification.Content,
 			CreatedAt = notification.CreatedAt,
 			IsRead = notification.IsRead,
-			UserId = int.Parse(notification.UserId),
+			UserId = notification.UserId,
 			User = MapUserModel(notification.User),
 		};
 	}

@@ -1,6 +1,6 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class UserModel : AbstractModel
+public class UserModel : AbstractModel<string>
 {
     public UserModel()
     {

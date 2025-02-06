@@ -18,6 +18,6 @@ public class CreateTeamValidator : AbstractValidator<CreateTeamDto>
 			.MaximumLength(200).WithMessage("Description can't exceed 200 characters.");
 
         RuleFor(t => t.LeaderId)
-			.GreaterThan(0).WithMessage("LeaderId must be greater than 0.");
+			.NotEmpty().WithMessage("LeaderId must be greater than 0.");
 	}
 }

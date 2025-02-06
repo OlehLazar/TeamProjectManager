@@ -31,7 +31,7 @@ public class NotificationController : ControllerBase
 			return BadRequest(validationResult.Errors);
 		}
 
-		int userId = (await _userService.GetUserAsync(createNotificationDto.UserName)).Id;
+		var userId = (await _userService.GetUserAsync(createNotificationDto.UserName)).Id;
 		await _notificationService.NotifyUserAsync(userId, createNotificationDto.Title, createNotificationDto.Content);
 
 		return NoContent();

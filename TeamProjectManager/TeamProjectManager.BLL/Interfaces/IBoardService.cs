@@ -4,7 +4,7 @@ namespace TeamProjectManager.BLL.Interfaces;
 
 public interface IBoardService
 {
-	Task<IEnumerable<BoardModel>> GetBoardsByUserIdAsync(int userId);
+	Task<IEnumerable<BoardModel>> GetBoardsByUserIdAsync(string userId);
 
 	Task<IEnumerable<BoardModel>> GetBoardsByProjectIdAsync(int projectId);
 

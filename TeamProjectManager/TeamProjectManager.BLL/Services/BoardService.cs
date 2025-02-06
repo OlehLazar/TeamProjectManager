@@ -17,7 +17,7 @@ public class BoardService : IBoardService
 		_boardRepository = _unitOfWork.BoardRepository;
 	}
 
-	public async Task<IEnumerable<BoardModel>> GetBoardsByUserIdAsync(int userId)
+	public async Task<IEnumerable<BoardModel>> GetBoardsByUserIdAsync(string userId)
 	{
 		var boards = await _boardRepository.GetAllByUserIdAsync(userId);
 		AppException.ThrowIfNull(boards, "Boards not found");

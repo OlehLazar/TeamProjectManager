@@ -1,12 +1,12 @@
 ﻿namespace TeamProjectManager.DAL.Interfaces;
 
-public interface IRepository<TEntity>
+public interface IRepository<TEntity, TId>
 {
 	Task<IEnumerable<TEntity>> GetAllAsync();
 
 	Task<IEnumerable<TEntity>> GetAsync(int skip, int take);
 
-	Task<TEntity?> GetByIdAsync(int id);
+	Task<TEntity?> GetByIdAsync(TId id);
 
 	Task AddAsync(TEntity entity);
 
@@ -14,5 +14,5 @@ public interface IRepository<TEntity>
 
 	Task DeleteAsync(TEntity entity);
 
-	Task DeleteByIdAsync(int id);
+	Task DeleteByIdAsync(TId id);
 }

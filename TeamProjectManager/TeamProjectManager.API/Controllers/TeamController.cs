@@ -27,10 +27,10 @@ public class TeamController : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetTeams()
 	{
-		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var teams = await _teamService.GetTeamsByUserIdAsync(userId);
 
-		var teamDtos = teams.Select(t => new TeamDto(t.Id, t.Name, t.Description, t.LeaderId.ToString()));
+		var teamDtos = teams.Select(t => new TeamDto(t.Id, t.Name, t.Description, t.LeaderId));
 
 		return Ok(teamDtos);
 	}

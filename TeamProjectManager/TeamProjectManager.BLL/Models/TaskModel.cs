@@ -1,6 +1,6 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class TaskModel : AbstractModel
+public class TaskModel : AbstractModel<int>
 {
     public TaskModel()
     {
@@ -8,7 +8,7 @@ public class TaskModel : AbstractModel
     }
 
     public TaskModel(string name, string description, DateTime startDate, DateTime endDate, 
-		int boardId, int creatorId, int assigneeId)
+		int boardId, string creatorId, string assigneeId)
     {
         Name = name;
 		Description = description;
@@ -29,9 +29,9 @@ public class TaskModel : AbstractModel
 
 	public int BoardId { get; set; }
 
-	public int CreatorId { get; set; }
+	public string CreatorId { get; set; }
 
-	public int AssigneeId { get; set; }
+	public string AssigneeId { get; set; }
 
 	public bool Status { get; set; } = default;
 

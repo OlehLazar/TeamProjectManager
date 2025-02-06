@@ -26,7 +26,7 @@ public class ProjectController : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetProjects()
 	{
-		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var projects = await _projectService.GetProjectsByUserIdAsync(userId);
 
 		var projectDtos = projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId));

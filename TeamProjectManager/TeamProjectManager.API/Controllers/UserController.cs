@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.User;
-using TeamProjectManager.API.Utilities;
-using TeamProjectManager.API.Validation;
 using TeamProjectManager.API.Validation.User;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
-using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 

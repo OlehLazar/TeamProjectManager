@@ -1,6 +1,6 @@
 ﻿namespace TeamProjectManager.DAL.Interfaces;
 
-public interface ITaskRepository : IRepository<Entities.Task>
+public interface ITaskRepository : IRepository<Entities.Task, int>
 {
 	Task<IEnumerable<Entities.Task>> GetAllByUserIdAsync(string userId);
 

@@ -1,13 +1,13 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class NotificationModel : AbstractModel
+public class NotificationModel : AbstractModel<int>
 {
     public NotificationModel()
     {
         
     }
 
-    public NotificationModel(string title, string content, DateTime createdAt, int userId)
+    public NotificationModel(string title, string content, DateTime createdAt, string userId)
     {
         Title = title;
 		Content = content;
@@ -23,7 +23,7 @@ public class NotificationModel : AbstractModel
 
 	public bool IsRead { get; set; } = default;
 
-	public required int UserId { get; set; }
+	public required string UserId { get; set; }
 
 	public UserModel User { get; set; }
 }

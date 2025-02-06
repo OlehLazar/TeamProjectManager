@@ -1,6 +1,6 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class BoardModel : AbstractModel
+public class BoardModel : AbstractModel<int>
 {
     public BoardModel()
     {

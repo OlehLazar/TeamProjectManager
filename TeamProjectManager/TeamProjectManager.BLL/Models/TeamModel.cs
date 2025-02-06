@@ -1,13 +1,13 @@
 ﻿namespace TeamProjectManager.BLL.Models;
 
-public class TeamModel : AbstractModel
+public class TeamModel : AbstractModel<int>
 {
     public TeamModel()
     {
         
     }
 
-    public TeamModel(string name, string description, int leaderId)
+    public TeamModel(string name, string description, string leaderId)
     {
         Name = name;
 		Description = description;
@@ -18,7 +18,7 @@ public class TeamModel : AbstractModel
 
 	public required string Description { get; set; } = default!;
 
-	public int LeaderId { get; set; }
+	public string LeaderId { get; set; }
 
 	public UserModel Leader { get; set; }
 

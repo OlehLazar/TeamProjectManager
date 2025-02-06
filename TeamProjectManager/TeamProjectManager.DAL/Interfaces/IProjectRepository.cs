@@ -2,9 +2,9 @@
 
 namespace TeamProjectManager.DAL.Interfaces;
 
-public interface IProjectRepository : IRepository<Project>
+public interface IProjectRepository : IRepository<Project, int>
 {
-	Task<IEnumerable<Project>> GetAllByUserIdAsync(int userId);
+	Task<IEnumerable<Project>> GetAllByUserIdAsync(string userId);
 
 	Task<IEnumerable<Project>> GetAllByTeamIdAsync(int teamId);
 }

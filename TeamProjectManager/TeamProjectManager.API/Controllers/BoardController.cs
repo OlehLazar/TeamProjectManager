@@ -27,7 +27,7 @@ public class BoardController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetBoards()
 	{
-		int userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
+		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var boards = await _boardService.GetBoardsByUserIdAsync(userId);
 
 		var boardDtos = boards.Select(b => new BoardDto(b.Id, b.Name, b.Description, b.CreatedDate, b.ProjectId));

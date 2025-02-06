@@ -17,7 +17,7 @@ public class ProjectService : IProjectService
 		_projectRepository = unitOfWork.ProjectRepository;
 	}
 
-	public async Task<IEnumerable<ProjectModel>> GetProjectsByUserIdAsync(int userId)
+	public async Task<IEnumerable<ProjectModel>> GetProjectsByUserIdAsync(string userId)
 	{
 		var projects = await _projectRepository.GetAllByUserIdAsync(userId);
 		AppException.ThrowIfNull(projects, "Ptojects not found");

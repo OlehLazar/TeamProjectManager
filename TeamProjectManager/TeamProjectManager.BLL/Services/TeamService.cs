@@ -24,9 +24,9 @@ public class TeamService : ITeamService
 		return teams.Select(Mapper.MapTeamModel);
 	}
 
-	public async Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(int userId)
+	public async Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(string userId)
 	{
-		var teams = await _teamRepository.GetAllByUserIdAsync(userId.ToString());
+		var teams = await _teamRepository.GetAllByUserIdAsync(userId);
 		AppException.ThrowIfNull(teams, "Teams not found");
 		return teams.Select(Mapper.MapTeamModel);
 	}
@@ -51,7 +51,7 @@ public class TeamService : ITeamService
 		await _teamRepository.DeleteByIdAsync(id);
 	}
 
-	public async Task AddMemeberAsync(int teamId, int userId)
+	public async Task AddMemeberAsync(int teamId, string userId)
 	{
 		var team = await _teamRepository.GetByIdAsync(teamId);
 		AppException.ThrowIfNull(team, "Team not found");
@@ -61,11 +61,11 @@ public class TeamService : ITeamService
 		await _teamRepository.UpdateAsync(team);
 	}
 
-	public async Task RemoveMemberAsync(int teamId, int userId)
+	public async Task RemoveMemberAsync(int teamId, string userId)
 	{
 		var team = await _teamRepository.GetByIdAsync(teamId);
 		AppException.ThrowIfNull(team, "Team not found");
-		var user = team!.Members!.FirstOrDefault(u => u.Id == userId.ToString());
+		var user = team!.Members!.FirstOrDefault(u => u.Id == userId);
 		AppException.ThrowIfNull(user, "User not found");
 		team.Members!.Remove(user!);
 		await _teamRepository.UpdateAsync(team);
