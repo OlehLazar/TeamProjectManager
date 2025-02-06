@@ -29,7 +29,13 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 	{
 		AppException.ThrowIfNull(userModel, "User data is required.");
 
-		var user = Mapper.MapUser(userModel);
+		var user = new User
+		{
+			FirstName = userModel.FirstName,
+			LastName = userModel.LastName,
+			UserName = userModel.UserName,
+			Avatar = userModel.Avatar,
+		};
 
 		return await _userManager.CreateAsync(user, userModel.Password);
 	}
