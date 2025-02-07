@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
+import Button from "../components/shared/Button";
+
 const Profile = () => {
   const navigate = useNavigate();
 
@@ -17,18 +19,15 @@ const Profile = () => {
     navigate("/login");
   };
 
-  
-
   return (
     <div className="flex flex-col items-center p-6">
       <h1 className="text-2xl font-bold">My Profile</h1>
       
-      <button
+      <Button
         onClick={handleLogout}
-        className="mt-6 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition"
       >
         Logout
-      </button>
+      </Button>
     </div>
   );
 };
