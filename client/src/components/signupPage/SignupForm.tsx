@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { register } from "../../services/authService"; // Import API call function
+import { register } from "../../services/authService";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({

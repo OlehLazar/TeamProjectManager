@@ -1,18 +1,23 @@
 import { useState } from "react";
+import { login } from "../../services/authService";
 import Input from "../shared/Input"
 import Button from "../shared/Button"
 
-interface LoginFormProps {
-    onSubmit: (username: string, password: string) => void;
-}
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: React.FC = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(username, password);
+
+        try {
+            await login({ userName: username, password: password });
+            window.location.href = "/";
+        } catch (error) {
+            console.error("Login failed:", error);
+            alert("Invalid credentials. Please try again.");
+        }
     };
 
     return (
