@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -75,7 +76,10 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<JwtHelper>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+	options.Filters.Add<ValidationExceptionFilter>();
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -111,6 +115,10 @@ builder.Services.AddFluentValidationAutoValidation()
 				.AddFluentValidationClientsideAdapters();
 
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+	options.SuppressModelStateInvalidFilter = false; // Must be false to allow FluentValidation to return errors
+});
 
 var app = builder.Build();
 

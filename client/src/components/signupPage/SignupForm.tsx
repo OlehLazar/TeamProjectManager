@@ -11,6 +11,7 @@ const SignupForm: React.FC = () => {
     password: "",
     repeatPassword: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,7 +30,12 @@ const SignupForm: React.FC = () => {
       window.location.href = "/login";
     } catch (error) {
       console.error("Signup failed:", error);
-      alert(error);
+      
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("An unexpected error occurred.");
+      }
     }
   };
 
@@ -41,6 +47,7 @@ const SignupForm: React.FC = () => {
       <Input name="password" type="password" placeholder="Password" width="w-1/3" value={formData.password} onChange={handleChange} />
       <Input name="repeatPassword" type="password" placeholder="Repeat Password" width="w-1/3" value={formData.repeatPassword} onChange={handleChange} />
       <Button width="w-1/6" type="submit">Sign up</Button>
+      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
     </form>
   );
 };

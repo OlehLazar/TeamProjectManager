@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using FluentValidation;
+using System.Net;
 using System.Text.Json;
 using TeamProjectManager.BLL.Validation;
 
@@ -13,6 +14,11 @@ public class ErrorHandler(RequestDelegate next)
 		try
 		{
 			await _next(context);
+		}
+		catch (ValidationException ex)
+		{
+			var errors = ex.Errors.Select(e => e.ErrorMessage).ToArray();
+			await HandleExceptionAsync(context, "Validation failed.", HttpStatusCode.BadRequest, string.Join("; ", errors));
 		}
 		catch (AppException ex)
 		{
