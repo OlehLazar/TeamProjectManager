@@ -2,7 +2,7 @@ import { useState } from "react";
 import { login } from "../../services/authService";
 import Input from "../shared/Input"
 import Button from "../shared/Button"
-
+import axios from "axios";
 
 const LoginForm: React.FC = () => {
     const [username, setUsername] = useState("");
@@ -17,7 +17,16 @@ const LoginForm: React.FC = () => {
             window.location.href = "/";
         } catch (error) {
             console.error("Login failed:", error);
-            if (error instanceof Error) {
+            if (axios.isAxiosError(error)) {
+                const validationErrors = error.response?.data?.errors;
+                
+                if (validationErrors) {
+                  const messages = Object.values(validationErrors).flat().join(" ");
+                  setErrorMessage(messages);
+                } else {
+                  setErrorMessage(error.response?.data?.title || "An error occurred.");
+                }
+            } else if (error instanceof Error) {
                 setErrorMessage(error.message);
             } else {
                 setErrorMessage("An unexpected error occurred.");

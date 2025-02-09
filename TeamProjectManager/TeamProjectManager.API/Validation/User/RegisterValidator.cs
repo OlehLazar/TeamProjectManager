@@ -11,6 +11,8 @@ public class RegisterValidator : AbstractValidator<RegisterDto>
 
 		RuleFor(user => user.LastName).NameRules("Last name");
 
+		RuleFor(user => user.UserName).UserNameRules();
+
 		RuleFor(user => user.Password).PasswordRules();
 	}
 }

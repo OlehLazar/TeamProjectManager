@@ -2,6 +2,7 @@ import { useState } from "react";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { register } from "../../services/authService";
+import axios from "axios";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -28,10 +29,19 @@ const SignupForm: React.FC = () => {
     try {
       await register(formData);
       window.location.href = "/login";
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Signup failed:", error);
-      
-      if (error instanceof Error) {
+    
+      if (axios.isAxiosError(error)) {
+        const validationErrors = error.response?.data?.errors;
+        
+        if (validationErrors) {
+          const messages = Object.values(validationErrors).flat().join(" ");
+          setErrorMessage(messages);
+        } else {
+          setErrorMessage(error.response?.data?.title || "An error occurred.");
+        }
+      } else if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
         setErrorMessage("An unexpected error occurred.");
