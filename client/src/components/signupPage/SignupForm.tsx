@@ -12,7 +12,8 @@ const SignupForm: React.FC = () => {
     password: "",
     repeatPassword: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,8 +22,14 @@ const SignupForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    const newErrors: Record<string, string[]> = {};
+
     if (formData.password !== formData.repeatPassword) {
-      alert("Passwords do not match!");
+      newErrors.RepeatPassword = ["Passwords do not match"];
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setFieldErrors(newErrors);
       return;
     }
 
@@ -34,17 +41,16 @@ const SignupForm: React.FC = () => {
     
       if (axios.isAxiosError(error)) {
         const validationErrors = error.response?.data?.errors;
-        
+    
         if (validationErrors) {
-          const messages = Object.values(validationErrors).flat().join(" ");
-          setErrorMessage(messages);
+          setFieldErrors(validationErrors);
         } else {
-          setErrorMessage(error.response?.data?.title || "An error occurred.");
+          setFieldErrors({ general: [error.response?.data?.title || "An error occurred."] });
         }
       } else if (error instanceof Error) {
-        setErrorMessage(error.message);
+        setFieldErrors({ general: [error.message] });
       } else {
-        setErrorMessage("An unexpected error occurred.");
+        setFieldErrors({ general: ["An unexpected error occurred."] });
       }
     }
   };
@@ -52,12 +58,31 @@ const SignupForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
       <Input name="firstName" placeholder="First Name" width="w-1/3" value={formData.firstName} onChange={handleChange} />
+      {fieldErrors.FirstName && fieldErrors.FirstName.map((err, i) => (
+        <p key={i} className="text-red-500 text-sm">{err}</p>
+      ))}
+
       <Input name="lastName" placeholder="Last Name" width="w-1/3" value={formData.lastName} onChange={handleChange} />
-      <Input name="userName" placeholder="Nickname" width="w-1/3" value={formData.userName} onChange={handleChange} />
+      {fieldErrors.LastName && fieldErrors.LastName.map((err, i) => (
+        <p key={i} className="text-red-500 text-sm">{err}</p>
+      ))}
+
+      <Input name="userName" placeholder="Username" width="w-1/3" value={formData.userName} onChange={handleChange} />
+      {fieldErrors.UserName && fieldErrors.UserName.map((err, i) => (
+        <p key={i} className="text-red-500 text-sm">{err}</p>
+      ))}
+
       <Input name="password" type="password" placeholder="Password" width="w-1/3" value={formData.password} onChange={handleChange} />
+      {fieldErrors.Password && fieldErrors.Password.map((err, i) => (
+        <p key={i} className="text-red-500 text-sm">{err}</p>
+      ))}
+
       <Input name="repeatPassword" type="password" placeholder="Repeat Password" width="w-1/3" value={formData.repeatPassword} onChange={handleChange} />
+      {fieldErrors.RepeatPassword && fieldErrors.RepeatPassword.map((err, i) => (
+        <p key={i} className="text-red-500 text-sm">{err}</p>
+      ))}
+
       <Button width="w-1/6" type="submit">Sign up</Button>
-      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
     </form>
   );
 };

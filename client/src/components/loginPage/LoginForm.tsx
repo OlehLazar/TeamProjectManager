@@ -2,7 +2,6 @@ import { useState } from "react";
 import { login } from "../../services/authService";
 import Input from "../shared/Input"
 import Button from "../shared/Button"
-import axios from "axios";
 
 const LoginForm: React.FC = () => {
     const [username, setUsername] = useState("");
@@ -17,40 +16,14 @@ const LoginForm: React.FC = () => {
             window.location.href = "/";
         } catch (error) {
             console.error("Login failed:", error);
-            if (axios.isAxiosError(error)) {
-                const validationErrors = error.response?.data?.errors;
-                
-                if (validationErrors) {
-                  const messages = Object.values(validationErrors).flat().join(" ");
-                  setErrorMessage(messages);
-                } else {
-                  setErrorMessage(error.response?.data?.title || "An error occurred.");
-                }
-            } else if (error instanceof Error) {
-                setErrorMessage(error.message);
-            } else {
-                setErrorMessage("An unexpected error occurred.");
-            }
+            setErrorMessage("Invalid credentials");
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-            <Input
-                name="username"
-                placeholder="Username"
-                width="w-1/3"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <Input
-                name="password"
-                placeholder="Password"
-                type="password"
-                width="w-1/3"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <Input name="username" placeholder="Username" width="w-1/3" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <Input name="password" placeholder="Password" type="password" width="w-1/3" value={password} onChange={(e) => setPassword(e.target.value)} />
             <Button width="w-1/6" type="submit">Log in</Button>
             {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
         </form>
