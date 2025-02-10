@@ -13,7 +13,7 @@ export const updateProfile = async (userData: { firstName: string; lastName: str
   });
 };
 
-export const changePassword = async (passwordData: { newPassword: string }) => {
+export const changePassword = async (passwordData: { oldPassword: string, newPassword: string, confirmPassword: string }) => {
   await api.put("/user/change-password", passwordData, {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });

@@ -92,14 +92,8 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 			return IdentityResult.Failed(new IdentityError { Description = "User not found." });
 		}
 
-		var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
-
-		if (!result.Succeeded)
-		{
-			return IdentityResult.Failed(new IdentityError { Description = "Invalid password." });
-		}
-
-		return IdentityResult.Success;
+		var token = await _userManager.GeneratePasswordResetTokenAsync(user!);
+		return await _userManager.ResetPasswordAsync(user!, token, password);
 	}
 
 	public async Task DeleteUserAsync(string userName)
