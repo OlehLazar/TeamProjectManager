@@ -11,6 +11,7 @@ import { exampleTeam } from "./constants/exampleTeam";
 import { exampleProjects } from "./constants/exampleProjects";
 import { exampleTeams } from "./constants/exampleTeams";
 import ProfilePage from "./pages/ProfilePage";
+import NotificationsPage from "./pages/NotificationsPage";
 
 const App = () => (
   <Router>
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/teams/:teamId" element={<TeamPage team={exampleTeam} />} />
         <Route path="/projects" element={<MyProjectsPage projects={exampleProjects} />} />
         <Route path="/projects/:projectId" element={<ProjectPage projects={exampleProjects} />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
       </Route>
     </Routes>
   </Router>
