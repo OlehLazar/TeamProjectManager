@@ -12,6 +12,7 @@ import { exampleProjects } from "./constants/exampleProjects";
 import { exampleTeams } from "./constants/exampleTeams";
 import ProfilePage from "./pages/ProfilePage";
 import NotificationsPage from "./pages/NotificationsPage";
+import CreateTeamPage from "./pages/CreateTeamPage";
 
 const App = () => (
   <Router>
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/teams" element={<MyTeamsPage teams={exampleTeams} />} />
         <Route path="/teams/:teamId" element={<TeamPage team={exampleTeam} />} />
+        <Route path="/teams/create" element={<CreateTeamPage />} />
         <Route path="/projects" element={<MyProjectsPage projects={exampleProjects} />} />
         <Route path="/projects/:projectId" element={<ProjectPage projects={exampleProjects} />} />
         <Route path="/notifications" element={<NotificationsPage />} />
