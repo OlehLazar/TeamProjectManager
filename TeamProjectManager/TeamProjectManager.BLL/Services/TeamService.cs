@@ -2,8 +2,9 @@
 using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Utilities;
 using TeamProjectManager.BLL.Validation;
+using TeamProjectManager.DAL.Entities;
 using TeamProjectManager.DAL.Interfaces;
-
+using Task = System.Threading.Tasks.Task;
 namespace TeamProjectManager.BLL.Services;
 
 public class TeamService : ITeamService
@@ -41,7 +42,20 @@ public class TeamService : ITeamService
 	public async Task AddTeamAsync(TeamModel team)
 	{
 		AppException.ThrowIfNull(team, "Team can't be null");
-		await _teamRepository.AddAsync(Mapper.MapTeam(team));
+
+		var leader = await _unitOfWork.UserRepository.GetByIdAsync(team.LeaderId);
+
+		var teamEntity = new Team
+		{
+			Name = team.Name,
+			Description = team.Description,
+			LeaderId = team.LeaderId,
+			Leader = leader!,
+			Members = [],
+			Projects = [],
+		};
+
+		await _teamRepository.AddAsync(teamEntity);
 	}
 
 	public async Task DeleteTeamAsync(int id)

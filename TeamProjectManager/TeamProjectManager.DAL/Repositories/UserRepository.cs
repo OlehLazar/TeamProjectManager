@@ -24,7 +24,7 @@ public class UserRepository(ManagerDbContext context)
 
 	public async Task<User?> GetByIdAsync(string id)
 	{
-		return await _context.Users.FindAsync();
+		return await _context.Users.FindAsync(id);
 	}
 
 	public async Task AddAsync(User entity)

@@ -45,8 +45,8 @@ public static class Mapper
 			Description = team.Description,
 			LeaderId = team.LeaderId,
 			Leader = MapUserModel(team.Leader),
-			Members = team.Members.Select(MapUserModel).ToList(),
-			Projects = team.Projects.Select(MapProjectModel).ToList(),
+			Members = team.Members?.Select(MapUserModel).ToList() ?? new List<UserModel>(),
+			Projects = team.Projects?.Select(MapProjectModel).ToList() ?? new List<ProjectModel>(),
 		};
 	}
 

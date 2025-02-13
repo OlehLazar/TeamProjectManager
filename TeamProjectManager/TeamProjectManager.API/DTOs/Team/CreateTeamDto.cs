@@ -1,3 +1,3 @@
 ﻿namespace TeamProjectManager.API.DTOs.Team;
 
-public record CreateTeamDto(string Name, string Description, string LeaderUsername);
+public record CreateTeamDto(string Name, string Description);

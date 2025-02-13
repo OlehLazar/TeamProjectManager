@@ -22,7 +22,7 @@ public class TeamModel : AbstractModel<int>
 
 	public UserModel Leader { get; set; }
 
-	public ICollection<UserModel> Members { get; set; }
+	public ICollection<UserModel> Members { get; set; } = [];
 
-	public ICollection<ProjectModel> Projects { get; set; }
+	public ICollection<ProjectModel> Projects { get; set; } = [];
 }
