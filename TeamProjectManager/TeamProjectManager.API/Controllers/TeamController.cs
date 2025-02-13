@@ -66,11 +66,12 @@ public class TeamController : ControllerBase
 			return BadRequest(validationResult.Errors);
 		}
 
+		var leader = await _userService.GetUserAsync(User.Identity!.Name!);
 		var teamModel = new TeamModel
 		{
 			Name = createTeamDto.Name,
 			Description = createTeamDto.Description,
-			LeaderId = createTeamDto.LeaderId,
+			LeaderId = leader.Id,
 			Members = [],
 			Projects = []
 		};
