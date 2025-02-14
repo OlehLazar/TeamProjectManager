@@ -26,7 +26,7 @@ public static class Mapper
 
 		return new User
 		{
-			Id = userModel.Id.ToString(),
+			Id = userModel.Id,
 			FirstName = userModel.FirstName,
 			LastName = userModel.LastName,
 			UserName = userModel.UserName,
@@ -45,8 +45,8 @@ public static class Mapper
 			Description = team.Description,
 			LeaderId = team.LeaderId,
 			Leader = MapUserModel(team.Leader),
-			Members = team.Members?.Select(MapUserModel).ToList() ?? new List<UserModel>(),
-			Projects = team.Projects?.Select(MapProjectModel).ToList() ?? new List<ProjectModel>(),
+			Members = team.Members?.Select(MapUserModel).ToList() ?? [],
+			Projects = team.Projects?.Select(MapProjectModel).ToList() ?? [],
 		};
 	}
 
@@ -61,8 +61,8 @@ public static class Mapper
 			Description = teamModel.Description,
 			LeaderId = teamModel.LeaderId.ToString(),
 			Leader = MapUser(teamModel.Leader),
-			Members = teamModel.Members.Select(MapUser).ToList(),
-			Projects = teamModel.Projects.Select(MapProject).ToList(),
+			Members = teamModel.Members?.Select(MapUser).ToList() ?? [],
+			Projects = teamModel.Projects?.Select(MapProject).ToList() ?? [],
 		};
 	}
 

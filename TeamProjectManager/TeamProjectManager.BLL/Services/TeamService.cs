@@ -36,6 +36,8 @@ public class TeamService : ITeamService
 	{
 		var team = await _teamRepository.GetByIdAsync(id);
 		AppException.ThrowIfNull(team, "Team not found");
+		var leader = await _unitOfWork.UserRepository.GetByIdAsync(team!.LeaderId);
+		team.Leader = leader!;
 		return Mapper.MapTeamModel(team!);
 	}
 
