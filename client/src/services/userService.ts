@@ -1,3 +1,4 @@
+import { UserModel } from "../interfaces/models/UserModel";
 import api from "./api";
 
 export const getProfile = async () => {
@@ -5,6 +6,16 @@ export const getProfile = async () => {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });
   return response.data;
+};
+
+export const getUser = async (userName: string): Promise<UserModel | null> => {
+  try {
+    const response = await api.get<UserModel>(`/user/${userName}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    return null;
+  }
 };
 
 export const updateProfile = async (userData: { firstName: string; lastName: string; avatar?: string }) => {

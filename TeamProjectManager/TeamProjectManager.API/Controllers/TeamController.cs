@@ -49,7 +49,7 @@ public class TeamController : ControllerBase
 			team.Id,
 			team.Name,
 			team.Description,
-			team.LeaderId,
+			team.Leader.UserName,
 			team.Members.Select(m => new UserDto(m.FirstName, m.LastName, m.UserName, m.Avatar)).ToList(),
 			team.Projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.TeamId)).ToList()
 		);

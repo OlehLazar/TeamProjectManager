@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Validation.User;
 using TeamProjectManager.BLL.Interfaces;
@@ -25,6 +26,26 @@ public class UserController : ControllerBase
 	{
 		var user = await _userService.GetUserAsync(User.Identity!.Name!);
 		var userDto = new UserDto(user.FirstName, user.LastName, user.UserName, user.Avatar);
+		return Ok(userDto);
+	}
+
+	[HttpGet("{username}")]
+	public async Task<IActionResult> GetByUsername([Required] string username)
+	{
+		var user = await _userService.GetUserAsync(username);
+
+		if (user == null)
+		{
+			return NotFound();
+		}
+
+		var userDto = new UserDto(
+			user.FirstName,
+			user.LastName,
+			user.UserName,
+			user.Avatar
+		);
+
 		return Ok(userDto);
 	}
 
