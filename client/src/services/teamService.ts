@@ -1,3 +1,4 @@
+import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
 import api from "./api";
 
 interface CreateTeamData {
@@ -10,7 +11,7 @@ export const getTeams = async () => {
     return Array.isArray(response.data) ? response.data : [];
 };
   
-export const getTeamById = async (id: number) => {
+export const getTeamById = async (id: number): Promise<FullTeamDto> => {
     const response = await api.get(`/team/${id}`);
     return response.data;
 };
