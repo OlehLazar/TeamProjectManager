@@ -111,7 +111,6 @@ const ProfilePage = () => {
       
       {showPasswordForm && (
         <form onSubmit={handlePasswordChange} className="flex flex-col gap-4">
-          <p className="font-ptSerif text-xl font-semibold">Enter your data:</p>
           <Input type="password" placeholder="Old Password" value={passwordData.oldPassword} onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })} />
           <Input type="password" placeholder="New Password" value={passwordData.newPassword} onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })} />
           <Input type="password" placeholder="Confirm New Password" value={passwordData.confirmPassword} onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })} />
@@ -126,10 +125,10 @@ const ProfilePage = () => {
       
       {showUpdateForm && (
         <form onSubmit={handleUpdate} className="flex flex-col gap-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4">
             <Input placeholder="First Name" value={updateData.firstName} onChange={(e) => setUpdateData({ ...updateData, firstName: e.target.value})} />
-            <Button type="submit" width="w-1/4">Confirm</Button>
             <Input placeholder="Last Name" value={updateData.lastName} onChange={(e) => setUpdateData({ ...updateData, lastName: e.target.value})} />
+            <Button type="submit" width="w-1/4">Confirm</Button>
           </div>
           {updateError && <p className="text-red-500">{updateError}</p>}
         </form>

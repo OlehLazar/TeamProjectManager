@@ -1,31 +1,39 @@
-import { useState } from "react";
-import { login } from "../../services/authService";
+import { SubmitHandler, useForm } from "react-hook-form"
 import Input from "../shared/Input"
 import Button from "../shared/Button"
+import { login } from "../../services/authService";
+
+type FormFields = {
+    username: string;
+    password: string;
+}
 
 const LoginForm: React.FC = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const { register, handleSubmit, formState: { errors }, setError } = useForm<FormFields>();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-            await login({ userName: username, password: password });
+            await login({ userName: data.username, password: data.password });
             window.location.href = "/";
         } catch (error) {
             console.error("Login failed:", error);
-            setErrorMessage("Invalid credentials");
+            setError('root', {
+                type: 'invalidCredentials',
+                message: 'Invalid credentials'
+            });
         }
-    };
+    }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-            <Input name="username" placeholder="Username" width="w-1/3" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <Input name="password" placeholder="Password" type="password" width="w-1/3" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <Input {...register('username')} name="username" placeholder="Username" width="w-1/3" />
+            <Input {...register('password')} name="password" placeholder="Password" type="password" width="w-1/3" />
             <Button width="w-1/6" type="submit">Log in</Button>
-            {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+            {errors.root && errors.root.type === 'invalidCredentials' && (
+                <span role="alert" className="text-md text-red-500">
+                    {errors.root.message}
+                </span>
+            )}
         </form>
     )
 }

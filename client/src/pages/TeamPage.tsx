@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { getTeamById } from "../services/teamService";
 import { useQuery } from "@tanstack/react-query";
 import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
-import { getUser } from "../services/userService";
+import { getUser, getProfile } from "../services/userService";
 import { UserDto } from "../interfaces/dtos/UserDto";
+import Button from "../components/shared/Button";
 
 const TeamPage = () => {
   const params = useParams();
@@ -20,6 +21,11 @@ const TeamPage = () => {
     enabled: !!data,
   });
 
+  const { data: currentUser } = useQuery<UserDto>({
+    queryKey: ["currentUser"],
+    queryFn: () => getProfile(),
+  });
+
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
@@ -27,6 +33,10 @@ const TeamPage = () => {
     <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-3">
       <h1 className="font-ptSerif font-semibold text-3xl">{data!.name}</h1>
       <p className="font-openSans text-lg">{data!.description}</p>
+
+      {leader?.userName == currentUser?.userName && (
+        <Button>Add a member</Button>
+      )}
 
       {leader && (
         <div className="flex items-center gap-3 pt-3">
