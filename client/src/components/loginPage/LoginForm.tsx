@@ -8,7 +8,7 @@ type FormFields = {
     password: string;
 }
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
     const { register, handleSubmit, formState: { errors }, setError } = useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -18,7 +18,6 @@ const LoginForm: React.FC = () => {
         } catch (error) {
             console.error("Login failed:", error);
             setError('root', {
-                type: 'invalidCredentials',
                 message: 'Invalid credentials'
             });
         }
@@ -26,10 +25,10 @@ const LoginForm: React.FC = () => {
 
     return (
         <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <Input {...register('username')} name="username" placeholder="Username" width="w-1/3" />
-            <Input {...register('password')} name="password" placeholder="Password" type="password" width="w-1/3" />
+            <Input {...register('username')} placeholder="Username" width="w-1/3" />
+            <Input {...register('password')} placeholder="Password" type="password" width="w-1/3" />
             <Button width="w-1/6" type="submit">Log in</Button>
-            {errors.root && errors.root.type === 'invalidCredentials' && (
+            {errors.root && (
                 <span role="alert" className="text-md text-red-500">
                     {errors.root.message}
                 </span>

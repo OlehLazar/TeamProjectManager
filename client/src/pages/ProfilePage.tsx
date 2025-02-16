@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
 import Button from "../components/shared/Button";
 import Input from "../components/shared/Input";
-import { getProfile, deleteProfile, changePassword, updateProfile } from "../services/userService";
-import axios from "axios";
+import { getProfile, deleteProfile, changePassword } from "../services/userService";
+import UpdateProfileForm from "../components/profilePage/UpdateProfileForm";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -16,9 +16,8 @@ const ProfilePage = () => {
   const [passwordData, setPasswordData] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
   const [passwordError, setPasswordError] = useState("");
   const [showPasswordForm, setShowPasswordForm] = useState(false);
-  const [updateData, setUpdateData] = useState({ firstName: "", lastName: "" });
   const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [updateError, setUpdateError] = useState("");
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -71,30 +70,6 @@ const ProfilePage = () => {
     }
   };
   
-  const handleUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    try {
-      await updateProfile(updateData);
-      setUpdateData({ firstName: "", lastName: "" });
-      setUpdateError("");
-      setShowUpdateForm(false);
-      window.location.reload();
-    } catch (error: unknown) {
-      console.error("Update failed:", error);
-  
-      if (axios.isAxiosError(error)) {
-        const errors = error.response?.data?.errors;
-        if (errors) {
-          const errorMessages = Object.values(errors).flat().join(", ");
-          setUpdateError(errorMessages);
-          return;
-        }
-      }
-  
-      setUpdateError("An unexpected error occurred.");
-    }
-  };
   
   if (loading) return <p className="text-center">Loading profile...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -119,20 +94,8 @@ const ProfilePage = () => {
         </form>
       )}
       
-      {!showUpdateForm && (
-        <Button onClick={() => setShowUpdateForm(true)} width="w-1/4">Update profile</Button>
-      )}
-      
-      {showUpdateForm && (
-        <form onSubmit={handleUpdate} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-4">
-            <Input placeholder="First Name" value={updateData.firstName} onChange={(e) => setUpdateData({ ...updateData, firstName: e.target.value})} />
-            <Input placeholder="Last Name" value={updateData.lastName} onChange={(e) => setUpdateData({ ...updateData, lastName: e.target.value})} />
-            <Button type="submit" width="w-1/4">Confirm</Button>
-          </div>
-          {updateError && <p className="text-red-500">{updateError}</p>}
-        </form>
-      )}
+      {!showUpdateForm && (<Button onClick={() => setShowUpdateForm(true)} width="w-1/4">Update profile</Button>)}
+      {showUpdateForm && (<UpdateProfileForm />)}
 
       <Button onClick={handleLogout} width="w-1/4">Logout</Button>
       <Button onClick={handleDelete} width="w-1/4">Delete profile</Button>
