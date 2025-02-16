@@ -2,46 +2,26 @@ import Button from "../components/shared/Button"
 import Input from "../components/shared/Input"
 import TeamCard from "../components/myTeamsPage/TeamCard"
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { TeamModel } from "../interfaces/models/TeamModel";
+import { useState } from "react";
 import { getTeams } from "../services/teamService";
+import { TeamDto } from "../interfaces/dtos/TeamDto";
+import { useQuery } from "@tanstack/react-query";
 
 const MyTeamsPage = () => {
-  const [teams, setTeams] = useState<TeamModel[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<TeamModel[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const data = await getTeams();
-        setTeams(data);
-        setFilteredTeams(data);
-      } catch (err) {
-        console.error("Failed to load teams:", err);
-        setError("Failed to load teams. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTeams();
-  }, []);
+  const { data: teams = [], isLoading, error } = useQuery<TeamDto[]>({
+    queryKey: ['teams'],
+    queryFn: () => getTeams(),
+  });
 
-  useEffect(() => {
-    if (searchTerm.trim() === "") {
-      setFilteredTeams(teams);
-    } else {
-      const filtered = teams.filter((team) =>
-        team.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredTeams(filtered);
-    }
-  }, [searchTerm, teams]);
-
-
+  const filteredTeams = searchTerm.trim() === ""
+  ? teams
+  : teams.filter((team) =>
+      team.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
   const handleCreateTeam = () => {
     navigate("/teams/create");
   };
@@ -63,11 +43,12 @@ const MyTeamsPage = () => {
         <Button width="w-1/4" onClick={handleCreateTeam}>Create a team</Button>
       </div>
 
-      {loading && <p className="text-center">Loading teams...</p>}
-      
-      {error && <p className="text-center text-red-500">{error}</p>}
+      {isLoading && <p className="text-center">Loading teams...</p>}
 
-      {!loading && !error && (
+      {error && <p className="text-center text-red-500">Failed to load teams. Please try again later.</p>}
+
+
+      {!isLoading && !error && (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-4/5 mx-auto pt-5 pb-5">
           {filteredTeams.length > 0 ? (
             filteredTeams.map((team) => (
