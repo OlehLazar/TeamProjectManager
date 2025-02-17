@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { ProjectModel } from "../interfaces/models/ProjectModel";
+import { ProjectDto } from "../interfaces/dtos/ProjectDto";
 
-const ProjectPage: React.FC<{ projects: ProjectModel[] }> = ({ projects }) => {
+const ProjectPage: React.FC<{ projects: ProjectDto[] }> = ({ projects }) => {
     const { projectId } = useParams<{ projectId: string }>();
     const project = projects.find((p) => p.id === Number(projectId));
   

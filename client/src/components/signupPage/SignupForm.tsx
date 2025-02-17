@@ -1,87 +1,70 @@
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { register } from "../../services/authService";
 import axios from "axios";
+import { signup } from "../../services/authService";
 
-const SignupForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    userName: "",
-    password: "",
-    repeatPassword: "",
-  });
-  
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+type FormFields = {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  repeatPassword: string;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const SignupForm = () => {
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<FormFields>();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const newErrors: Record<string, string[]> = {};
-
-    if (formData.password !== formData.repeatPassword) {
-      newErrors.RepeatPassword = ["Passwords do not match"];
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setFieldErrors(newErrors);
-      return;
-    }
-
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    if (data.password !== data.repeatPassword) {
+      setError( 'repeatPassword', {
+          message: "Passwords need to match"
+      });
+  }
     try {
-      await register(formData);
-      window.location.href = "/login";
-    } catch (error: unknown) {
-      console.error("Signup failed:", error);
+      await signup({firstName: data.firstName, lastName: data.lastName, userName: data.userName, password: data.password});
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Update failed:", error);
+  
+        if (axios.isAxiosError(error)) {
+            const fieldMapping: { [key: string]: keyof FormFields } = {
+                FirstName: 'firstName',
+                LastName: 'lastName',
+                UserName: 'userName',
+                Password: 'password',
+            };
+
+            const serverErrors = error.response?.data?.errors;
+            Object.entries(serverErrors).forEach(([field, messages]) => {
+                const formField = fieldMapping[field];
+                const errorMessage = Array.isArray(messages) 
+                ? messages.join(" ") 
+                : (messages as string);
     
-      if (axios.isAxiosError(error)) {
-        const validationErrors = error.response?.data?.errors;
-    
-        if (validationErrors) {
-          setFieldErrors(validationErrors);
-        } else {
-          setFieldErrors({ general: [error.response?.data?.title || "An error occurred."] });
+                if (formField) {
+                setError(formField, {
+                    type: "server",
+                    message: errorMessage
+                });
+                }
+            });
         }
-      } else if (error instanceof Error) {
-        setFieldErrors({ general: [error.message] });
-      } else {
-        setFieldErrors({ general: ["An unexpected error occurred."] });
-      }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-      <Input name="firstName" placeholder="First Name" width="w-1/3" value={formData.firstName} onChange={handleChange} />
-      {fieldErrors.FirstName && fieldErrors.FirstName.map((err, i) => (
-        <p key={i} className="text-red-500 text-sm">{err}</p>
-      ))}
-
-      <Input name="lastName" placeholder="Last Name" width="w-1/3" value={formData.lastName} onChange={handleChange} />
-      {fieldErrors.LastName && fieldErrors.LastName.map((err, i) => (
-        <p key={i} className="text-red-500 text-sm">{err}</p>
-      ))}
-
-      <Input name="userName" placeholder="Username" width="w-1/3" value={formData.userName} onChange={handleChange} />
-      {fieldErrors.UserName && fieldErrors.UserName.map((err, i) => (
-        <p key={i} className="text-red-500 text-sm">{err}</p>
-      ))}
-
-      <Input name="password" type="password" placeholder="Password" width="w-1/3" value={formData.password} onChange={handleChange} />
-      {fieldErrors.Password && fieldErrors.Password.map((err, i) => (
-        <p key={i} className="text-red-500 text-sm">{err}</p>
-      ))}
-
-      <Input name="repeatPassword" type="password" placeholder="Repeat Password" width="w-1/3" value={formData.repeatPassword} onChange={handleChange} />
-      {fieldErrors.RepeatPassword && fieldErrors.RepeatPassword.map((err, i) => (
-        <p key={i} className="text-red-500 text-sm">{err}</p>
-      ))}
-
+    <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <Input {...register('firstName')} placeholder="First Name" width="w-1/3" />
+      {errors.firstName && (<span role="alert" className="text-md text-red-500">{errors.firstName.message}</span>)}
+      <Input {...register('lastName')} placeholder="Last Name" width="w-1/3" />
+      {errors.lastName && (<span role="alert" className="text-md text-red-500">{errors.lastName.message}</span>)}
+      <Input {...register('userName')} placeholder="Username" width="w-1/3" />
+      {errors.userName && (<span role="alert" className="text-md text-red-500">{errors.userName.message}</span>)}
+      <Input {...register('password')} type="password" placeholder="Password" width="w-1/3" />
+      {errors.password && (<span role="alert" className="text-md text-red-500">{errors.password.message}</span>)}
+      <Input {...register('repeatPassword')} type="password" placeholder="Repeat Password" width="w-1/3" />
+      {errors.repeatPassword && (<span role="alert" className="text-md text-red-500 mt-4">{errors.repeatPassword.message}</span>)}
       <Button width="w-1/6" type="submit">Sign up</Button>
     </form>
   );

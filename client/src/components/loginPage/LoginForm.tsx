@@ -28,11 +28,7 @@ const LoginForm = () => {
             <Input {...register('username')} placeholder="Username" width="w-1/3" />
             <Input {...register('password')} placeholder="Password" type="password" width="w-1/3" />
             <Button width="w-1/6" type="submit">Log in</Button>
-            {errors.root && (
-                <span role="alert" className="text-md text-red-500">
-                    {errors.root.message}
-                </span>
-            )}
+            {errors.root && (<span role="alert" className="text-md text-red-500">{errors.root.message}</span>)}
         </form>
     )
 }
