@@ -1,0 +1,56 @@
+import { SubmitHandler, useForm } from "react-hook-form";
+import { changePassword } from "../../services/userService"
+import Input from "../shared/Input";
+import Button from "../shared/Button";
+import axios from "axios";
+
+type FormFields = {
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+}
+
+const ChangePasswordForm = () => {
+    const { register, handleSubmit, formState: { errors }, setError } = useForm<FormFields>();
+    
+    const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        if (data.newPassword !== data.confirmPassword) {
+            setError('root', {
+                message: "New passwords do not match"
+            });
+            return;
+        }
+        try {
+            await changePassword({oldPassword: data.oldPassword, newPassword: data.newPassword});
+            window.location.reload();
+        } catch (error) {
+            console.error("Change failed:", error)
+            let message = "An unexpected error occured.";
+           
+            if (axios.isAxiosError(error)) {
+                const errors = error.response?.data?.errors;
+                if (errors) {
+                    message = Object.values(errors).flat().join(); 
+                } else {
+                    message = String(error.response?.data);
+                }   
+            }
+
+            setError('root', {
+                message: message
+            });
+        }
+    }
+
+    return (
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <Input {...register("oldPassword")} type="password" placeholder="Old Password" />
+            <Input {...register("newPassword")} type="password" placeholder="New Password" />
+            <Input {...register("confirmPassword")} type="password" placeholder="Confirm New Password" />
+            {errors.root && (<span role="alert" className="text-sm text-red-500 mt-4">{errors.root.message}</span>)}
+            <Button type="submit" width="w-1/4">Confirm</Button>
+        </form>
+    )
+}
+
+export default ChangePasswordForm

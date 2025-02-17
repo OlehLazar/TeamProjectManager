@@ -73,13 +73,18 @@ public class UserController : ControllerBase
 	[HttpPut("change-password")]
 	public async Task<IActionResult> ChangePassword(ChangePasswordDto changeDto)
 	{
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		if (user.Password != changeDto.OldPassword)
+		{
+			return BadRequest("Incorrect current password");
+		}
+
 		var validationResult = await new ChangePasswordValidator().ValidateAsync(changeDto);
 		if (!validationResult.IsValid)
 		{
 			return BadRequest(validationResult.Errors);
 		}
 
-		var user = await _userService.GetUserAsync(User.Identity!.Name!);
 		var result = await _userService.ChangePasswordAsync(user.UserName, changeDto.NewPassword);
 		if (result.Succeeded)
 		{
