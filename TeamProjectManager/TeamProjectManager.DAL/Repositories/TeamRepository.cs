@@ -33,7 +33,10 @@ public class TeamRepository(ManagerDbContext context)
 
 	public async Task<Team?> GetByIdAsync(int id)
 	{
-		return await _context.Teams.FindAsync(id);
+		return await _context.Teams
+		.Include(t => t.Members)
+		.Include(t => t.Projects)
+		.FirstOrDefaultAsync(t => t.Id == id);
 	}
 
 	public async Task AddAsync(Team entity)

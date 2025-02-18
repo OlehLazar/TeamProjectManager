@@ -73,6 +73,10 @@ public class TeamService : ITeamService
 		AppException.ThrowIfNull(team, "Team not found");
 		var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 		AppException.ThrowIfNull(user, "User not found");
+		if (team.Members == null)
+		{
+			team.Members = [];
+		}
 		team.Members.Add(user!);
 		await _teamRepository.UpdateAsync(team);
 	}

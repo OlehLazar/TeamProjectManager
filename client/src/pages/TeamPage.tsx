@@ -5,15 +5,20 @@ import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
 import { getUser, getProfile } from "../services/userService";
 import { UserDto } from "../interfaces/dtos/UserDto";
 import Button from "../components/shared/Button";
+import { useState } from "react";
+import AddMemberForm from "../components/teamPage/AddMemberForm";
 
 const TeamPage = () => {
   const params = useParams();
   const teamId = Number(params.teamId);
+
+  const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   
   const { data, isLoading, isError } = useQuery<FullTeamDto>({
     queryKey: ['team', teamId],
     queryFn: () => getTeamById(teamId),
   });
+  console.log(data);
 
   const { data: leader } = useQuery<UserDto>({
     queryKey: ['user', data?.leaderUsername],
@@ -30,13 +35,12 @@ const TeamPage = () => {
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
   return (
-    <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-3">
+    <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-8">
       <h1 className="font-ptSerif font-semibold text-3xl">{data!.name}</h1>
       <p className="font-openSans text-lg">{data!.description}</p>
 
-      {leader?.userName == currentUser?.userName && (
-        <Button>Add a member</Button>
-      )}
+      {!showAddMemberForm && leader?.userName == currentUser?.userName && (<Button onClick={() => setShowAddMemberForm(true)}>Add a member</Button>)}
+      {showAddMemberForm && (<AddMemberForm />)}
 
       {leader && (
         <div className="flex items-center gap-3 pt-3">

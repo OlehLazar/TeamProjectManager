@@ -16,7 +16,7 @@ public class Team
 
 	public User Leader { get; set; }
 
-	public ICollection<User>? Members { get; init; }
+	public ICollection<User>? Members { get; set; }
 
-	public ICollection<Project>? Projects { get; init; }
+	public ICollection<Project>? Projects { get; set; }
 }
