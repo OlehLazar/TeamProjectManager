@@ -7,18 +7,20 @@ import { UserDto } from "../interfaces/dtos/UserDto";
 import Button from "../components/shared/Button";
 import { useState } from "react";
 import AddMemberForm from "../components/teamPage/AddMemberForm";
+import { deleteTeam } from "../services/teamService";
+import axios from "axios";
 
 const TeamPage = () => {
   const params = useParams();
   const teamId = Number(params.teamId);
 
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
-  
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
   const { data, isLoading, isError } = useQuery<FullTeamDto>({
     queryKey: ['team', teamId],
     queryFn: () => getTeamById(teamId),
   });
-  console.log(data);
 
   const { data: leader } = useQuery<UserDto>({
     queryKey: ['user', data?.leaderUsername],
@@ -31,16 +33,34 @@ const TeamPage = () => {
     queryFn: () => getProfile(),
   });
 
+  const handleDelete = async () => {
+    try {
+      await deleteTeam(teamId);
+      window.location.href = "/teams";
+    } catch (error) {
+      console.error("Deletition failed:", error);
+      if (axios.isAxiosError(error)) {
+        const errors = error.response?.data?.errors;
+        setDeleteError(errors);
+      }
+    }
+  }
+
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
   return (
-    <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-8">
+    <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-5">
       <h1 className="font-ptSerif font-semibold text-3xl">{data!.name}</h1>
       <p className="font-openSans text-lg">{data!.description}</p>
 
-      {!showAddMemberForm && leader?.userName == currentUser?.userName && (<Button onClick={() => setShowAddMemberForm(true)}>Add a member</Button>)}
+      {!showAddMemberForm && leader?.userName === currentUser?.userName && (<Button onClick={() => setShowAddMemberForm(true)}>Add a member</Button>)}
       {showAddMemberForm && (<AddMemberForm />)}
+
+      {leader?.userName === currentUser?.userName && (<Button onClick={handleDelete} >Delete the team</Button>)}
+      {deleteError && (<div className="text-red-500 mb-4">{deleteError}</div>)}
+
+      
 
       {leader && (
         <div className="flex items-center gap-3 pt-3">
@@ -50,7 +70,7 @@ const TeamPage = () => {
           <p className="text-sm text-gray-500">@{leader.userName}</p>
         </div>
       )}
-
+      
       <h2 className="text-center font-bold font-ptSerif text-xl">Projects</h2>
       <ul className="flex flex-col gap-5 pt-5 pb-5">
         {data!.projects.map((project) => (

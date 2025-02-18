@@ -1,6 +1,6 @@
-import { TeamModel } from "../models/TeamModel";
+import { TeamDto } from "../dtos/TeamDto";
 
 export interface TeamCardProps {
-    team: TeamModel,
+    team: TeamDto,
     onClick: () => void,
 }

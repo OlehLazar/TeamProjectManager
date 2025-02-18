@@ -10,7 +10,7 @@ export const getTeams = async () => {
     const response = await api.get('/team');
     return Array.isArray(response.data) ? response.data : [];
 };
-  
+
 export const getTeamById = async (id: number): Promise<FullTeamDto> => {
     const response = await api.get(`/team/${id}`);
     return response.data;
