@@ -117,7 +117,7 @@ builder.Services.AddFluentValidationAutoValidation()
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-	options.SuppressModelStateInvalidFilter = false; // Must be false to allow FluentValidation to return errors
+	options.SuppressModelStateInvalidFilter = false;
 });
 
 var app = builder.Build();

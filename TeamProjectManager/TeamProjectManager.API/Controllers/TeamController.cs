@@ -99,7 +99,7 @@ public class TeamController : ControllerBase
 		return Unauthorized("You are not the leader of this team");
 	}
 
-	[HttpPost("{id}/leave")]
+	[HttpPost("{teamId}/leave")]
 	public async Task<IActionResult> LeaveTeam(int teamId)
 	{
 		var team = await _teamService.GetTeamByIdAsync(teamId);
@@ -111,7 +111,7 @@ public class TeamController : ControllerBase
 		var user = await _userService.GetUserAsync(User.Identity!.Name!);
 		if (team.LeaderId == user.Id)
 		{
-			return BadRequest("The leader can't leave the team");
+			return BadRequest("Leader can't leave the team");
 		}
 
 		await _teamService.RemoveMemberAsync(teamId, user.Id);

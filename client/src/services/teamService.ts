@@ -27,7 +27,7 @@ export const deleteTeam = async (id: number) => {
 };
 
 export const leaveTeam = async (teamId: number) => {
-    const response = await api.post(`/team/${teamId}/leave`);
+    const response = await api.post(`/team/${teamId}/leave`, teamId);
     return response.data;
 };
 

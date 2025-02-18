@@ -1,5 +1,5 @@
-import { TeamModel } from "../models/TeamModel";
+import { TeamDto } from "../dtos/TeamDto";
 
 export interface MyTeamsPageProps {
-    teams: TeamModel[];
+    teams: TeamDto[];
 }
