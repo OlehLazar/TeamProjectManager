@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import NotificationsPage from "./pages/NotificationsPage";
 import CreateTeamPage from "./pages/CreateTeamPage";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import CreateProjectPage from "./pages/CreateProjectPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/teams" element={<MyTeamsPage />} />
           <Route path="/teams/:teamId" element={<TeamPage />} />
+          <Route path="/teams/:teamId/create" element={<CreateProjectPage />} />
           <Route path="/teams/create" element={<CreateTeamPage />} />
           <Route path="/projects" element={<MyProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectPage />} />

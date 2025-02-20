@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getTeamById, leaveTeam } from "../services/teamService";
 import { useQuery } from "@tanstack/react-query";
 import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
@@ -13,6 +13,7 @@ import axios from "axios";
 const TeamPage = () => {
   const params = useParams();
   const teamId = Number(params.teamId);
+  const navigate = useNavigate();
 
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
@@ -60,6 +61,10 @@ const TeamPage = () => {
     }
   }
 
+  const handleCreateProject = () => {
+    navigate(`/teams/${teamId}/create`);
+  }
+
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
@@ -86,6 +91,8 @@ const TeamPage = () => {
       <div className="w-1/2"><Button width="w-1/4" onClick={handleLeave}>Leave</Button></div>
       {leaveError && (<div className="text-red-500 mb-4">{leaveError}</div>)}
       
+      <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
+
       <h2 className="text-center font-bold font-ptSerif text-xl">Projects</h2>
       <ul className="flex flex-col gap-5 pt-5 pb-5">
         {data!.projects.map((project) => (

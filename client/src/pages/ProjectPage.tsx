@@ -1,18 +1,6 @@
-import { useParams } from "react-router-dom";
-import { ProjectDto } from "../interfaces/dtos/ProjectDto";
 
-const ProjectPage: React.FC<{ projects: ProjectDto[] }> = ({ projects }) => {
-    const { projectId } = useParams<{ projectId: string }>();
-    const project = projects.find((p) => p.id === Number(projectId));
-  
-    if (!project) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen">
-                <h1 className="text-3xl font-semibold">Project Not Found</h1>
-                <p className="text-gray-600 mt-3">The project you are looking for does not exist.</p>
-            </div>
-        );
-    }
+
+const ProjectPage = () => {
   
     return (
         <div className="p-5">
