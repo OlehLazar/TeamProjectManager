@@ -36,6 +36,7 @@ public class TeamRepository(ManagerDbContext context)
 		return await _context.Teams
 		.Include(t => t.Members)
 		.Include(t => t.Projects)
+		.AsSplitQuery()
 		.FirstOrDefaultAsync(t => t.Id == id);
 	}
 

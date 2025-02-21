@@ -118,8 +118,7 @@ public static class Mapper
 			Name = project.Name,
 			Description = project.Description,
 			TeamId = project.TeamId,
-			Team = MapTeamModel(project.Team),
-			Boards = project.Boards.Select(MapBoardModel).ToList(),
+			Boards = project.Boards?.Select(MapBoardModel).ToList() ?? [],
 		};
 	}
 
@@ -133,8 +132,7 @@ public static class Mapper
 			Name = projectModel.Name,
 			Description = projectModel.Description,
 			TeamId = projectModel.TeamId,
-			Team = MapTeam(projectModel.Team),
-			Boards = projectModel.Boards.Select(MapBoard).ToList(),
+			Boards = projectModel.Boards.Select(MapBoard).ToList() ?? [],
 		};
 	}
 

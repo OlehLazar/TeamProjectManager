@@ -25,5 +25,5 @@ public class BoardModel : AbstractModel<int>
 
     public ProjectModel Project { get; set; } = default!;
 
-	public ICollection<TaskModel>? Tasks { get; init; }
+    public ICollection<TaskModel> Tasks { get; set; } = [];
 }

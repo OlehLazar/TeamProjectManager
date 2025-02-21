@@ -18,9 +18,9 @@ public class ProjectModel : AbstractModel<int>
 
 	public required string Description { get; set; } = default!;
 
-	public required int TeamId { get; set; }
+	public int TeamId { get; set; }
 
-    public TeamModel Team { get; set; }
+    public TeamModel? Team { get; set; }
 
-    public ICollection<BoardModel>? Boards { get; set; }
+    public ICollection<BoardModel> Boards { get; set; } = [];
 }

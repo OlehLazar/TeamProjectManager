@@ -14,7 +14,7 @@ public class Project
 
 	public int TeamId { get; set; }
 
-	public Team Team { get; set; } = default!;
+	public Team? Team { get; set; }
 
-	public ICollection<Board>? Boards { get; init; }
+	public ICollection<Board>? Boards { get; set; }
 }

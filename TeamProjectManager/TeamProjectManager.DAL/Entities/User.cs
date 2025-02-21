@@ -12,9 +12,9 @@ public class User : IdentityUser
 
 	public ICollection<Notification>? Notifications { get; set; }
 
-	public ICollection<Task>? CreatedTasks { get; init; }
+	public ICollection<Task>? CreatedTasks { get; set; }
 
-	public ICollection<Task>? AssignedTasks { get; init; }
+	public ICollection<Task>? AssignedTasks { get; set; }
 
-	public ICollection<Team>? Teams { get; init; }
+	public ICollection<Team>? Teams { get; set; }
 }
