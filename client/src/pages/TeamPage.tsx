@@ -9,6 +9,7 @@ import { useState } from "react";
 import AddMemberForm from "../components/teamPage/AddMemberForm";
 import { deleteTeam } from "../services/teamService";
 import axios from "axios";
+import ProjectCard from "../components/shared/ProjectCard";
 
 const TeamPage = () => {
   const params = useParams();
@@ -65,6 +66,10 @@ const TeamPage = () => {
     navigate(`/teams/${teamId}/create`);
   }
 
+  const handleProjectClick = (projectId: number) => {
+    navigate(`/projects/${projectId}`);
+  }
+
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
@@ -97,10 +102,7 @@ const TeamPage = () => {
       <ul className="flex flex-col gap-5 pt-5 pb-5">
         {data!.projects.map((project) => (
           <li key={project.id}>
-            <div className="p-3 border border-gray-300 rounded-lg shadow-black shadow-sm flex flex-col w-full md:w-1/2 lg:w-1/3">
-              <h3 className="font-semibold text-xl font-ptSerif">{project.name}</h3>
-              <p>{project.description}</p>
-            </div>
+            <ProjectCard project={project} onClick={() => handleProjectClick(project.id)} />
           </li>
         ))}
       </ul>
