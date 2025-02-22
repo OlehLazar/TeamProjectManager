@@ -1,16 +1,34 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { FullProjectDto } from "../interfaces/dtos/FullProjectDto";
+import { getProjectById } from "../services/projectService";
+import { BoardDto } from "../interfaces/dtos/BoardDto";
+import Button from "../components/shared/Button";
 
 
 const ProjectPage = () => {
-  
+    const params = useParams();
+    const projectId = Number(params.projectId);
+
+    const { data, isLoading, isError } = useQuery<FullProjectDto>({
+        queryKey: ['project', projectId],
+        queryFn: () => getProjectById(projectId),
+    });
+
+    if (isLoading) return <div className="flex text-center">Loading...</div>;
+    if (isError) return <div className="flex text-center">Error fetching project data</div>;
+
     return (
-        <div className="p-5">
-            <h1 className="font-ptSerif font-semibold text-3xl mb-3">{project.name}</h1>
-            <p className="text-gray-700 text-lg mb-5">{project.description}</p>
-    
+        <div className="flex flex-col p-5 gap-5">
+            <h1 className="font-ptSerif font-semibold text-3xl mb-3">{data!.name}</h1>
+            <p className="text-gray-700 text-lg mb-5">{data!.description}</p>
+
+            <div><Button width="w-1/6">Create a new board</Button></div>
+
             <h2 className="font-semibold text-2xl mb-3">Boards</h2>
-            {project.boards && project.boards.length > 0 ? (
+            {data!.boards && data!.boards.length > 0 ? (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {project.boards?.map((board) => (
+                    {data!.boards?.map((board: BoardDto) => (
                         <li
                             key={board.id}
                             className="p-4 border border-gray-300 rounded-lg shadow hover:shadow-md transition-shadow"
@@ -21,7 +39,7 @@ const ProjectPage = () => {
                 </ul>
             ) : (
                 <p className="text-gray-600">
-                    {project.boards === null ? "Boards information is unavailable." : "No boards available for this project."}
+                    {data!.boards === null ? "Boards information is unavailable." : "No boards available for this project."}
                 </p>
             )}
         </div>
