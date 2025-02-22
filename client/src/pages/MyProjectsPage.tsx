@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
 import { ProjectDto } from "../interfaces/dtos/ProjectDto"
 import { getProjects } from "../services/projectService";
+import ProjectCard from "../components/shared/ProjectCard";
 
 const MyProjectsPage = () => {
     const { data: projects = [], isLoading, error } = useQuery<ProjectDto[]>({
@@ -21,16 +21,9 @@ const MyProjectsPage = () => {
             {!isLoading && !error && projects.length > 0 && (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {projects.map((project) => (
-                        <Link to={`/projects/${project.id}`} className="block" key={project.id}>
-                            <li key={project.id}>
-                                <div className="p-4 border border-gray-300 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                                    <h2 className="font-ptSerif font-semibold text-xl mb-2">
-                                        {project.name}
-                                    </h2>
-                                    <p className="text-gray-600">{project.description}</p>
-                                </div>
-                            </li>
-                        </Link>
+                        <li key={project.id}>
+                            <ProjectCard project={project} />
+                        </li>
                     ))}
                 </ul>
             )}

@@ -66,10 +66,6 @@ const TeamPage = () => {
     navigate(`/teams/${teamId}/create`);
   }
 
-  const handleProjectClick = (projectId: number) => {
-    navigate(`/projects/${projectId}`);
-  }
-
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
@@ -99,10 +95,10 @@ const TeamPage = () => {
       <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
 
       <h2 className="text-center font-bold font-ptSerif text-xl">Projects</h2>
-      <ul className="flex flex-col gap-5 pt-5 pb-5">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {data!.projects.map((project) => (
           <li key={project.id}>
-            <ProjectCard project={project} onClick={() => handleProjectClick(project.id)} />
+            <ProjectCard project={project} />
           </li>
         ))}
       </ul>
