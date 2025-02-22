@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import Button from "../shared/Button";
-import Input from "../shared/Input";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 import { updateProfile } from "../../services/userService";
 import axios from "axios";
 

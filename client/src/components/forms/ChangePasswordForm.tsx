@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { changePassword } from "../../services/userService"
-import Input from "../shared/Input";
-import Button from "../shared/Button";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 import axios from "axios";
 
 type FormFields = {

@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
 import { getUser, getProfile } from "../services/userService";
 import { UserDto } from "../interfaces/dtos/UserDto";
-import Button from "../components/shared/Button";
+import Button from "../components/ui/Button";
 import { useState } from "react";
-import AddMemberForm from "../components/teamPage/AddMemberForm";
+import AddMemberForm from "../components/forms/AddMemberForm";
 import { deleteTeam } from "../services/teamService";
 import axios from "axios";
-import ProjectCard from "../components/shared/ProjectCard";
+import ProjectCard from "../components/cards/ProjectCard";
 
 const TeamPage = () => {
   const params = useParams();

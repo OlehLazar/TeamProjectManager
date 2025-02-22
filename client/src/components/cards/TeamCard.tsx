@@ -1,5 +1,5 @@
 import { TeamCardProps } from "../../interfaces/props/TeamCardProps"
-import Button from "../shared/Button"
+import Button from "../ui/Button"
 
 const TeamCard: React.FC<TeamCardProps> = ({ team, onClick }) => {
   return (

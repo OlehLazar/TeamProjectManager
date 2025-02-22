@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FullProjectDto } from "../interfaces/dtos/FullProjectDto";
 import { getProjectById } from "../services/projectService";
 import { BoardDto } from "../interfaces/dtos/BoardDto";
-import Button from "../components/shared/Button";
+import Button from "../components/ui/Button";
 
 
 const ProjectPage = () => {

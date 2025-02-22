@@ -1,4 +1,4 @@
-import Paragraph from "../shared/Paragraph";
+import Paragraph from "../ui/Paragraph";
 import { aboutContent } from "../../constants/aboutContent";
 
 const AboutUs = () => {

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { ProjectDto } from "../interfaces/dtos/ProjectDto"
 import { getProjects } from "../services/projectService";
-import ProjectCard from "../components/shared/ProjectCard";
+import ProjectCard from "../components/cards/ProjectCard";
 
 const MyProjectsPage = () => {
     const { data: projects = [], isLoading, error } = useQuery<ProjectDto[]>({

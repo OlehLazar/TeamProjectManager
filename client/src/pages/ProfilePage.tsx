@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
-import Button from "../components/shared/Button";
+import Button from "../components/ui/Button";
 import { getProfile, deleteProfile } from "../services/userService";
-import ChangePasswordForm from "../components/profilePage/ChangePasswordForm";
-import UpdateProfileForm from "../components/profilePage/UpdateProfileForm";
+import ChangePasswordForm from "../components/forms/ChangePasswordForm";
+import UpdateProfileForm from "../components/forms/UpdateProfileForm";
 
 const ProfilePage = () => {
   const navigate = useNavigate();

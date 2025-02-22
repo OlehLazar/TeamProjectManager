@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import Button from "../components/shared/Button";
-import Input from "../components/shared/Input";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
 import { createProject } from "../services/projectService";
 import axios from "axios";
 

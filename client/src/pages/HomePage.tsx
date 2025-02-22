@@ -1,5 +1,5 @@
-import AboutUs from "../components/homePage/AboutUs"
-import StartNow from "../components/homePage/StartNow"
+import AboutUs from "../components/sections/AboutUs"
+import StartNow from "../components/sections/StartNow"
 
 const HomePage = () => {
   return (
