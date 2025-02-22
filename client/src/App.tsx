@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DefaultLayout from "./components/layout/DefaultLayout";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import MyTeamsPage from "./pages/MyTeamsPage";
-import MyProjectsPage from "./pages/MyProjectsPage";
-import TeamPage from "./pages/TeamPage";
-import ProjectPage from "./pages/ProjectPage";
-import ProfilePage from "./pages/ProfilePage";
-import NotificationsPage from "./pages/NotificationsPage";
-import CreateTeamPage from "./pages/CreateTeamPage";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/auth/LoginPage";
+import SignupPage from "./pages/auth/SignupPage";
+import MyTeamsPage from "./pages/teams/MyTeamsPage";
+import MyProjectsPage from "./pages/projects/MyProjectsPage";
+import TeamPage from "./pages/teams/TeamPage";
+import ProjectPage from "./pages/projects/ProjectPage";
+import ProfilePage from "./pages/profile/ProfilePage";
+import NotificationsPage from "./pages/notifications/NotificationsPage";
+import CreateTeamPage from "./pages/teams/CreateTeamPage";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import CreateProjectPage from "./pages/CreateProjectPage";
+import CreateProjectPage from "./pages/projects/CreateProjectPage";
 
 const queryClient = new QueryClient();
 
