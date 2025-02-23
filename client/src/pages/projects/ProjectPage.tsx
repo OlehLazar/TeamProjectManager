@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { FullProjectDto } from "../interfaces/dtos/FullProjectDto";
-import { getProjectById } from "../services/projectService";
-import { BoardDto } from "../interfaces/dtos/BoardDto";
-import Button from "../components/ui/Button";
+import { FullProjectDto } from "../../interfaces/dtos/FullProjectDto";
+import { getProjectById } from "../../services/projectService";
+import { BoardDto } from "../../interfaces/dtos/BoardDto";
+import Button from "../../components/ui/Button";
 
 
 const ProjectPage = () => {

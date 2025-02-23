@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import Button from "../components/ui/Button";
-import Input from "../components/ui/Input";
-import { createProject } from "../services/projectService";
+import Button from "../../components/ui/Button";
+import Input from "../../components/ui/Input";
+import { createProject } from "../../services/projectService";
 import axios from "axios";
 
 type FormFields = {

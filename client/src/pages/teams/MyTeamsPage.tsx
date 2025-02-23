@@ -1,10 +1,10 @@
-import Button from "../components/ui/Button"
-import Input from "../components/ui/Input"
-import TeamCard from "../components/cards/TeamCard"
+import Button from "../../components/ui/Button";
+import Input from "../../components/ui/Input";
+import TeamCard from "../../components/cards/TeamCard";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getTeams } from "../services/teamService";
-import { TeamDto } from "../interfaces/dtos/TeamDto";
+import { getTeams } from "../../services/teamService";
+import { TeamDto } from "../../interfaces/dtos/TeamDto";
 import { useQuery } from "@tanstack/react-query";
 
 const MyTeamsPage = () => {

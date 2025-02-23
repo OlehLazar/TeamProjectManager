@@ -46,8 +46,8 @@ const ChangePasswordForm = () => {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <Input {...register("oldPassword")} type="password" placeholder="Old Password" />
             <Input {...register("newPassword")} type="password" placeholder="New Password" />
-            <Input {...register("confirmPassword")} type="password" placeholder="Confirm New Password" />
             {errors.root && (<span role="alert" className="text-sm text-red-500 mt-4">{errors.root.message}</span>)}
+            <Input {...register("confirmPassword")} type="password" placeholder="Confirm New Password" />
             <Button type="submit" width="w-1/4">Confirm</Button>
         </form>
     )
