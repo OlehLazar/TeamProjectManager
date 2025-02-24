@@ -16,7 +16,7 @@ public class Board
 
 	public int ProjectId { get; set; }
 
-	public Project Project { get; set; }
+	public Project? Project { get; set; }
 
 	public ICollection<Task>? Tasks { get; init; }
 }
