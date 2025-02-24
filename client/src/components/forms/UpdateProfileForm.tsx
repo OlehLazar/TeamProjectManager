@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { updateProfile } from "../../services/userService";
 import axios from "axios";
+import ErrorMessage from "../ui/ErrorMessage";
 
 type FormFields = {
   firstName: string;
@@ -46,10 +47,10 @@ const UpdateProfileForm = () => {
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <Input {...register("firstName")} placeholder="First Name" />
-            {errors.firstName && (<span role="alert" className="text-md text-red-500">{errors.firstName.message}</span>)}
+            {errors.firstName && <ErrorMessage message={errors.firstName.message!} />}
 
             <Input {...register("lastName")} placeholder="Last Name" />
-            {errors.lastName && (<span role="alert" className="text-md text-red-500">{errors.lastName.message}</span>)}
+            {errors.lastName && <ErrorMessage message={errors.lastName.message!} />}
 
             <Button type="submit" width="w-1/4">Confirm</Button>
         </form>

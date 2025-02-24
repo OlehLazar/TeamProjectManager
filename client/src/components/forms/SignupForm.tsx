@@ -3,6 +3,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import axios from "axios";
 import { signup } from "../../services/authService";
+import ErrorMessage from "../ui/ErrorMessage";
 
 type FormFields = {
   firstName: string;
@@ -56,15 +57,20 @@ const SignupForm = () => {
   return (
     <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
       <Input {...register('firstName')} placeholder="First Name" width="w-1/3" />
-      {errors.firstName && (<span role="alert" className="text-md text-red-500">{errors.firstName.message}</span>)}
+      {errors.firstName && <ErrorMessage message={errors.firstName.message!}/>}
+      
       <Input {...register('lastName')} placeholder="Last Name" width="w-1/3" />
-      {errors.lastName && (<span role="alert" className="text-md text-red-500">{errors.lastName.message}</span>)}
+      {errors.lastName && <ErrorMessage message={errors.lastName.message!} />}
+
       <Input {...register('userName')} placeholder="Username" width="w-1/3" />
-      {errors.userName && (<span role="alert" className="text-md text-red-500">{errors.userName.message}</span>)}
+      {errors.userName && <ErrorMessage message={errors.userName.message!} />}
+
       <Input {...register('password')} type="password" placeholder="Password" width="w-1/3" />
-      {errors.password && (<span role="alert" className="text-md text-red-500">{errors.password.message}</span>)}
+      {errors.password && <ErrorMessage message={errors.password.message!} />}
+
       <Input {...register('repeatPassword')} type="password" placeholder="Repeat Password" width="w-1/3" />
-      {errors.repeatPassword && (<span role="alert" className="text-md text-red-500 mt-4">{errors.repeatPassword.message}</span>)}
+      {errors.repeatPassword && <ErrorMessage message={errors.repeatPassword.message!} />}
+      
       <Button width="w-1/6" type="submit">Sign up</Button>
     </form>
   );

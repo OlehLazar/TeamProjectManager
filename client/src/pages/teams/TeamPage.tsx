@@ -10,6 +10,7 @@ import AddMemberForm from "../../components/forms/AddMemberForm";
 import { deleteTeam } from "../../services/teamService";
 import axios from "axios";
 import ProjectCard from "../../components/cards/ProjectCard";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const TeamPage = () => {
   const params = useParams();
@@ -87,10 +88,10 @@ const TeamPage = () => {
       {showAddMemberForm && (<AddMemberForm />)}
 
       {leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={handleDelete} >Delete the team</Button></div>)}
-      {deleteError && (<div className="text-red-500 mb-4">{deleteError}</div>)}
+      {deleteError && <ErrorMessage message={deleteError} />}
 
       <div className="w-1/2"><Button width="w-1/4" onClick={handleLeave}>Leave</Button></div>
-      {leaveError && (<div className="text-red-500 mb-4">{leaveError}</div>)}
+      {leaveError && <ErrorMessage message={leaveError} />}
       
       <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
 

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { getTeams } from "../../services/teamService";
 import { TeamDto } from "../../interfaces/dtos/TeamDto";
 import { useQuery } from "@tanstack/react-query";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const MyTeamsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,7 +44,7 @@ const MyTeamsPage = () => {
       </div>
 
       {isLoading && <p className="text-center">Loading teams...</p>}
-      {error && <p className="text-center text-red-500">Failed to load teams. Please try again later.</p>}
+      {error && <ErrorMessage message="Failed to load teams. Please try again later." />}
 
       {!isLoading && !error && (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-4/5 mx-auto pt-5 pb-5">

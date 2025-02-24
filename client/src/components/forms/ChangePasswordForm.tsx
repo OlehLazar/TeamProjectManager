@@ -3,6 +3,7 @@ import { changePassword } from "../../services/userService"
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import axios from "axios";
+import ErrorMessage from "../ui/ErrorMessage";
 
 type FormFields = {
     oldPassword: string;
@@ -46,7 +47,7 @@ const ChangePasswordForm = () => {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <Input {...register("oldPassword")} type="password" placeholder="Old Password" />
             <Input {...register("newPassword")} type="password" placeholder="New Password" />
-            {errors.root && (<span role="alert" className="text-sm text-red-500 mt-4">{errors.root.message}</span>)}
+            {errors.root && <ErrorMessage message={errors.root.message!} />}
             <Input {...register("confirmPassword")} type="password" placeholder="Confirm New Password" />
             <Button type="submit" width="w-1/4">Confirm</Button>
         </form>

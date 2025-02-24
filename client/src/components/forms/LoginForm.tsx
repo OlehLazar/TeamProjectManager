@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import Input from "../ui/Input"
 import Button from "../ui/Button"
 import { login } from "../../services/authService";
+import ErrorMessage from "../ui/ErrorMessage";
 
 type FormFields = {
     username: string;
@@ -27,7 +28,7 @@ const LoginForm = () => {
         <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
             <Input {...register('username')} placeholder="Username" width="w-1/3" />
             <Input {...register('password')} placeholder="Password" type="password" width="w-1/3" />
-            {errors.root && (<span role="alert" className="text-md text-red-500">{errors.root.message}</span>)}
+            {errors.root && <ErrorMessage message={errors.root.message!} />}
             <Button width="w-1/6" type="submit">Log in</Button>
         </form>
     )

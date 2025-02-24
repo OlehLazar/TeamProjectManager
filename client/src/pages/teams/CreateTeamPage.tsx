@@ -3,6 +3,7 @@ import { createTeam } from "../../services/teamService";
 import axios from "axios";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const CreateTeamPage = () => {
     const [name, setName] = useState("");
@@ -38,7 +39,7 @@ const CreateTeamPage = () => {
                 value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
             <Button width="w-1/5" onClick={handleCreate} >Create</Button>
-            {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+            {errorMessage && <ErrorMessage message={errorMessage} />}
         </div>
     )
 }
