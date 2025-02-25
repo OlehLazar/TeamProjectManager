@@ -26,6 +26,7 @@ const LoginForm = () => {
 
     return (
         <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <h1 className="text-2xl font-bold text font-ptSerif">Enter your data:</h1>
             <Input {...register('username')} placeholder="Username" width="w-1/3" />
             <Input {...register('password')} placeholder="Password" type="password" width="w-1/3" />
             {errors.root && <ErrorMessage message={errors.root.message!} />}

@@ -3,4 +3,6 @@ export interface ButtonProps {
     onClick?: () => void;
     children: string;
     width?: string;
+    textColor?: string;
+    bgColor?: string;
 }
