@@ -56,6 +56,8 @@ const SignupForm = () => {
 
   return (
     <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="text-2xl font-bold text font-ptSerif">Enter your data:</h1>
+      
       <Input {...register('firstName')} placeholder="First Name" width="w-1/3" />
       {errors.firstName && <ErrorMessage message={errors.firstName.message!}/>}
       
