@@ -20,7 +20,5 @@ public class ProjectModel : AbstractModel<int>
 
 	public int TeamId { get; set; }
 
-    public TeamModel? Team { get; set; }
-
     public ICollection<BoardModel> Boards { get; set; } = [];
 }

@@ -24,6 +24,4 @@ public class NotificationModel : AbstractModel<int>
 	public bool IsRead { get; set; } = default;
 
 	public required string UserId { get; set; }
-
-	public UserModel User { get; set; }
 }

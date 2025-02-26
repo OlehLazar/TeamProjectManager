@@ -81,7 +81,6 @@ public static class Mapper
 			CreatorId = task.CreatorId,
 			AssigneeId = task.AssigneeId,
 			Status = task.Status,
-			Board = MapBoardModel(task.Board),
 			Creator = MapUserModel(task.Creator),
 			Assignee = MapUserModel(task.Assignee),
 		};
@@ -102,7 +101,6 @@ public static class Mapper
 			CreatorId = taskModel.CreatorId.ToString(),
 			AssigneeId = taskModel.AssigneeId.ToString(),
 			Status = taskModel.Status,
-			Board = MapBoard(taskModel.Board),
 			Creator = MapUser(taskModel.Creator),
 			Assignee = MapUser(taskModel.Assignee),
 		};
@@ -148,7 +146,6 @@ public static class Mapper
 			CreatedAt = notification.CreatedAt,
 			IsRead = notification.IsRead,
 			UserId = notification.UserId,
-			User = MapUserModel(notification.User),
 		};
 	}
 
@@ -164,7 +161,6 @@ public static class Mapper
 			CreatedAt = notificationModel.CreatedAt,
 			IsRead = notificationModel.IsRead,
 			UserId = notificationModel.UserId.ToString(),
-			User = MapUser(notificationModel.User),
 		};
 	}
 
@@ -178,7 +174,6 @@ public static class Mapper
 			Name = board.Name,
 			Description = board.Description,
 			ProjectId = board.ProjectId,
-			Project = MapProjectModel(board.Project),
 			Tasks = board.Tasks.Select(MapTaskModel).ToList(),
 		};
 	}
@@ -193,7 +188,6 @@ public static class Mapper
 			Name = boardModel.Name,
 			Description = boardModel.Description,
 			ProjectId = boardModel.ProjectId,
-			Project = MapProject(boardModel.Project),
 			Tasks = boardModel.Tasks.Select(MapTask).ToList(),
 		};
 	}

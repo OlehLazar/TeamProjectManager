@@ -35,8 +35,6 @@ public class TaskModel : AbstractModel<int>
 
 	public bool Status { get; set; } = default;
 
-	public BoardModel Board { get; set; }
-
 	public UserModel Creator { get; set; }
 
 	public UserModel Assignee { get; set; }
