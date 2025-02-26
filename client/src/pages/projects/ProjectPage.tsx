@@ -4,11 +4,15 @@ import { FullProjectDto } from "../../interfaces/dtos/FullProjectDto";
 import { getProjectById } from "../../services/projectService";
 import { BoardDto } from "../../interfaces/dtos/BoardDto";
 import Button from "../../components/ui/Button";
+import { useState } from "react";
+import CreateBoardForm from "../../components/forms/CreateBoardForm";
 
 
 const ProjectPage = () => {
     const params = useParams();
     const projectId = Number(params.projectId);
+
+    const [showCreateBoardForm, setShowCreateBoardForm] = useState(false);
 
     const { data, isLoading, isError } = useQuery<FullProjectDto>({
         queryKey: ['project', projectId],
@@ -23,7 +27,8 @@ const ProjectPage = () => {
             <h1 className="font-ptSerif font-semibold text-3xl mb-3">{data!.name}</h1>
             <p className="text-gray-700 text-lg mb-5">{data!.description}</p>
 
-            <div><Button width="w-1/6">Create a new board</Button></div>
+            {!showCreateBoardForm && <div><Button width="w-1/6" onClick={() => setShowCreateBoardForm(true)}>Create a new board</Button></div>}
+            {showCreateBoardForm && <CreateBoardForm projectId={projectId} />}
 
             <h2 className="font-semibold text-2xl mb-3">Boards</h2>
             {data!.boards && data!.boards.length > 0 ? (
