@@ -5,7 +5,7 @@ export interface TaskDto {
     startDate: Date;
     endDate: Date;
     boardId: number;
-    creatorId: string;
-    assigneeId: string;
+    creatorUsername: string;
+    assigneeUsername: string;
     status: boolean;
 }

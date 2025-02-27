@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TeamProjectManager.API.DTOs.Board;
-using TeamProjectManager.API.DTOs.Project;
 using TeamProjectManager.API.DTOs.Task;
 using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
-using TeamProjectManager.BLL.Services;
-using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 
@@ -16,14 +12,12 @@ namespace TeamProjectManager.API.Controllers;
 [Route("api/[controller]")]
 public class TaskController : ControllerBase
 {
-	private IUserService _userService;
-	private IBoardService _boardService;
-	private ITaskService _taskService;
+	private readonly IUserService _userService;
+	private readonly ITaskService _taskService;
 
-    public TaskController(IUserService userService, IBoardService boardService, ITaskService taskService)
+    public TaskController(IUserService userService, ITaskService taskService)
     {
         _userService = userService;
-		_boardService = boardService;
         _taskService = taskService;
     }
 
@@ -33,9 +27,17 @@ public class TaskController : ControllerBase
 		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var tasks = await _taskService.GetTasksByUserIdAsync(userId);
 
-		var taskDtos = tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description,
-			t.StartDate, t.EndDate, t.BoardId,
-			t.CreatorId, t.AssigneeId, t.Status));
+		var taskDtos = tasks.Select(t => new TaskDto(
+			t.Id, 
+			t.Name, 
+			t.Description,
+			t.StartDate, 
+			t.EndDate, 
+			t.BoardId,
+			t.Creator.UserName, 
+			t.Assignee.UserName, 
+			t.Status
+		));
 
 		return Ok(taskDtos);
 	}
@@ -49,9 +51,17 @@ public class TaskController : ControllerBase
 			return NotFound("Task not found");
 		}
 
-		var taskDto = new TaskDto(task.Id, task.Name, task.Description,
-			task.StartDate, task.EndDate, task.BoardId,
-			task.CreatorId, task.AssigneeId, task.Status);
+		var taskDto = new TaskDto(
+			task.Id, 
+			task.Name, 
+			task.Description,
+			task.StartDate, 
+			task.EndDate, 
+			task.BoardId,
+			task.Creator.UserName, 
+			task.Assignee.UserName, 
+			task.Status
+		);
 
 		return Ok(taskDto);
 	}
@@ -72,8 +82,8 @@ public class TaskController : ControllerBase
 			StartDate = createTaskDto.StartDate,
 			EndDate = createTaskDto.EndDate,
 			BoardId = createTaskDto.BoardId,
-			CreatorId = createTaskDto.CreatorId,
-			AssigneeId = createTaskDto.AssigneeId,
+			CreatorId = (await _userService.GetUserAsync(createTaskDto.CreatorUsername)).Id,
+			AssigneeId = (await _userService.GetUserAsync(createTaskDto.AssigneeUsername)).Id,
 		};
 
 		await _taskService.AddTaskAsync(taskModel);
@@ -87,6 +97,12 @@ public class TaskController : ControllerBase
 		if (task == null)
 		{
 			return NotFound("Task not found");
+		}
+
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		if (user.Id != task.AssigneeId)
+		{
+			return BadRequest("This task wasn't assigned to you");
 		}
 
 		await _taskService.CompleteTaskAsync(taskId);

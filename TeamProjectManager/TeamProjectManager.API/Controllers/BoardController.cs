@@ -5,8 +5,6 @@ using TeamProjectManager.API.DTOs.Task;
 using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
-using TeamProjectManager.BLL.Services;
-using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 
@@ -48,7 +46,17 @@ public class BoardController : ControllerBase
 			board.Name,
 			board.Description,
 			board.ProjectId,
-			board.Tasks.Select(t => new TaskDto(t.Id, t.Name, t.Description, t.StartDate, t.EndDate, board.Id, t.CreatorId, t.AssigneeId, t.Status)).ToList()
+			board.Tasks.Select(t => new TaskDto(
+				t.Id, 
+				t.Name, 
+				t.Description, 
+				t.StartDate, 
+				t.EndDate, 
+				board.Id, 
+				t.Creator.UserName, 
+				t.Assignee.UserName, 
+				t.Status
+			)).ToList()
 		);
 
 		return Ok(boardDto);

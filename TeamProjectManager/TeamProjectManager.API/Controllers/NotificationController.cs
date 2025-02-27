@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TeamProjectManager.API.DTOs.Notification;
 using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
-using TeamProjectManager.BLL.Services;
-using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 

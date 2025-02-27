@@ -6,7 +6,6 @@ using TeamProjectManager.API.DTOs.User;
 using TeamProjectManager.API.Validation;
 using TeamProjectManager.BLL.Interfaces;
 using TeamProjectManager.BLL.Models;
-using TeamProjectManager.BLL.Validation;
 
 namespace TeamProjectManager.API.Controllers;
 
