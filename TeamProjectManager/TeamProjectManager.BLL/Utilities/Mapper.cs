@@ -174,6 +174,7 @@ public static class Mapper
 			Name = board.Name,
 			Description = board.Description,
 			ProjectId = board.ProjectId,
+			CreatedDate = board.CreatedDate,
 			Tasks = board.Tasks?.Select(MapTaskModel).ToList() ?? [],
 		};
 	}
@@ -188,6 +189,7 @@ public static class Mapper
 			Name = boardModel.Name,
 			Description = boardModel.Description,
 			ProjectId = boardModel.ProjectId,
+			CreatedDate = boardModel.CreatedDate,
 			Tasks = boardModel.Tasks.Select(MapTask).ToList(),
 		};
 	}

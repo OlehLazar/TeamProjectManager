@@ -6,7 +6,7 @@ import { BoardDto } from "../../interfaces/dtos/BoardDto";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
 import CreateBoardForm from "../../components/forms/CreateBoardForm";
-
+import BoardCard from "../../components/cards/BoardCard";
 
 const ProjectPage = () => {
     const params = useParams();
@@ -34,11 +34,8 @@ const ProjectPage = () => {
             {data!.boards && data!.boards.length > 0 ? (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {data!.boards?.map((board: BoardDto) => (
-                        <li
-                            key={board.id}
-                            className="p-4 border border-gray-300 rounded-lg shadow hover:shadow-md transition-shadow"
-                        >
-                            <h3 className="font-semibold text-xl">{board.name}</h3>
+                        <li key={board.id}>
+                            <BoardCard board={board} />
                         </li>
                     ))}
                 </ul>
