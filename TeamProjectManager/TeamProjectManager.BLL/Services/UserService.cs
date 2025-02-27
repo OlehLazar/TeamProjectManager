@@ -29,6 +29,12 @@ public class UserService(UserManager<User> userManager, SignInManager<User> sign
 	{
 		AppException.ThrowIfNull(userModel, "User data is required.");
 
+		var existingUser = await _userManager.FindByNameAsync(userModel.UserName);
+		if (existingUser != null)
+		{
+			return IdentityResult.Failed(new IdentityError { Description = "Username is already taken" });
+		}
+
 		var user = new User
 		{
 			FirstName = userModel.FirstName,
