@@ -13,6 +13,7 @@ import CreateTeamPage from "./pages/teams/CreateTeamPage";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import CreateProjectPage from "./pages/projects/CreateProjectPage";
 import BoardPage from "./pages/boards/BoardPage";
+import CreateTaskPage from "./pages/tasks/CreateTaskPage";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/projects" element={<MyProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectPage />} />
           <Route path="/boards/:boardId" element={<BoardPage />} />
+          <Route path="/boards/:boardId/createTask" element={<CreateTaskPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
       </Routes>
