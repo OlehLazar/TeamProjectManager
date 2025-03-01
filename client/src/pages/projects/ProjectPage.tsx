@@ -23,7 +23,7 @@ const ProjectPage = () => {
     if (isError) return <div className="flex text-center">Error fetching project data</div>;
 
     return (
-        <div className="flex flex-col p-5 gap-5">
+        <div className="flex flex-col p-10 gap-5">
             <h1 className="font-ptSerif font-semibold text-3xl mb-3">{data!.name}</h1>
             <p className="text-gray-700 text-lg mb-5">{data!.description}</p>
 

@@ -71,7 +71,7 @@ const TeamPage = () => {
   if (isError) return <div className="flex text-center">Error fetching team data</div>;
 
   return (
-    <div className="pt-5 pb-5 pl-10 pr-10 flex flex-col gap-5">
+    <div className="p-10 flex flex-col gap-5">
       <h1 className="font-ptSerif font-semibold text-3xl">{data!.name}</h1>
       <p className="font-openSans text-lg">{data!.description}</p>
 

@@ -3,21 +3,25 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { createTask } from "../../services/taskService";
+import { useParams } from "react-router-dom";
 
 type FormFields = {
     name: string;
     description: string;
     startDate: Date;
     endDate: Date;
-    boardId: number;
     assigneeUsername: string;
 };
 
 const CreateTaskPage = () => {
+    const params = useParams();
+    const boardId = Number(params.boardId);
+
     const { register, handleSubmit, control, formState: { errors }, setError } = useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
-        console.log(data);
+        await createTask({name: data.name, description: data.description, startDate: data.startDate, endDate: data.endDate, boardId: boardId, assigneeUsername: data.assigneeUsername})
     };
 
     return (

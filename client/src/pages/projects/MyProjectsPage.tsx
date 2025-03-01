@@ -4,21 +4,30 @@ import { getProjects } from "../../services/projectService";
 import ProjectCard from "../../components/cards/ProjectCard";
 
 const MyProjectsPage = () => {
+    const isLoggedIn = !!localStorage.getItem("token");
+
     const { data: projects = [], isLoading, error } = useQuery<ProjectDto[]>({
         queryKey: ['projects'],
         queryFn: () => getProjects(),
+        enabled: isLoggedIn,
     });
 
     return (
-        <div className="flex flex-col p-5">
+        <div className="flex flex-col p-10">
             <h1 className="font-ptSerif font-semibold text-2xl text-center mb-5">
                 My projects
             </h1>
             
-            {isLoading && <p className="text-center">Loading teams...</p>}
-            {error && <p className="text-center text-red-500">Failed to load teams. Please try again later.</p>}
+            {!isLoggedIn && (
+                <p className="text-center text-red-500">
+                    You need to be logged in to view your projects. Please <a href="/login" className="text-blue-500 underline">log in</a>.
+                </p>
+            )}
 
-            {!isLoading && !error && projects.length > 0 && (
+            {isLoggedIn && isLoading && <p className="text-center">Loading projects...</p>}
+            {isLoggedIn && error && <p className="text-center text-red-500">Failed to load projects. Please try again later.</p>}
+
+            {isLoggedIn && !isLoading && !error && projects.length > 0 && (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {projects.map((project) => (
                         <li key={project.id}>
@@ -26,6 +35,10 @@ const MyProjectsPage = () => {
                         </li>
                     ))}
                 </ul>
+            )}
+
+            {isLoggedIn && !isLoading && !error && projects.length === 0 && (
+                <p className="text-center">No projects found.</p>
             )}
         </div>
     )

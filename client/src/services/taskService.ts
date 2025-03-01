@@ -6,7 +6,6 @@ interface CreateTaskData {
     startDate: Date;
     endDate: Date;
     boardId: number;
-    creatorUsername: string;
     assigneeUsername: string;
 }
 

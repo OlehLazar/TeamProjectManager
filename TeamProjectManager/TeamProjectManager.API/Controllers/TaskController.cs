@@ -82,7 +82,7 @@ public class TaskController : ControllerBase
 			StartDate = createTaskDto.StartDate,
 			EndDate = createTaskDto.EndDate,
 			BoardId = createTaskDto.BoardId,
-			CreatorId = (await _userService.GetUserAsync(createTaskDto.CreatorUsername)).Id,
+			CreatorId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id,
 			AssigneeId = (await _userService.GetUserAsync(createTaskDto.AssigneeUsername)).Id,
 		};
 
