@@ -141,4 +141,10 @@ public class TeamController : ControllerBase
 		await _teamService.AddMemeberAsync(id, user.Id);
 		return Ok(new { message = "Member successfully added" });
 	}
+
+	[HttpGet("{boardId}/")]
+	public async Task<IActionResult> GetMembers()
+	{
+		throw new NotImplementedException();
+	}
 }
