@@ -39,6 +39,14 @@ public class ProjectService : IProjectService
 		return Mapper.MapProjectModel(project!);
 	}
 
+	public async Task<ProjectModel> GetProjectByBoardIdAsync(int boardId)
+	{
+		var projects = await _unitOfWork.ProjectRepository.GetAllAsync();
+		var project = projects.FirstOrDefault(p => p.Boards!.Any(b => b.Id == boardId));
+		AppException.ThrowIfNull(project, "Project not found");
+		return Mapper.MapProjectModel(project!);
+	}
+
 	public async Task AddProjectAsync(ProjectModel projectModel)
 	{
 		AppException.ThrowIfNull(projectModel, "Project can't be null");

@@ -16,11 +16,13 @@ public class TeamController : ControllerBase
 {
 	private readonly IUserService _userService;
 	private readonly ITeamService _teamService;
+	private readonly IProjectService _projectService;
 
-	public TeamController(IUserService userService, ITeamService teamService)
+	public TeamController(IUserService userService, ITeamService teamService, IProjectService projectService)
 	{
 		_userService = userService;
 		_teamService = teamService;
+		_projectService = projectService;
 	}
 
 	[HttpGet]
@@ -143,8 +145,12 @@ public class TeamController : ControllerBase
 	}
 
 	[HttpGet("{boardId}/")]
-	public async Task<IActionResult> GetMembers()
+	public async Task<IActionResult> GetMembers(int boardId)
 	{
-		throw new NotImplementedException();
+		var teamId = (await _projectService.GetProjectByBoardIdAsync(boardId)).TeamId;
+		var team = await _teamService.GetTeamByIdAsync(teamId);
+		var teamMembers = team.Members.ToList();
+		teamMembers.Add(team.Leader);
+		return Ok(teamMembers);
 	}
 }

@@ -10,6 +10,8 @@ public interface IProjectService
 
 	Task<ProjectModel> GetProjectByIdAsync(int id);
 
+	Task<ProjectModel> GetProjectByBoardIdAsync(int boardId);
+
 	Task AddProjectAsync(ProjectModel projectModel);
 
 	Task UpdateProjectAsync(ProjectModel projectModel);
