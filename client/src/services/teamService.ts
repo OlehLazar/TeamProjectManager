@@ -37,3 +37,8 @@ export const addMember = async (teamId: number, userName: string) => {
     });
     return response.data;
 };
+
+export const getMembers = async (boardId: number) => {
+    const response = await api.get(`/team/${boardId}/members`);
+    return Array.isArray(response.data) ? response.data : [];
+}

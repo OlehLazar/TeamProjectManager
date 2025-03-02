@@ -144,7 +144,7 @@ public class TeamController : ControllerBase
 		return Ok(new { message = "Member successfully added" });
 	}
 
-	[HttpGet("{boardId}/")]
+	[HttpGet("{boardId}/members")]
 	public async Task<IActionResult> GetMembers(int boardId)
 	{
 		var teamId = (await _projectService.GetProjectByBoardIdAsync(boardId)).TeamId;

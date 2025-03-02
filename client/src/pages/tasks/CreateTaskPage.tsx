@@ -5,6 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createTask } from "../../services/taskService";
 import { useParams } from "react-router-dom";
+import { getMembers } from "../../services/teamService";
+import { UserDto } from "../../interfaces/dtos/UserDto";
+import { useQuery } from "@tanstack/react-query";
 
 type FormFields = {
     name: string;
@@ -17,6 +20,11 @@ type FormFields = {
 const CreateTaskPage = () => {
     const params = useParams();
     const boardId = Number(params.boardId);
+
+    const { data: members = [], isLoading, error } = useQuery<UserDto[]>({
+        queryKey: ['members'],
+        queryFn: () => getMembers(boardId),
+    });
 
     const { register, handleSubmit, control, formState: { errors }, setError } = useForm<FormFields>();
 
@@ -61,6 +69,30 @@ const CreateTaskPage = () => {
                     )}
                 />
                 {errors.endDate && <span className="text-red-500">{errors.endDate.message}</span>}
+                
+                <Controller
+                    control={control}
+                    name="assigneeUsername"
+                    rules={{ required: "Assignee is required" }}
+                    render={({ field }) => (
+                        <select
+                            {...field}
+                            onChange={(e) => field.onChange(e.target.value)}
+                            className="w-full p-2 border rounded"
+                        >
+                            <option value="">Select assignee</option>
+                            {isLoading ? (
+                                <option disabled>Loading members...</option>
+                            ) : error ? (
+                                <option disabled>Error loading members</option>
+                            ) : members.map((member: UserDto) => (
+                                <option key={member.userName} value={member.userName}>
+                                    {member.userName}
+                                </option>
+                            ))}
+                        </select>
+                    )}
+                />
 
                 <Button type="submit" width="w-1/5">Create</Button>
             </form>
