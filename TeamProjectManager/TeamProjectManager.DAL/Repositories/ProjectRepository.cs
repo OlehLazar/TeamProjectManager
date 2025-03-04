@@ -19,7 +19,9 @@ public class ProjectRepository(ManagerDbContext context)
 
 	public async Task<IEnumerable<Project>> GetAllAsync()
 	{
-		return await _context.Projects.ToListAsync();
+		return await _context.Projects
+			.Include(p => p.Boards)
+			.ToListAsync();
 	}
 
 	public async Task<IEnumerable<Project>> GetAllByTeamIdAsync(int teamId)

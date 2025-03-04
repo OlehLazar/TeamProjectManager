@@ -81,8 +81,8 @@ public static class Mapper
 			CreatorId = task.CreatorId,
 			AssigneeId = task.AssigneeId,
 			Status = task.Status,
-			Creator = MapUserModel(task.Creator),
-			Assignee = MapUserModel(task.Assignee),
+			Creator = MapUserModel(task.Creator) ?? null,
+			Assignee = MapUserModel(task.Assignee) ?? null,
 		};
 	}
 
@@ -101,8 +101,6 @@ public static class Mapper
 			CreatorId = taskModel.CreatorId.ToString(),
 			AssigneeId = taskModel.AssigneeId.ToString(),
 			Status = taskModel.Status,
-			Creator = MapUser(taskModel.Creator),
-			Assignee = MapUser(taskModel.Assignee),
 		};
 	}
 

@@ -24,9 +24,9 @@ public class Task
 
 	public bool Status { get; set; }
 
-	public Board Board { get; set; }
+	public Board? Board { get; set; }
 
-	public User Creator { get; set; }
+	public User? Creator { get; set; }
 
-	public User Assignee { get; set; }
+	public User? Assignee { get; set; }
 }

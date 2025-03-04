@@ -37,7 +37,10 @@ public class TaskRepository(ManagerDbContext context)
 
 	public async Task<Entities.Task?> GetByIdAsync(int id)
 	{
-		return await _context.Tasks.FindAsync(id);
+		return await _context.Tasks
+			.Include(t => t.Creator)
+			.Include(t => t.Assignee)
+			.FirstOrDefaultAsync(t => t.Id == id);
 	}
 
 	public async Task AddAsync(Entities.Task entity)

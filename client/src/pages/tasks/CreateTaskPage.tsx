@@ -33,6 +33,7 @@ const CreateTaskPage = () => {
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
             await createTask({name: data.name, description: data.description, startDate: data.startDate, endDate: data.endDate, boardId: boardId, assigneeUsername: data.assigneeUsername})
+            window.location.href = `/boards/${boardId}`;
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 const fieldMapping: { [key: string]: keyof FormFields } = {
