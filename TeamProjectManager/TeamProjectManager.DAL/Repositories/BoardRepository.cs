@@ -43,7 +43,12 @@ public class BoardRepository(ManagerDbContext context)
 
 	public async Task<Board?> GetByIdAsync(int id)
 	{
-		return await _context.Boards.FindAsync(id);
+		return await _context.Boards
+			.Include(b => b.Tasks)
+				.ThenInclude(t => t.Assignee)
+			.Include(t => t.Tasks)
+				.ThenInclude(t => t.Creator)
+			.FirstOrDefaultAsync(b => b.Id == id);
 	}
 
 	public async Task AddAsync(Board entity)
