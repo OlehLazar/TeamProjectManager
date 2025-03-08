@@ -20,6 +20,6 @@ export const createTask = async (data: CreateTaskData) => {
 }
 
 export const completeTask = async (id: number) => {
-    const response = await api.put('/task', id);
+    const response = await api.put(`/task?taskId=${id}`);
     return response.data;
 }

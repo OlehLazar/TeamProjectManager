@@ -11,7 +11,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const endDate = format(task.endDate, "EEE MMM dd yyyy");
   console.log(task);
 
-  
+  const { data: currentUser } = useQuery<UserDto>({
+    queryKey: ["currentUser"],
+    queryFn: () => getProfile(),
+  });
+
   const handleCompleteTask = async () => {
     await completeTask(task.id);
     window.location.reload();
@@ -26,7 +30,9 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <h2>Creator: @{task.creatorUsername}</h2>
         <h2>Assigned to @{task.assigneeUsername}</h2>
         <h2>Status: {task.status ? 'Completed' : 'Uncompleted'}</h2>
-        
+        {currentUser?.userName === task.assigneeUsername && !task.status && (
+          <Button onClick={handleCompleteTask}>Complete Task</Button>
+        )}
     </div>
   )
 }
