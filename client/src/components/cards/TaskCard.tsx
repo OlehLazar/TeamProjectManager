@@ -5,11 +5,11 @@ import Button from "../ui/Button";
 import { getProfile } from "../../services/userService";
 import { useQuery } from "@tanstack/react-query";
 import { UserDto } from "../../interfaces/dtos/UserDto";
+import { useMemo } from "react";
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
-  const startDate = format(task.startDate, "EEE MMM dd yyyy");
-  const endDate = format(task.endDate, "EEE MMM dd yyyy");
-  console.log(task);
+  const startDate = useMemo(() => format(task.startDate, "EEE MMM dd yyyy"), [task.startDate]);
+  const endDate = useMemo(() => format(task.endDate, "EEE MMM dd yyyy"), [task.endDate]);
 
   const { data: currentUser } = useQuery<UserDto>({
     queryKey: ["currentUser"],
@@ -17,13 +17,17 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   });
 
   const handleCompleteTask = async () => {
-    await completeTask(task.id);
-    window.location.reload();
+    try {
+      await completeTask(task.id);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="flex flex-col gap-5 p-3 border border-gray-400 rounded-sm shadow-sm shadow-[#11111160] font-openSans">
-        <h1 className="font-ptSerif font-semibold text-xl">{task.name}</h1>
+        <h1 className="font-ptSerif font-semibold text-xl text-center">{task.name}</h1>
         <p>{task.description}</p>
         <p>Start date: {startDate}</p>
         <p>End date:  {endDate}</p>
