@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { FullProjectDto } from "../../interfaces/dtos/FullProjectDto";
-import { getProjectById } from "../../services/projectService";
+import { deleteProject, getProjectById } from "../../services/projectService";
 import { BoardDto } from "../../interfaces/dtos/BoardDto";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
@@ -19,6 +19,15 @@ const ProjectPage = () => {
         queryFn: () => getProjectById(projectId),
     });
 
+    const handleDeleteProjectClick = async () => {
+        try {
+            await deleteProject(projectId);
+            window.location.href = "/projects";
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     if (isLoading) return <div className="flex text-center">Loading...</div>;
     if (isError) return <div className="flex text-center">Error fetching project data</div>;
 
@@ -29,6 +38,8 @@ const ProjectPage = () => {
 
             {!showCreateBoardForm && <div><Button width="w-1/6" onClick={() => setShowCreateBoardForm(true)}>Create a new board</Button></div>}
             {showCreateBoardForm && <CreateBoardForm projectId={projectId} />}
+
+            <div><Button onClick={handleDeleteProjectClick} width="w-1/6">Delete the project</Button></div>
 
             <h2 className="font-semibold text-2xl mb-3">Boards</h2>
             {data!.boards && data!.boards.length > 0 ? (

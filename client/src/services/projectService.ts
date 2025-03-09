@@ -20,3 +20,8 @@ export const createProject = async (data: CreateProjectData) => {
     const response = await api.post('/project', data)
     return response.data;
 }
+
+export const deleteProject = async (id: number) => {
+    const response = await api.delete(`/project/${id}`);
+    return response.data;
+}
