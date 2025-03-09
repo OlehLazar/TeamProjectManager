@@ -21,7 +21,6 @@ const BoardPage = () => {
   if (isLoading) return <div className="flex text-center">Loading...</div>;
   if (isError) return <div className="flex text-center">Error fetching board data</div>;
 
-  // Separate tasks into completed and uncompleted
   const completedTasks = data!.tasks.filter((task) => task.status);
   const uncompletedTasks = data!.tasks.filter((task) => !task.status);
 

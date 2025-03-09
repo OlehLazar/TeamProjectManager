@@ -13,17 +13,17 @@ namespace TeamProjectManager.API.Controllers;
 [Route("api/[controller]")]
 public class BoardController : ControllerBase
 {
-    private readonly IUserService _userService;
+	private readonly IUserService _userService;
 	private readonly IBoardService _boardService;
 
-    public BoardController(IUserService userService, IBoardService boardService)
-    {
-        _userService = userService;
-        _boardService = boardService;
-    }
+	public BoardController(IUserService userService, IBoardService boardService)
+	{
+		_userService = userService;
+		_boardService = boardService;
+	}
 
-    [HttpGet]
-    public async Task<IActionResult> GetBoards()
+	[HttpGet]
+	public async Task<IActionResult> GetBoards()
 	{
 		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var boards = await _boardService.GetBoardsByUserIdAsync(userId);
@@ -32,9 +32,9 @@ public class BoardController : ControllerBase
 		return Ok(boardDtos);
 	}
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetBoardById(int id)
-    {
+	[HttpGet("{id}")]
+	public async Task<IActionResult> GetBoardById(int id)
+	{
 		var board = await _boardService.GetBoardByIdAsync(id);
 		if (board == null)
 		{
@@ -47,14 +47,14 @@ public class BoardController : ControllerBase
 			board.Description,
 			board.ProjectId,
 			board.Tasks.Select(t => new TaskDto(
-				t.Id, 
-				t.Name, 
-				t.Description, 
-				t.StartDate, 
-				t.EndDate, 
-				board.Id, 
-				t.Creator.UserName, 
-				t.Assignee.UserName, 
+				t.Id,
+				t.Name,
+				t.Description,
+				t.StartDate,
+				t.EndDate,
+				board.Id,
+				t.Creator!.UserName,
+				t.Assignee!.UserName,
 				t.Status
 			)).ToList()
 		);
@@ -62,9 +62,9 @@ public class BoardController : ControllerBase
 		return Ok(boardDto);
 	}
 
-    [HttpPost]
-    public async Task<IActionResult> CreateBoard(CreateBoardDto createBoardDto)
-    {
+	[HttpPost]
+	public async Task<IActionResult> CreateBoard(CreateBoardDto createBoardDto)
+	{
 		var validationResult = await new CreateBoardValidator().ValidateAsync(createBoardDto);
 		if (!validationResult.IsValid)
 		{
@@ -80,5 +80,18 @@ public class BoardController : ControllerBase
 
 		await _boardService.AddBoardAsync(boardModel);
 		return Ok();
+	}
+
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteBoard(int id)
+	{
+		var board = await _boardService.GetBoardByIdAsync(id);
+		if (board == null)
+		{
+			return NotFound("Board not found.");
+		}
+
+		await _boardService.DeleteBoardAsync(id);
+		return Ok("Board successfully deleted.");
 	}
 }
