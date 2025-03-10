@@ -12,6 +12,9 @@ const MyTasksPage = () => {
         queryFn: () => getTasks(),
         enabled: isLoggedIn,
     });
+    
+    const completedTasks = tasks.filter(task => task.status);
+    const uncompletedTasks = tasks.filter(task => !task.status);
 
     return (
         <div className="flex flex-col p-10 gap-5">
@@ -21,16 +24,28 @@ const MyTasksPage = () => {
             {isLoggedIn && isLoading && <p className="text-center">Loading tasks...</p>}
             {isLoggedIn && error && <ErrorMessage message="Failed to load tasks. Please try again later." />}
             {isLoggedIn && !isLoading && !error && tasks.length > 0 && (
-                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {tasks.map((task) => (
-                        <li key={task.id}>
-                            <TaskCard task={task} />
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    <h2 className="font-ptSerif text-2xl">Uncompleted Tasks</h2>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {uncompletedTasks.map((task) => (
+                            <li key={task.id}>
+                                <TaskCard task={task} />
+                            </li>
+                        ))}
+                    </ul>
+
+                    <h2 className="font-ptSerif text-2xl">Completed Tasks</h2>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {completedTasks.map((task) => (
+                            <li key={task.id}>
+                                <TaskCard task={task} />
+                            </li>
+                        ))}
+                    </ul>
+                </>
             )}
         </div>
     )
 }
 
-export default MyTasksPage
+export default MyTasksPage;
