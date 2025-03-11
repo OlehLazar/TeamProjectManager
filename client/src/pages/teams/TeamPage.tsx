@@ -68,7 +68,7 @@ const TeamPage = () => {
   }
 
   if (isLoading) return <div className="flex text-center">Loading...</div>;
-  if (isError) return <div className="flex text-center">Error fetching team data</div>;
+  if (isError) return <ErrorMessage message="Error fetching team data." />;
 
   return (
     <div className="p-10 flex flex-col gap-5">

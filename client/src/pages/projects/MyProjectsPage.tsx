@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ProjectDto } from "../../interfaces/dtos/ProjectDto";
 import { getProjects } from "../../services/projectService";
 import ProjectCard from "../../components/cards/ProjectCard";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const MyProjectsPage = () => {
     const isLoggedIn = !!localStorage.getItem("token");
@@ -25,7 +26,7 @@ const MyProjectsPage = () => {
             )}
 
             {isLoggedIn && isLoading && <p className="text-center">Loading projects...</p>}
-            {isLoggedIn && error && <p className="text-center text-red-500">Failed to load projects. Please try again later.</p>}
+            {isLoggedIn && error && <ErrorMessage message="Failed to load projects. Please try again later." />}
 
             {isLoggedIn && !isLoading && !error && projects.length > 0 && (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

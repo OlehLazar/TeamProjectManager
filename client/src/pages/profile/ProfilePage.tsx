@@ -5,6 +5,7 @@ import Button from "../../components/ui/Button";
 import { getProfile, deleteProfile } from "../../services/userService";
 import ChangePasswordForm from "../../components/forms/ChangePasswordForm";
 import UpdateProfileForm from "../../components/forms/UpdateProfileForm";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const ProfilePage = () => {
   };  
   
   if (loading) return <p className="text-center">Loading profile...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (error) return <ErrorMessage message={error} />;
 
   return (
     <div className="flex flex-col p-6 text-center gap-6 mx-auto w-1/2">

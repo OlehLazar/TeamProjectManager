@@ -7,6 +7,7 @@ import Button from "../../components/ui/Button";
 import { useState } from "react";
 import CreateBoardForm from "../../components/forms/CreateBoardForm";
 import BoardCard from "../../components/cards/BoardCard";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const ProjectPage = () => {
     const params = useParams();
@@ -29,7 +30,7 @@ const ProjectPage = () => {
     }
 
     if (isLoading) return <div className="flex text-center">Loading...</div>;
-    if (isError) return <div className="flex text-center">Error fetching project data</div>;
+    if (isError) return <ErrorMessage message="Error fetching project data." />;
 
     return (
         <div className="flex flex-col p-10 gap-5">

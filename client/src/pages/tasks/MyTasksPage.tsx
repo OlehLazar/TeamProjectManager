@@ -25,7 +25,7 @@ const MyTasksPage = () => {
             {isLoggedIn && error && <ErrorMessage message="Failed to load tasks. Please try again later." />}
             {isLoggedIn && !isLoading && !error && tasks.length > 0 && (
                 <>
-                    <h2 className="font-ptSerif text-2xl">Uncompleted Tasks</h2>
+                    <h2 className="font-ptSerif font-semibold text-2xl text-center">Uncompleted Tasks</h2>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {uncompletedTasks.map((task) => (
                             <li key={task.id}>
@@ -34,7 +34,7 @@ const MyTasksPage = () => {
                         ))}
                     </ul>
 
-                    <h2 className="font-ptSerif text-2xl">Completed Tasks</h2>
+                    <h2 className="font-ptSerif font-semibold text-2xl text-center">Completed Tasks</h2>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {completedTasks.map((task) => (
                             <li key={task.id}>
