@@ -17,10 +17,9 @@ public class NotificationService : INotificationService
 		_notificationRepository = _unitOfWork.NotificationRepository;
 	}
 
-    public async Task<IEnumerable<NotificationModel>> GetNotificationsAsync(string userId, int page, int pageSize)
+    public async Task<IEnumerable<NotificationModel>> GetNotificationsAsync(string userId)
 	{
-		int skip = (page - 1) * pageSize;
-		var notifications = await _notificationRepository.GetByUserIdAsync(userId, skip, pageSize);
+		var notifications = await _notificationRepository.GetByUserIdAsync(userId);
 		return notifications.Select(Mapper.MapNotificationModel);
 	}
 

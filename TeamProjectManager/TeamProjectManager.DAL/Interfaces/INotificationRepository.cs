@@ -4,7 +4,7 @@ namespace TeamProjectManager.DAL.Interfaces;
 
 public interface INotificationRepository : IRepository<Notification, int>
 {
-	Task<IEnumerable<Notification>> GetByUserIdAsync(string userId, int skip, int take);
+	Task<IEnumerable<Notification>> GetByUserIdAsync(string userId);
 
 	Task<int> GetCountAsync(string userId);
 }

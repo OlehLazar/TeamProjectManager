@@ -1,9 +1,9 @@
-import Notification from "../../components/cards/Notification"
+import Notification from "../../components/cards/NotificationCard"
 
 const NotificationsPage = () => {
   return (
     <div className="p-10 flex flex-col gap-5">
-        <Notification />
+        <h1></h1>
     </div>
   )
 }

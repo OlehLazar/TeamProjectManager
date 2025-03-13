@@ -27,12 +27,10 @@ public class NotificationRepository(ManagerDbContext context)
 		return await _context.Notifications.FindAsync(id);
 	}
 
-	public async Task<IEnumerable<Notification>> GetByUserIdAsync(string userId, int skip, int take)
+	public async Task<IEnumerable<Notification>> GetByUserIdAsync(string userId)
 	{
 		return await _context.Notifications
 			.Where(n => n.UserId == userId)
-			.Skip(skip)
-			.Take(take)
 			.ToListAsync();
 	}
 
