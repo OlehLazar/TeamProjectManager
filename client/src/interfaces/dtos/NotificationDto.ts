@@ -1,5 +1,5 @@
 export interface NotificationDto {
-    is: number;
+    id: number;
     title: string;
     content: string;
     createdAt: Date;
