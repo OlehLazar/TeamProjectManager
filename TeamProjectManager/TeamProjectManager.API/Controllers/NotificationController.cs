@@ -33,6 +33,19 @@ public class NotificationController : ControllerBase
 		return Ok(notificationDtos);
 	}
 
+	[HttpPut("{id}")]
+	public async Task<IActionResult> ReadNotification(int id)
+	{
+		await _notificationService.ReadNotificationAsync(id);
+		var notification = await _notificationService.GetNotificationAsync(id);
+		if (notification == null)
+		{
+			return NotFound();
+		}
+
+		return Ok();
+	}
+
 	[HttpPost("notify")]
     public async Task<IActionResult> NotifyUser(CreateNotificationDto createNotificationDto)
     {

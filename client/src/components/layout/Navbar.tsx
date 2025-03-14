@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { navItems as defaultNavItems } from "../../constants";
+import { getNotifications } from "../../services/notificationService";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [hasUnread, setHasUnread] = useState(false);
 
   useEffect(() => {
     const handleAuthChange = () => {
@@ -16,10 +18,34 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchNotifications = async () => {
+        try {
+          const notifications = await getNotifications();
+          setHasUnread(notifications.some(n => !n.isRead));
+        } catch (error) {
+          console.error("Failed to fetch notifications:", error);
+        }
+      };
+
+      fetchNotifications();
+    }
+  }, [isLoggedIn]);
+
   const navItems = isLoggedIn
-    ? defaultNavItems.map((item) =>
-        item.label === "Log in" ? { ...item, label: "My profile", url: "/profile" } : item
-      )
+    ? defaultNavItems.map((item) => {
+        if (item.label === "Log in") {
+          return { ...item, label: "My profile", url: "/profile" };
+        }
+        if (item.label === "Notifications") {
+          return {
+            ...item,
+            label: hasUnread ? "Notifications 🔴" : "Notifications",
+          };
+        }
+        return item;
+      })
     : defaultNavItems;
 
   return (

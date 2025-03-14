@@ -1,17 +1,46 @@
+import { useState } from "react";
 import { format } from "date-fns";
-import { NotificationCardProps } from "../../interfaces/props/NotificationCardProps"
+import { NotificationCardProps } from "../../interfaces/props/NotificationCardProps";
+import { readNotification } from "../../services/notificationService";
 
 const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => {
-  const formattedDate = format(notification.createdAt, "EEE MMM dd yyyy");
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isRead, setIsRead] = useState(notification.isRead);
   
-  return (
-    <div className="flex flex-col p-5 gap-5 shadow-sm border border-gray-400 rounded-sm">
-      <h1>{notification.title}</h1>
-      <p>{notification.content}</p>
-      <p>Created: {formattedDate}</p>
-      <p>{notification.username}</p>
-    </div>
-  )
-}
+  const formattedDate = format(notification.createdAt, "EEE MMM dd yyyy");
 
-export default NotificationCard
+  const handleToggle = async () => {
+    if (!isRead) {
+      try {
+        await readNotification(notification.id);
+        setIsRead(true);
+        window.location.reload();
+      } catch (error) {
+        console.error("Failed to mark notification as read:", error);
+      }
+    }
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div 
+      className={`flex flex-col p-5 gap-3 shadow-sm border rounded-sm cursor-pointer ${
+        isRead ? "border-gray-400 bg-white" : "border-red-500 bg-red-100"
+      }`}
+      onClick={handleToggle}
+    >
+      <h1 className="font-semibold">{notification.title}</h1>
+      
+      {isExpanded && (
+        <div className="mt-2">
+          <p>{notification.content}</p>
+          <p className="text-sm text-gray-600">Created: {formattedDate}</p>
+          <p className="text-sm text-gray-600">To: {notification.username}</p>
+          <p>{notification.isRead.toString()}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default NotificationCard;

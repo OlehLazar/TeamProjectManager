@@ -11,6 +11,11 @@ export const getNotifications = async () => {
     return Array.isArray(response.data) ? response.data : [];
 }
 
+export const readNotification = async (id: number) => {
+    const response = await api.put(`/notification/${id}`);
+    return response.data;
+}
+
 export const notify = async (data: CreateNotificationData) => {
     const response = await api.post('/notification/notify', data);
     return Array.isArray(response.data) ? response.data : [];

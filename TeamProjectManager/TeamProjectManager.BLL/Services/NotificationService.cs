@@ -23,6 +23,13 @@ public class NotificationService : INotificationService
 		return notifications.Select(Mapper.MapNotificationModel);
 	}
 
+	public async Task<NotificationModel> GetNotificationAsync(int id)
+	{
+		var notification = await _notificationRepository.GetByIdAsync(id);
+		AppException.ThrowIfNull(notification, "Notification not found.");
+		return Mapper.MapNotificationModel(notification!);
+	}
+
 	public async Task NotifyUserAsync(string userId, string title, string content)
 	{
 		AppException.ThrowIfNullOrWhiteSpace(title, "Title is required");
