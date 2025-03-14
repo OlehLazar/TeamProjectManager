@@ -15,7 +15,7 @@ const NotificationsPage = () => {
   
   return (
     <div className="p-10 flex flex-col gap-5">
-        <h1 className="font-ptSerif font-semibold text-3xl">Notifications</h1>
+        <h1 className="font-ptSerif font-semibold text-3xl text-center">Notifications</h1>
 
         {!isLoggedIn && <ErrorMessage message="You need to be logged in t view your notifications" />}
         {isLoggedIn && isLoading && <p>Loading notifications...</p>}

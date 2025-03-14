@@ -23,11 +23,11 @@ public class NotificationController : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetNotifications()
 	{
-		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-		var notifications = await _notificationService.GetNotificationsAsync(userId);
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		var notifications = await _notificationService.GetNotificationsAsync(user.Id);
 
-		var notificationDtos = notifications.Select(async n => new NotificationDto(
-			n.Id, n.Title, n.Content, n.CreatedAt, n.IsRead, (await _userService.GetUserAsync(n.UserId)).UserName
+		var notificationDtos = notifications.Select(n => new NotificationDto(
+			n.Id, n.Title, n.Content, n.CreatedAt, n.IsRead, user.UserName
 		));
 
 		return Ok(notificationDtos);
