@@ -1,5 +1,6 @@
 import { FullTeamDto } from "../interfaces/dtos/FullTeamDto";
 import api from "./api";
+import { notify } from "./notificationService";
 
 interface CreateTeamData {
     name: string;
@@ -35,6 +36,13 @@ export const addMember = async (teamId: number, userName: string) => {
     const response = await api.post(`/team/${teamId}/add-member`, userName, {
       headers: { 'Content-Type': 'application/json' },
     });
+
+    await notify({
+        title: "New Team",
+        content: `You've been added to a new team.`,
+        username: userName
+    });
+
     return response.data;
 };
 

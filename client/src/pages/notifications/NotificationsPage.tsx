@@ -23,7 +23,7 @@ const NotificationsPage = () => {
 
         {isLoggedIn && !isLoading && !error && notifications.length > 0 && (
             <ul className="grid grid-cols-1 gap-5">
-                {notifications.map((notification) => (
+                {notifications.slice().reverse().map((notification) => (
                     <li key={notification.id} className="border p-5">
                         <NotificationCard notification={notification} />
                     </li>

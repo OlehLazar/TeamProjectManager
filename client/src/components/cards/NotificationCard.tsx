@@ -14,7 +14,6 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
       try {
         await readNotification(notification.id);
         setIsRead(true);
-        window.location.reload();
       } catch (error) {
         console.error("Failed to mark notification as read:", error);
       }
@@ -34,9 +33,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
       {isExpanded && (
         <div className="mt-2">
           <p>{notification.content}</p>
-          <p className="text-sm text-gray-600">Created: {formattedDate}</p>
-          <p className="text-sm text-gray-600">To: {notification.username}</p>
-          <p>{notification.isRead.toString()}</p>
+          <p className="text-sm text-gray-600">{formattedDate}</p>
         </div>
       )}
     </div>

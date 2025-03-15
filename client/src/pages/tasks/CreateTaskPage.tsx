@@ -10,7 +10,6 @@ import { UserDto } from "../../interfaces/dtos/UserDto";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import ErrorMessage from "../../components/ui/ErrorMessage";
-import { notify } from "../../services/notificationService";
 
 type FormFields = {
     name: string;
@@ -33,12 +32,7 @@ const CreateTaskPage = () => {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-            await createTask({name: data.name, description: data.description, startDate: data.startDate, endDate: data.endDate, boardId: boardId, assigneeUsername: data.assigneeUsername})
-            await notify({
-                title: "New Task Assigned",
-                content: `You have been assigned a new task: "${data.name}".`,
-                username: data.assigneeUsername
-            });
+            await createTask({name: data.name, description: data.description, startDate: data.startDate, endDate: data.endDate, boardId: boardId, assigneeUsername: data.assigneeUsername});
             window.location.href = `/boards/${boardId}`;
         } catch (error) {
             if (axios.isAxiosError(error)) {
