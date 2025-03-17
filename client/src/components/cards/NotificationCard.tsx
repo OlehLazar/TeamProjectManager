@@ -23,7 +23,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
 
   return (
     <div 
-      className={`flex flex-col p-5 gap-3 shadow-sm border rounded-sm cursor-pointer ${
+      className={`flex flex-col p-5 gap-3 shadow-sm border rounded-sm w-1/3 mx-auto cursor-pointer ${
         isRead ? "border-gray-400 bg-white" : "border-red-500 bg-red-100"
       }`}
       onClick={handleToggle}
@@ -32,8 +32,8 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
       
       {isExpanded && (
         <div className="mt-2">
-          <p>{notification.content}</p>
-          <p className="text-sm text-gray-600">{formattedDate}</p>
+          <p className="text-gray-700">{notification.content}</p>
+          <p className="font-semibold text-gray-800 text-sm mt-2">{formattedDate}</p>
         </div>
       )}
     </div>

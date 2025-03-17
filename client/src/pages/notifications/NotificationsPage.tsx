@@ -3,6 +3,7 @@ import { getNotifications } from "../../services/notificationService";
 import { NotificationDto } from "../../interfaces/dtos/NotificationDto";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import NotificationCard from "../../components/cards/NotificationCard";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const NotificationsPage = () => {
   const isLoggedIn = !!localStorage.getItem("token");
@@ -18,13 +19,15 @@ const NotificationsPage = () => {
         <h1 className="font-ptSerif font-semibold text-3xl text-center">Notifications</h1>
 
         {!isLoggedIn && <ErrorMessage message="You need to be logged in t view your notifications" />}
-        {isLoggedIn && isLoading && <p>Loading notifications...</p>}
+
+        {isLoggedIn && isLoading && <LoadingSpinner />}
+        
         {isLoggedIn && error && <ErrorMessage message="Failed to load notifications. Please try again later." />}
 
         {isLoggedIn && !isLoading && !error && notifications.length > 0 && (
             <ul className="grid grid-cols-1 gap-5">
                 {notifications.slice().reverse().map((notification) => (
-                    <li key={notification.id} className="border p-5">
+                    <li key={notification.id} className="p-5">
                         <NotificationCard notification={notification} />
                     </li>
                 ))}

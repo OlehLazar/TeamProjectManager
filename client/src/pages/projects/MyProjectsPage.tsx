@@ -3,6 +3,7 @@ import { ProjectDto } from "../../interfaces/dtos/ProjectDto";
 import { getProjects } from "../../services/projectService";
 import ProjectCard from "../../components/cards/ProjectCard";
 import ErrorMessage from "../../components/ui/ErrorMessage";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const MyProjectsPage = () => {
     const isLoggedIn = !!localStorage.getItem("token");
@@ -25,7 +26,8 @@ const MyProjectsPage = () => {
                 </p>
             )}
 
-            {isLoggedIn && isLoading && <p className="text-center">Loading projects...</p>}
+            {isLoggedIn && isLoading && <LoadingSpinner />}
+
             {isLoggedIn && error && <ErrorMessage message="Failed to load projects. Please try again later." />}
 
             {isLoggedIn && !isLoading && !error && projects.length > 0 && (

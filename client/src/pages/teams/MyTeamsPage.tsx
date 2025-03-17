@@ -7,6 +7,7 @@ import { getTeams } from "../../services/teamService";
 import { TeamDto } from "../../interfaces/dtos/TeamDto";
 import { useQuery } from "@tanstack/react-query";
 import ErrorMessage from "../../components/ui/ErrorMessage";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const MyTeamsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,7 +44,8 @@ const MyTeamsPage = () => {
         <Button width="w-1/4" onClick={handleCreateTeam}>Create a team</Button>
       </div>
 
-      {isLoading && <p className="text-center">Loading teams...</p>}
+      {isLoading && <LoadingSpinner />}
+
       {error && <ErrorMessage message="Failed to load teams. Please try again later." />}
 
       {!isLoading && !error && (

@@ -3,6 +3,7 @@ import { TaskDto } from "../../interfaces/dtos/TaskDto";
 import { getTasks } from "../../services/taskService";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import TaskCard from "../../components/cards/TaskCard";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const MyTasksPage = () => {
     const isLoggedIn = !!localStorage.getItem("token");
@@ -21,8 +22,11 @@ const MyTasksPage = () => {
             <h1 className="font-ptSerif text-3xl text-center">My tasks</h1>
 
             {!isLoggedIn && (<ErrorMessage message="You need to be logged in to view your tasks" />)}
-            {isLoggedIn && isLoading && <p className="text-center">Loading tasks...</p>}
+
+            {isLoggedIn && isLoading && <LoadingSpinner />}
+
             {isLoggedIn && error && <ErrorMessage message="Failed to load tasks. Please try again later." />}
+
             {isLoggedIn && !isLoading && !error && tasks.length > 0 && (
                 <>
                     <h2 className="font-ptSerif font-semibold text-2xl text-center">Uncompleted Tasks</h2>
