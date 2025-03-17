@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaBell, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { format } from "date-fns";
 import { NotificationCardProps } from "../../interfaces/props/NotificationCardProps";
 import { readNotification } from "../../services/notificationService";
@@ -28,7 +29,13 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
       }`}
       onClick={handleToggle}
     >
-      <h1 className="font-semibold">{notification.title}</h1>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <FaBell className={`w-5 h-5 ${isRead ? "text-gray-400" : "text-blue-500"}`} />
+          <h1 className="font-semibold text-lg">{notification.title}</h1>
+        </div>
+        {isExpanded ? <FaChevronUp className="w-5 h-5 text-gray-600" /> : <FaChevronDown className="w-5 h-5 text-gray-600" />}
+      </div>
       
       {isExpanded && (
         <div className="mt-2">
