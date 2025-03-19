@@ -25,10 +25,10 @@ const BoardPage = () => {
   const uncompletedTasks = data!.tasks.filter((task) => !task.status);
 
   return (
-    <div className="flex flex-col gap-5 pt-5 pb-5 pl-10 pr-10">
+    <div className="flex flex-col gap-7 pt-5 pb-5 pl-10 pr-10">
       <h1 className="font-ptSerif font-semibold text-2xl text-center">{data!.name}</h1>
-      <p className="text-lg">{data!.description}</p>
-      <div>
+      <p className="text-lg text-center">{data!.description}</p>
+      <div className="text-center">
         <Button onClick={handleCreateTaskClick} width="w-1/6">
           Create a task
         </Button>
