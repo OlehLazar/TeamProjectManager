@@ -52,7 +52,7 @@ const UpdateProfileForm = () => {
             <Input {...register("lastName")} placeholder="Last Name" />
             {errors.lastName && <ErrorMessage message={errors.lastName.message!} />}
 
-            <Button type="submit" width="w-1/4">Confirm</Button>
+            <Button type="submit" width="w-full">Confirm</Button>
         </form>
     );
 };

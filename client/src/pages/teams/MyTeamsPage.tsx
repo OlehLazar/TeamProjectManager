@@ -10,12 +10,14 @@ import ErrorMessage from "../../components/ui/ErrorMessage";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const MyTeamsPage = () => {
+  const isLoggedIn = !!localStorage.getItem("token");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const { data: teams = [], isLoading, error } = useQuery<TeamDto[]>({
     queryKey: ['teams'],
     queryFn: () => getTeams(),
+    enabled: isLoggedIn,
   });
 
   const filteredTeams = searchTerm.trim() === ""
@@ -34,6 +36,7 @@ const MyTeamsPage = () => {
 
   return (
     <div className="pt-5 pb-5 flex flex-col justify-between items-center">
+      {isLoggedIn && 
       <div className="flex w-1/2 mx-auto p-5">
         <Input
           placeholder="Search for a team"
@@ -43,6 +46,7 @@ const MyTeamsPage = () => {
         />
         <Button width="w-1/4" onClick={handleCreateTeam}>Create a team</Button>
       </div>
+      }
 
       {isLoading && <LoadingSpinner />}
 

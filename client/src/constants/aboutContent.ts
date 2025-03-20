@@ -5,7 +5,7 @@ export const aboutContent = [
       image: {
         src: "/src/assets/images/tasks.jpg",
         alt: "tasks",
-        className: "w-1/3 rounded-full",
+        className: "w-1/4 rounded-full",
       },
       reverse: false,
     },

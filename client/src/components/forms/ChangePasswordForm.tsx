@@ -49,7 +49,7 @@ const ChangePasswordForm = () => {
             <Input {...register("newPassword")} type="password" placeholder="New Password" />
             {errors.root && <ErrorMessage message={errors.root.message!} />}
             <Input {...register("confirmPassword")} type="password" placeholder="Confirm New Password" />
-            <Button type="submit" width="w-1/4">Confirm</Button>
+            <Button type="submit" width="w-full">Confirm</Button>
         </form>
     )
 }

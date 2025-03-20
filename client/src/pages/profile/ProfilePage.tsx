@@ -56,19 +56,22 @@ const ProfilePage = () => {
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <div className="flex flex-col p-6 text-center gap-6 mx-auto w-1/2">
-      <h1 className="text-3xl font-bold font-ptSerif">My Profile</h1>
-      {user.avatar && <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mt-4" />}
-      <p className="text-xl font-sans">{user.firstName} {user.lastName}</p>
-      
-      {!showPasswordForm && (<Button onClick={() => setShowPasswordForm(true)} width="w-1/4">Change Password</Button>)}
-      {showPasswordForm && (<ChangePasswordForm />)}
-      
-      {!showUpdateForm && (<Button onClick={() => setShowUpdateForm(true)} width="w-1/4">Update profile</Button>)}
-      {showUpdateForm && (<UpdateProfileForm />)}
+    <div className="flex items-center">
+      {!showPasswordForm && !showUpdateForm && <img src="/src/assets/images/noire.jpg" alt="" width={700} />}
+      <div className="flex flex-col p-6 text-center gap-6 mx-auto w-1/5">
+        <h1 className="text-3xl font-bold font-ptSerif">My Profile</h1>
+        {user.avatar && <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mt-4" />}
+        <p className="text-xl font-sans">{user.firstName} {user.lastName}</p>
+        
+        {!showPasswordForm && (<Button onClick={() => setShowPasswordForm(true)} width="w-full">Change Password</Button>)}
+        {showPasswordForm && (<ChangePasswordForm />)}
+        
+        {!showUpdateForm && (<Button onClick={() => setShowUpdateForm(true)} width="w-full">Update profile</Button>)}
+        {showUpdateForm && (<UpdateProfileForm />)}
 
-      <Button onClick={handleLogout} width="w-1/4">Logout</Button>
-      <Button onClick={handleDelete} width="w-1/4">Delete profile</Button>
+        <Button onClick={handleLogout} width="w-full">Logout</Button>
+        <Button onClick={handleDelete} width="w-full">Delete profile</Button>
+      </div>
     </div>
   );
 };
