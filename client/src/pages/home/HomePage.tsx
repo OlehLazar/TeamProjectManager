@@ -3,7 +3,7 @@ import StartNow from "../../components/sections/StartNow"
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="p-10">
       <AboutUs />
       <StartNow />
     </div>

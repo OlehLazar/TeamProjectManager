@@ -1,16 +1,19 @@
-import Paragraph from "../ui/Paragraph";
 import { aboutContent } from "../../constants/aboutContent";
 
 const AboutUs = () => {
   return (
-    <div className="pt-10 pb-5 pl-40 pr-40 flex flex-col text-xl">
-      <h1 className="pb-10 text-3xl font-bold text-center font-ptSerif">About us</h1>
+    <div className="p-10 flex flex-col text-xl">
+      <h1 className="pb-10 text-4xl font-bold text-center font-ptSerif">About us</h1>
       {aboutContent.map(({ heading, text, image, reverse }, index) => (
         <div
           key={index}
-          className={`flex gap-10 pb-10 ${reverse ? "flex-row-reverse" : ""}`}
+          className={`flex gap-10 ${reverse ? "flex-row-reverse" : ""}`}
         >
-          <Paragraph heading={heading} text={text} />
+          <div className="flex flex-col gap-5">
+            <h1 className="font-ptSerif font-semibold text-4xl">{heading}</h1>
+            <p className="w-2/3 text-2xl font-light">{text}</p>
+          </div>
+          
           <img
             src={image.src}
             alt={image.alt}

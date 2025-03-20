@@ -13,7 +13,7 @@ export const aboutContent = [
       heading: "What is success for us?",
       text: "Our success is measured by the success of our customers. We prioritize building strong relationships with our users and providing exceptional support. Our dedicated team is always available to assist you with any questions or challenges you may encounter. We believe in open communication and collaboration, and we're committed to working closely with you to ensure your experience with our platform is seamless and rewarding.",
       image: {
-        src: "/src/assets/images/team_project.jpg",
+        src: "/src/assets/images/team_success_section.png",
         alt: "team project",
         className: "w-1/3 rounded-xl",
       },
