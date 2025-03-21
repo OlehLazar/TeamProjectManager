@@ -9,7 +9,7 @@ const StartNow = () => {
         Get started with us now and discover the difference!
       </p>
 
-      <a href="/login"><Button width="w-1/3">START NOW</Button></a>
+      <a href="/login" className="text-3xl"><Button width="w-1/3">START NOW</Button></a>
     </div>
   )
 }

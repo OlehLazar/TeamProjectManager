@@ -11,6 +11,7 @@ import { deleteTeam } from "../../services/teamService";
 import axios from "axios";
 import ProjectCard from "../../components/cards/ProjectCard";
 import ErrorMessage from "../../components/ui/ErrorMessage";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const TeamPage = () => {
   const params = useParams();
@@ -67,7 +68,7 @@ const TeamPage = () => {
     navigate(`/teams/${teamId}/create`);
   }
 
-  if (isLoading) return <div className="flex text-center">Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <ErrorMessage message="Error fetching team data." />;
 
   return (
@@ -84,18 +85,14 @@ const TeamPage = () => {
         </div>
       )}
 
-      {!showAddMemberForm && leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={() => setShowAddMemberForm(true)}>Add a member</Button></div>)}
-      {showAddMemberForm && (<AddMemberForm />)}
-
       {leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={handleDelete} >Delete the team</Button></div>)}
       {deleteError && <ErrorMessage message={deleteError} />}
 
       <div className="w-1/2"><Button width="w-1/4" onClick={handleLeave}>Leave</Button></div>
       {leaveError && <ErrorMessage message={leaveError} />}
-      
-      <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
 
-      <h2 className="text-center font-bold font-ptSerif text-xl">Projects</h2>
+      <h2 className="text-center font-bold font-ptSerif text-2xl">Projects</h2>
+      <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {data!.projects.map((project) => (
           <li key={project.id}>
@@ -104,7 +101,9 @@ const TeamPage = () => {
         ))}
       </ul>
 
-      <h2 className="text-center font-bold font-ptSerif text-xl">Members</h2>
+      <h2 className="text-center font-bold font-ptSerif text-2xl">Members</h2>
+      {!showAddMemberForm && leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={() => setShowAddMemberForm(true)}>Add a member</Button></div>)}
+      {showAddMemberForm && (<AddMemberForm />)}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-5 pb-5">
         {data!.members.map((member) => (
           <li key={member.userName}>

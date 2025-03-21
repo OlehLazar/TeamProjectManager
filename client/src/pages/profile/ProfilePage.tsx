@@ -57,7 +57,7 @@ const ProfilePage = () => {
 
   return (
     <div className="flex items-center">
-      {!showPasswordForm && !showUpdateForm && <img src="/src/assets/images/noire.jpg" alt="" width={700} />}
+      {!showPasswordForm && !showUpdateForm && <img src="/src/assets/images/noire.jpg" alt="" width={700} className="rounded-3xl p-2" />}
       <div className="flex flex-col p-6 text-center gap-6 mx-auto w-1/5">
         <h1 className="text-3xl font-bold font-ptSerif">My Profile</h1>
         {user.avatar && <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mt-4" />}
