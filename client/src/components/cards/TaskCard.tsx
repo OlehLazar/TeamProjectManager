@@ -26,7 +26,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 p-3 border border-gray-400 rounded-xl shadow-sm shadow-[#11111160] font-openSans hover:shadow-xl">
+    <div className="flex flex-col gap-5 p-3 border border-[#1111116b] rounded-xl shadow-sm shadow-[#11111160] font-openSans hover:shadow-xl text-lg">
         <h1 className="font-ptSerif font-semibold text-xl text-center">{task.name}</h1>
         <p>{task.description}</p>
         <p>Start date: {startDate}</p>

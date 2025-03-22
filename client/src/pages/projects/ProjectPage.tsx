@@ -8,6 +8,7 @@ import { useState } from "react";
 import CreateBoardForm from "../../components/forms/CreateBoardForm";
 import BoardCard from "../../components/cards/BoardCard";
 import ErrorMessage from "../../components/ui/ErrorMessage";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const ProjectPage = () => {
     const params = useParams();
@@ -29,7 +30,7 @@ const ProjectPage = () => {
         }
     }
 
-    if (isLoading) return <div className="flex text-center">Loading...</div>;
+    if (isLoading) return <LoadingSpinner />;
     if (isError) return <ErrorMessage message="Error fetching project data." />;
 
     return (
@@ -40,9 +41,7 @@ const ProjectPage = () => {
             {!showCreateBoardForm && <div><Button width="w-1/6" onClick={() => setShowCreateBoardForm(true)}>Create a new board</Button></div>}
             {showCreateBoardForm && <CreateBoardForm projectId={projectId} />}
 
-            <div><Button onClick={handleDeleteProjectClick} width="w-1/6">Delete the project</Button></div>
-
-            <h2 className="font-semibold text-2xl mb-3">Boards</h2>
+            <h2 className=" font-ptSerif font-semibold text-3xl mb-3 text-center">Boards</h2>
             {data!.boards && data!.boards.length > 0 ? (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {data!.boards?.map((board: BoardDto) => (
@@ -56,6 +55,8 @@ const ProjectPage = () => {
                     {data!.boards === null ? "Boards information is unavailable." : "No boards available for this project."}
                 </p>
             )}
+
+            <div><Button onClick={handleDeleteProjectClick} width="w-1/6">Delete the project</Button></div> 
         </div>
     );
 };

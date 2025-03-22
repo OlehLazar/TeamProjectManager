@@ -37,7 +37,7 @@ const MyTasksPage = () => {
                     </ul>
 
                     <h2 className="font-ptSerif text-2xl text-center">Completed Tasks</h2>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 bg-[#1fa3f51f] p-2 b b-blue rounded-xl">
                         {completedTasks.map((task) => (
                             <li key={task.id}>
                                 <TaskCard task={task} />
