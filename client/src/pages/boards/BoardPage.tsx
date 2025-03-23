@@ -4,6 +4,8 @@ import { FullBoardDto } from "../../interfaces/dtos/FullBoardDto";
 import { getBoardById } from "../../services/boardService";
 import Button from "../../components/ui/Button";
 import TaskCard from "../../components/cards/TaskCard";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 
 const BoardPage = () => {
   const params = useParams();
@@ -18,8 +20,8 @@ const BoardPage = () => {
     window.location.href = `/boards/${boardId}/createTask`;
   };
 
-  if (isLoading) return <div className="flex text-center">Loading...</div>;
-  if (isError) return <div className="flex text-center">Error fetching board data</div>;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorMessage message="Error fetching board data." />;
 
   const completedTasks = data!.tasks.filter((task) => task.status);
   const uncompletedTasks = data!.tasks.filter((task) => !task.status);

@@ -6,6 +6,7 @@ import { getProfile, deleteProfile } from "../../services/userService";
 import ChangePasswordForm from "../../components/forms/ChangePasswordForm";
 import UpdateProfileForm from "../../components/forms/UpdateProfileForm";
 import ErrorMessage from "../../components/ui/ErrorMessage";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const ProfilePage = () => {
     navigate("/login");
   };  
   
-  if (loading) return <p className="text-center">Loading profile...</p>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
 
   return (
