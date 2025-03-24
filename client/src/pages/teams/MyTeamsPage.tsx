@@ -36,16 +36,22 @@ const MyTeamsPage = () => {
 
   return (
     <div className="pt-5 pb-5 flex flex-col justify-between items-center">
+      {!isLoggedIn && (
+        <p className="text-center text-red-500">
+          You need to be logged in to view your teams. Please <a href="/login" className="text-blue-500 underline">log in</a>.
+        </p>
+      )}
+
       {isLoggedIn && 
-      <div className="flex w-1/2 mx-auto p-5">
-        <Input
-          placeholder="Search for a team"
-          width="w-1/2"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button width="w-1/4" onClick={handleCreateTeam}>Create a team</Button>
-      </div>
+        <div className="flex w-1/2 mx-auto p-5">
+          <Input
+            placeholder="Search for a team"
+            width="w-1/2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button width="w-1/4" onClick={handleCreateTeam}>Create a team</Button>
+        </div>
       }
 
       {isLoading && <LoadingSpinner />}

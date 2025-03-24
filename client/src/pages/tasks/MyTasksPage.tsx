@@ -19,7 +19,11 @@ const MyTasksPage = () => {
 
     return (
         <div className="flex flex-col p-10 gap-10">
-            {!isLoggedIn && (<ErrorMessage message="You need to be logged in to view your tasks" />)}
+            {!isLoggedIn &&
+                <p className="text-center text-red-500">
+                    You need to be logged in to view your tasks. Please <a href="/login" className="text-blue-500 underline">log in</a>.
+                </p>
+            }
 
             {isLoggedIn && isLoading && <LoadingSpinner />}
 
@@ -37,7 +41,7 @@ const MyTasksPage = () => {
                     </ul>
 
                     <h2 className="font-ptSerif text-2xl text-center">Completed Tasks</h2>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 bg-[#1fa3f51f] p-2 b b-blue rounded-xl">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 bg-[#61656628] p-2 b b-blue rounded-xl">
                         {completedTasks.map((task) => (
                             <li key={task.id}>
                                 <TaskCard task={task} />

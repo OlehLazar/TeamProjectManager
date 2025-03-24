@@ -18,7 +18,11 @@ const NotificationsPage = () => {
     <div className="p-10 flex flex-col gap-5">
         <h1 className="font-ptSerif font-semibold text-3xl text-center">Notifications</h1>
 
-        {!isLoggedIn && <ErrorMessage message="You need to be logged in t view your notifications" />}
+        {!isLoggedIn && (
+          <p className="text-center text-red-500">
+            You need to be logged in to view your teams. Please <a href="/login" className="text-blue-500 underline">log in</a>.
+          </p>
+        )}
 
         {isLoggedIn && isLoading && <LoadingSpinner />}
         
