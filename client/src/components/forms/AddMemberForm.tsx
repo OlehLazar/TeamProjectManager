@@ -27,11 +27,7 @@ const AddMemberForm = () => {
            
             if (axios.isAxiosError(error)) {
                 const errors = error.response?.data?.errors;
-                if (errors) {
-                    message = Object.values(errors).flat().join(); 
-                } else {
-                    message = String(error.response?.data.message);
-                }   
+                message = Object.values(errors).flat().join();  
             }
 
             setError('root', {
