@@ -79,25 +79,15 @@ public class ProjectController : ControllerBase
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> DeleteProject(int id)
 	{
-		var project = await _projectService.GetProjectByIdAsync(id);
-		if (project == null)
-		{
-			return NotFound("Project not found.");
-		}
-
-		var team = await _teamService.GetTeamByIdAsync(project.TeamId);
-		if (team == null)
-		{
-			return NotFound("Team not found.");
-		}
-
 		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
-		if (team.LeaderId == userId)
+		try
 		{
-			await _projectService.DeleteProjectAsync(id);
+			await _projectService.DeleteProjectAsync(id, userId);
 			return Ok("Project successfully deleted.");
 		}
-
-		return Unauthorized("You are not the leader of this team.");
+		catch (UnauthorizedAccessException ex)
+		{
+			return Unauthorized(ex.Message);
+		}
 	}
 }

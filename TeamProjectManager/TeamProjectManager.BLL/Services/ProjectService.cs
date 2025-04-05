@@ -3,6 +3,7 @@ using TeamProjectManager.BLL.Models;
 using TeamProjectManager.BLL.Utilities;
 using TeamProjectManager.BLL.Validation;
 using TeamProjectManager.DAL.Interfaces;
+using TeamProjectManager.DAL.Repositories;
 
 namespace TeamProjectManager.BLL.Services;
 
@@ -10,11 +11,13 @@ public class ProjectService : IProjectService
 {
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly IProjectRepository _projectRepository;
+	private readonly ITeamRepository _teamRepository;
 
-    public ProjectService(IUnitOfWork unitOfWork)
+	public ProjectService(IUnitOfWork unitOfWork)
     {
 		_unitOfWork = unitOfWork;
 		_projectRepository = unitOfWork.ProjectRepository;
+		_teamRepository = unitOfWork.TeamRepository;
 	}
 
 	public async Task<IEnumerable<ProjectModel>> GetProjectsByUserIdAsync(string userId)
@@ -60,10 +63,19 @@ public class ProjectService : IProjectService
 		await _projectRepository.UpdateAsync(Mapper.MapProject(projectModel));
 	}
 
-	public async Task DeleteProjectAsync(int id)
+	public async Task DeleteProjectAsync(int id, string userId)
 	{
 		var project = await _projectRepository.GetByIdAsync(id);
 		AppException.ThrowIfNull(project, "Project not found");
+
+		var team = await _teamRepository.GetByIdAsync(project!.TeamId);
+		AppException.ThrowIfNull(team, "Team not found");
+
+		if (team!.LeaderId != userId)
+		{
+			throw new UnauthorizedAccessException("You are not the leader of this team.");
+		}
+
 		await _projectRepository.DeleteByIdAsync(id);
 	}
 }

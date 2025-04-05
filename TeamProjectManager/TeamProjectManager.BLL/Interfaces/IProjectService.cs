@@ -16,5 +16,5 @@ public interface IProjectService
 
 	Task UpdateProjectAsync(ProjectModel projectModel);
 
-	Task DeleteProjectAsync(int id);
+	Task DeleteProjectAsync(int id, string userId);
 }
