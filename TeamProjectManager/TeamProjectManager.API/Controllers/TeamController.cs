@@ -30,9 +30,7 @@ public class TeamController : ControllerBase
 	{
 		var userId = (await _userService.GetUserAsync(User.Identity!.Name!)).Id;
 		var teams = await _teamService.GetTeamsByUserIdAsync(userId);
-
 		var teamDtos = teams.Select(t => new TeamDto(t.Id, t.Name, t.Description, t.LeaderId));
-
 		return Ok(teamDtos);
 	}
 

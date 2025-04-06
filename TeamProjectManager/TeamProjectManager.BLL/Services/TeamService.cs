@@ -18,13 +18,6 @@ public class TeamService : ITeamService
 		_teamRepository = unitOfWork.TeamRepository;
 	}
 
-    public async Task<IEnumerable<TeamModel>> GetTeamsAsync()
-	{
-		var teams = await _teamRepository.GetAllAsync();
-		AppException.ThrowIfNull(teams, "Teams not found");
-		return teams.Select(Mapper.MapTeamModel);
-	}
-
 	public async Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(string userId)
 	{
 		var teams = await _teamRepository.GetAllByUserIdAsync(userId);
@@ -36,8 +29,10 @@ public class TeamService : ITeamService
 	{
 		var team = await _teamRepository.GetByIdAsync(id);
 		AppException.ThrowIfNull(team, "Team not found");
+
 		var leader = await _unitOfWork.UserRepository.GetByIdAsync(team!.LeaderId);
 		team.Leader = leader!;
+
 		return Mapper.MapTeamModel(team!);
 	}
 
