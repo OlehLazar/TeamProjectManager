@@ -66,12 +66,15 @@ public class TeamService : ITeamService
 	{
 		var team = await _teamRepository.GetByIdAsync(teamId);
 		AppException.ThrowIfNull(team, "Team not found");
+
 		var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 		AppException.ThrowIfNull(user, "User not found");
-		if (team.Members == null)
+
+		if (team!.Members == null)
 		{
 			team.Members = [];
 		}
+
 		team.Members.Add(user!);
 		await _teamRepository.UpdateAsync(team);
 	}
@@ -80,8 +83,10 @@ public class TeamService : ITeamService
 	{
 		var team = await _teamRepository.GetByIdAsync(teamId);
 		AppException.ThrowIfNull(team, "Team not found");
+
 		var user = team!.Members!.FirstOrDefault(u => u.Id == userId);
 		AppException.ThrowIfNull(user, "User not found");
+
 		team.Members!.Remove(user!);
 		await _teamRepository.UpdateAsync(team);
 	}

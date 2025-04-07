@@ -21,25 +21,18 @@ const UpdateProfileForm = () => {
           console.error("Update failed:", error);
       
             if (axios.isAxiosError(error)) {
-                const fieldMapping: { [key: string]: keyof FormFields } = {
+                const fieldMapping = {
                     FirstName: 'firstName',
-                    LastName: 'lastName'
-                };
-
-                const serverErrors = error.response?.data?.errors;
-                Object.entries(serverErrors).forEach(([field, messages]) => {
-                    const formField = fieldMapping[field];
-                    const errorMessage = Array.isArray(messages) 
-                    ? messages.join(", ") 
-                    : (messages as string);
-        
-                    if (formField) {
-                    setError(formField, {
-                        type: "server",
-                        message: errorMessage
-                    });
-                    }
-                });
+                    LastName: 'lastName',
+                } as const;
+              
+                for (const [field, messages] of Object.entries(error.response?.data?.errors || {})) {
+                    const formField = fieldMapping[field as keyof typeof fieldMapping];
+                    if (!formField) continue;
+              
+                    const message = Array.isArray(messages) ? messages.join(' ') : messages;
+                    setError(formField, { type: 'server', message: message as string });
+                }
             }
         }
     };

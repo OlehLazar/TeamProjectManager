@@ -1,4 +1,4 @@
-﻿using TeamProjectManager.DAL.Data;
+using TeamProjectManager.DAL.Data;
 
 namespace TeamProjectManager.DAL.Repositories;
 
