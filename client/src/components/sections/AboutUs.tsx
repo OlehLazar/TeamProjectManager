@@ -2,8 +2,8 @@ import { aboutContent } from "../../constants/aboutContent";
 
 const AboutUs = () => {
   return (
-    <div className="px-4 py-10 flex flex-col gap-16 text-base sm:text-lg md:text-xl lg:text-2xl">
-      <h1 className="pb-10 text-4xl font-bold text-center font-ptSerif">About us</h1>
+    <div className="px-4 py-10 flex flex-col gap-10 text-base sm:text-lg md:text-xl lg:text-2xl">
+      <h1 className="pb-4 text-4xl font-bold text-center font-ptSerif">About us</h1>
       {aboutContent.map(({ heading, text, image, reverse }, index) => (
         <div
           key={index}
