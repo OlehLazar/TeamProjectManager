@@ -13,7 +13,6 @@ const Navbar = () => {
     };
 
     const handleResize = () => {
-      // Close menu when resizing to desktop
       if (window.innerWidth >= 768) {
         setIsMenuOpen(false);
       }
@@ -84,7 +83,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Desktop menu */}
       <ul className="hidden md:flex flex-1 justify-between pl-5">
         {navItems.map((item, index) => (
           <li key={index}>
@@ -95,7 +93,6 @@ const Navbar = () => {
         ))}
       </ul>
 
-      {/* Mobile menu */}
       {isMenuOpen && (
         <ul className="w-full md:hidden flex flex-col space-y-4 mt-4">
           {navItems.map((item, index) => (
