@@ -99,7 +99,7 @@ const Navbar = () => {
             <li key={index}>
               <a 
                 href={item.url} 
-                className="block py-2 hover:bg-gray-700 px-4 rounded transition-colors"
+                className="block py-2 hover:bg-gray-400 px-4 rounded transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}

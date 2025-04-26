@@ -15,7 +15,7 @@ const NotificationsPage = () => {
   });
   
   return (
-    <div className="p-10 flex flex-col gap-5">
+    <div className="p-10 flex flex-col gap-5 w-1/2 mx-auto">
         <h1 className="font-ptSerif font-semibold text-3xl text-center">Notifications</h1>
 
         {!isLoggedIn && (

@@ -85,7 +85,7 @@ const TeamPage = () => {
         </div>
       )}
 
-      {leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={handleDelete} >Delete the team</Button></div>)}
+      {leader?.userName === currentUser?.userName && (<div className="w-1/2 object-scale-down"><Button width="w-1/4 md:w-1/2 sm:w-full" onClick={handleDelete} >Delete the team</Button></div>)}
       {deleteError && <ErrorMessage message={deleteError} />}
 
       <div className="w-1/2"><Button width="w-1/4" onClick={handleLeave}>Leave</Button></div>

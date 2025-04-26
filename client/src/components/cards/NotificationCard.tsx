@@ -24,7 +24,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
 
   return (
     <div 
-      className={`flex flex-col p-5 gap-3 shadow-sm border rounded-2xl w-1/3 mx-auto cursor-pointer ${
+      className={`flex flex-col p-5 gap-3 shadow-sm border rounded-2xl mx-auto cursor-pointer ${
         isRead ? "border-gray-400 bg-white" : "border-red-500 bg-red-100"
       }`}
       onClick={handleToggle}
