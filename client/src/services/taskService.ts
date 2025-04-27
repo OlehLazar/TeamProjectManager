@@ -1,5 +1,4 @@
 import api from "./api";
-import { notify } from "./notificationService";
 
 interface CreateTaskData {
     name: string;
@@ -17,13 +16,6 @@ export const getTasks = async () => {
 
 export const createTask = async (data: CreateTaskData) => {
     const response = await api.post('/task', data);
-    
-    await notify({
-        title: "New Task Assigned",
-        content: `You have been assigned a new task: "${data.name}".`,
-        username: data.assigneeUsername
-    });
-
     return response.data;
 }
 

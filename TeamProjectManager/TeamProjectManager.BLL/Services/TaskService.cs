@@ -10,11 +10,13 @@ public class TaskService : ITaskService
 {
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly ITaskRepository _taskRepository;
+	private readonly INotificationService _notificationService;
 
-    public TaskService(IUnitOfWork unitOfWork)
+	public TaskService(IUnitOfWork unitOfWork, INotificationService notificationService)
     {
 		_unitOfWork = unitOfWork;
 		_taskRepository = unitOfWork.TaskRepository;
+		_notificationService = notificationService;
 	}
 
 	public async Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(string userId)
@@ -50,6 +52,15 @@ public class TaskService : ITaskService
 	{
 		AppException.ThrowIfNull(taskModel, "Task model is null");
 		await _taskRepository.AddAsync(Mapper.MapTask(taskModel));
+
+		var user = await _unitOfWork.UserRepository.GetByIdAsync(taskModel.AssigneeId);
+		AppException.ThrowIfNull(user, "User not found");
+
+		await _notificationService.NotifyUserAsync(
+			taskModel.AssigneeId,
+			"New Task Assigned", 
+			$"You have been assigned a new task: {taskModel.Name}"
+		);
 	}
 
 	public async Task UpdateTaskAsync(TaskModel taskModel)

@@ -11,11 +11,13 @@ public class TeamService : ITeamService
 {
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly ITeamRepository _teamRepository;
+	private readonly INotificationService _notificationService;
 
-	public TeamService( IUnitOfWork unitOfWork)
+	public TeamService( IUnitOfWork unitOfWork, INotificationService notificationService)
     {
         _unitOfWork = unitOfWork;
 		_teamRepository = unitOfWork.TeamRepository;
+		_notificationService = notificationService;
 	}
 
 	public async Task<IEnumerable<TeamModel>> GetTeamsByUserIdAsync(string userId)
@@ -77,6 +79,12 @@ public class TeamService : ITeamService
 
 		team.Members.Add(user!);
 		await _teamRepository.UpdateAsync(team);
+
+		await _notificationService.NotifyUserAsync(
+			userId,
+			"New Team Invitation",
+			$"You have been added to the team: {team.Name}"
+		);
 	}
 
 	public async Task RemoveMemberAsync(int teamId, string userId)
