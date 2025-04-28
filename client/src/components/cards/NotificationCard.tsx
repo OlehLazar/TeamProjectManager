@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaBell, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { format } from "date-fns";
 import { NotificationCardProps } from "../../interfaces/props/NotificationCardProps";
-import { readNotification } from "../../services/notificationService";
+import { readNotification } from "../../services/userService";
 
 const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => {
   const [isExpanded, setIsExpanded] = useState(false);

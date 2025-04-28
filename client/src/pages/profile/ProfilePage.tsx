@@ -67,7 +67,7 @@ const ProfilePage = () => {
           />
         </div>
       )}
-      <div className="w-full max-w-[500px] flex flex-col p-4 md:p-6 gap-4 md:gap-6 bg-white rounded-xl shadow-lg">
+      <div className="w-full max-w-[500px] flex flex-col p-4 md:p-6 gap-4 md:gap-6 bg-white rounded-xl shadow-lg text-center">
         <h1 className="text-3xl font-bold font-ptSerif">My Profile</h1>
         {user.avatar && <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mt-4" />}
         <p className="text-xl font-sans">{user.firstName} {user.lastName}</p>

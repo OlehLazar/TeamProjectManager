@@ -14,19 +14,41 @@ namespace TeamProjectManager.API.Controllers;
 public class UserController : ControllerBase
 {
 	private readonly IUserService _userService;
+	private readonly INotificationService _notificationService;
 
-	public UserController(IUserService userService)
+	public UserController(IUserService userService, INotificationService notificationService)
     {
 		_userService = userService;
+		_notificationService = notificationService;
 	}
 
-	[Authorize]
 	[HttpGet("profile")]
 	public async Task<IActionResult> GetProfile()
 	{
 		var user = await _userService.GetUserAsync(User.Identity!.Name!);
 		var userDto = new UserDto(user.FirstName, user.LastName, user.UserName, user.Avatar);
 		return Ok(userDto);
+	}
+
+	[HttpGet("notifications")]
+	public async Task<IActionResult> GetNotifications()
+	{
+		var user = await _userService.GetUserAsync(User.Identity!.Name!);
+		var notifications = await _notificationService.GetNotificationsAsync(user.Id);
+		return Ok(notifications);
+	}
+
+	[HttpPut("{id}")]
+	public async Task<IActionResult> ReadNotification(int id)
+	{
+		await _notificationService.ReadNotificationAsync(id);
+		var notification = await _notificationService.GetNotificationAsync(id);
+		if (notification == null)
+		{
+			return NotFound();
+		}
+
+		return Ok();
 	}
 
 	[HttpGet("{username}")]

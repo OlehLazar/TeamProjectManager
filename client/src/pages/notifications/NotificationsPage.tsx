@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getNotifications } from "../../services/notificationService";
+import { getNotifications } from "../../services/userService";
 import { NotificationDto } from "../../interfaces/dtos/NotificationDto";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import NotificationCard from "../../components/cards/NotificationCard";

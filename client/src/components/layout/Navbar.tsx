@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { navItems as defaultNavItems } from "../../constants";
-import { getNotifications } from "../../services/notificationService";
+import { getNotifications } from "../../services/userService";
+import { NotificationDto } from "../../interfaces/dtos/NotificationDto";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
@@ -32,7 +33,7 @@ const Navbar = () => {
       const fetchNotifications = async () => {
         try {
           const notifications = await getNotifications();
-          setHasUnread(notifications.some(n => !n.isRead));
+            setHasUnread(notifications.some((n: NotificationDto) => !n.isRead));
         } catch (error) {
           console.error("Failed to fetch notifications:", error);
         }

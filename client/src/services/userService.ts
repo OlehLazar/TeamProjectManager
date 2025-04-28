@@ -8,6 +8,18 @@ export const getProfile = async () => {
   return response.data;
 };
 
+export const getNotifications = async () => {
+  const response = await api.get("/user/notifications", {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+  return response.data;
+};
+
+export const readNotification = async (id: number) => {
+  const response = await api.put(`/notification/${id}`);
+  return response.data;
+}
+
 export const getUser = async (userName: string): Promise<UserDto> => {
   const response = await api.get<UserDto>(`/user/${userName}`);
   return response.data;
