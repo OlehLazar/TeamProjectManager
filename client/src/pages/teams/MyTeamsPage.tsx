@@ -43,7 +43,7 @@ const MyTeamsPage = () => {
       )}
 
       {isLoggedIn && 
-        <div className="flex w-1/2 mx-auto p-5">
+        <div className="flex flex-col md:flex-row w-full md:w-1/2 mx-auto p-5 gap-2">
           <Input
             placeholder="Search for a team"
             width="w-1/2"
