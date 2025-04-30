@@ -85,14 +85,14 @@ const TeamPage = () => {
         </div>
       )}
 
-      {leader?.userName === currentUser?.userName && (<div className="w-1/2 object-scale-down"><Button width="w-1/4 md:w-1/2 sm:w-full" onClick={handleDelete} >Delete the team</Button></div>)}
+      {leader?.userName === currentUser?.userName && (<div><Button width="w-full sm:w-1/2 md:w-1/3 lg:w-1/4" onClick={handleDelete} >Delete the team</Button></div>)}
       {deleteError && <ErrorMessage message={deleteError} />}
 
-      <div className="w-1/2"><Button width="w-1/4" onClick={handleLeave}>Leave</Button></div>
+      <div><Button width="w-full sm:w-1/2 md:w-1/3 lg:w-1/4" onClick={handleLeave}>Leave</Button></div>
       {leaveError && <ErrorMessage message={leaveError} />}
 
       <h2 className="text-center font-bold font-ptSerif text-2xl">Projects</h2>
-      <div className="w-1/2"><Button width="w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
+      <div><Button width="w-full sm:w-1/2 md:w-1/3 lg:w-1/4" onClick={handleCreateProject}>Create a project</Button></div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {data!.projects.map((project) => (
           <li key={project.id}>
@@ -102,7 +102,9 @@ const TeamPage = () => {
       </ul>
 
       <h2 className="text-center font-bold font-ptSerif text-2xl">Members</h2>
-      {!showAddMemberForm && leader?.userName === currentUser?.userName && (<div className="w-1/2"><Button width="w-1/4" onClick={() => setShowAddMemberForm(true)}>Add a member</Button></div>)}
+      {!showAddMemberForm && leader?.userName === currentUser?.userName && (
+        <div><Button width="w-full sm:w-1/2 md:w-1/3 lg:w-1/4" onClick={() => setShowAddMemberForm(true)}>Add a member</Button></div>
+      )}
       {showAddMemberForm && (<AddMemberForm />)}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-5 pb-5">
         {data!.members.map((member) => (
