@@ -37,7 +37,7 @@ const AddMemberForm = () => {
     }
 
     return (
-        <form className="flex flex-col p-4 items-center gap-4 border border-[#737272] rounded-xl shadow-md shadow-[#11111170] w-1/4 bg-w mx-auto" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col p-4 items-center gap-4 border border-[#737272] rounded-xl shadow-md shadow-[#11111170] bg-w mx-auto" onSubmit={handleSubmit(onSubmit)}>
             <h1 className="font-ptSerif font-semibold text-2xl">Enter the username</h1>
             <Input {...register('username')} placeholder="Username" width="w-1/2" />
             {errors.root && <ErrorMessage message={errors.root.message!} />}
