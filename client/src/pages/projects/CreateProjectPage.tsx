@@ -44,13 +44,13 @@ const CreateProjectPage = () => {
       <form className="flex flex-col text-center w-1/2 mx-auto gap-4" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="font-ptSerif text-2xl font-semibold">Create a new project</h1>
 
-        <Input {...register('name')} placeholder="Name" width="w-1/3" />
+        <Input {...register('name')} placeholder="Name" width="lg:w-1/3 md:w-1/2 sm:w-full" />
         {errors.name && <ErrorMessage message={errors.name.message!} />}
 
-        <div><textarea {...register('description')} placeholder="Description" className="focus:outline-none border-b border-[#1111116a]" /></div>
+        <div className="mx-auto"><textarea {...register('description')} placeholder="Description" className="focus:outline-none border-b border-[#1111116a]" /></div>
         {errors.description && <ErrorMessage message={errors.description.message!} />}
 
-        <Button width="w-1/5" type="submit">Create</Button>
+        <Button width="lg:w-1/5 md:w-1/3 sm:w-1/2" type="submit">Create</Button>
       </form>
     </div>
   )
