@@ -55,7 +55,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="pt-10 pb-10 flex flex-col justify-center text-center gap-5 mx-auto w-1/2">
+    <div className="pt-10 pb-10 flex flex-col justify-center text-center gap-5 mx-auto w-full sm:w-4/5 lg:w-1/2 xl:w-2/5">
       <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-2xl font-bold text font-ptSerif">Enter your data:</h1>
         
