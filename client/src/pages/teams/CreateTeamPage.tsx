@@ -46,13 +46,13 @@ const CreateTeamPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="pt-10 pb-10 flex flex-col justify-center text-center gap-5 mx-auto w-1/2">
             <h1 className="font-ptSerif text-2xl font-semibold">Create a new team</h1>
 
-            <Input {...register('name')} placeholder="Name" width="w-1/3" />
+            <Input {...register('name')} placeholder="Name" width="lg:w-1/3 md:w-1/2 sm:w-full" />
             {errors.name && <ErrorMessage message={errors.name.message!} />}
 
             <div><textarea {...register('description')} placeholder="Description" className="focus:outline-none border-b border-[#1111116a] p-2 resize-y" /></div>
             {errors.description && <ErrorMessage message={errors.description.message!} />}
 
-            <Button type="submit" width="w-1/5" >Create</Button>
+            <Button type="submit" width="lg:w-1/5 md:w-1/3 sm:w-1/2" >Create</Button>
         </form>
     )
 }
