@@ -47,7 +47,7 @@ const CreateBoardForm: React.FC<CreateBoardFormProps> = ({ projectId }) => {
         <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
             <h1 className="font-ptSerif text-2xl font-semibold">Create a new board</h1>
 
-            <Input {...register('name')} placeholder="Name" width="w-1/3" />
+            <Input {...register('name')} placeholder="Name" width="w-1/5" />
             {errors.name && <ErrorMessage message={errors.name.message!} />}
 
             <div><textarea {...register('description')} placeholder="Description" className="focus:outline-none border-b border-[#1111116a]" /></div>
