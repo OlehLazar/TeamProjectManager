@@ -52,3 +52,4 @@ After cloning the repository you should:
 - Start the server
 - Start the client using 'npm run dev'
 - Enjoy
+![image](https://github.com/user-attachments/assets/b6ea4511-5b5c-4c05-93f1-f1e12c5690be)
